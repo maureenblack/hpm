@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="100" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Elements -->
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#DAA520" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Main Symbol: Combines Cross with Ascending Growth -->
+  <g id="mainSymbol">
+    <!-- Ascending Growth Chart/Plant -->
+    <path d="M30,70 Q40,60 45,65 Q55,55 60,60 Q70,45 75,50 Q85,30 90,35" 
+          stroke="url(#goldGradient)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    
+    <!-- Stylized Cross -->
+    <rect x="25" y="30" width="4" height="40" rx="1" fill="#4B0082"/>
+    <rect x="15" y="40" width="24" height="4" rx="1" fill="#4B0082"/>
+    
+    <!-- Seed/Circle at the base of growth -->
+    <circle cx="30" cy="70" r="5" fill="#4B0082"/>
+    
+    <!-- Light Rays/Prosperity -->
+    <path d="M30,25 L35,15" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M40,30 L50,25" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M20,30 L10,25" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Ministry Name: Holistic Prosperity Ministries -->
+  <g id="ministryName">
+    <text x="105" y="45" font-family="'Montserrat', sans-serif" font-weight="700" font-size="18" fill="#4B0082">HOLISTIC PROSPERITY</text>
+    <text x="105" y="65" font-family="'Montserrat', sans-serif" font-weight="500" font-size="16" fill="#4B0082">MINISTRIES</text>
+    <line x1="105" y1="50" x2="290" y2="50" stroke="#FFD700" stroke-width="1.5"/>
+  </g>
+  
+  <!-- Tagline -->
+  <text x="105" y="80" font-family="'Montserrat', sans-serif" font-weight="400" font-size="10" fill="#333333">Faith in Action, Prosperity in Motion</text>
+</svg>
