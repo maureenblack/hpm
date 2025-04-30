@@ -1,5 +1,5 @@
 /**
- * Holistic Prosperity Ministries - Main JavaScript
+ * Holistic Prosperity Ministry - Main JavaScript
  */
 
 document.addEventListener('DOMContentLoaded', function() {
