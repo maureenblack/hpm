@@ -43,16 +43,16 @@
                             <li role="none"><a class="dropdown-item" href="#faq" data-bs-toggle="tab" data-bs-target="#faq" role="menuitem">FAQ</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown" role="none">
-                        <a class="nav-link dropdown-toggle" href="#" id="ministries-dropdown" role="menuitem" aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
-                            Ministry
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="ministriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ministries
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="ministries-dropdown" role="menu">
-                            <li role="none"><a class="dropdown-item" href="#cryptstock" data-bs-toggle="tab" data-bs-target="#cryptstock" role="menuitem">CrypStock Prosperity Academy</a></li>
-                            <li role="none"><a class="dropdown-item" href="#faith-worship" data-bs-toggle="tab" data-bs-target="#faith-worship" role="menuitem">Faith & Worship Ministry</a></li>
-                            <li role="none"><a class="dropdown-item" href="#community" data-bs-toggle="tab" data-bs-target="#community" role="menuitem">Community Impact Projects</a></li>
-                            <li role="none"><a class="dropdown-item" href="#love-action" data-bs-toggle="tab" data-bs-target="#love-action" role="menuitem">Love in Action Fellowship</a></li>
-                            <li role="none"><a class="dropdown-item" href="#prosperity-counseling" data-bs-toggle="tab" data-bs-target="#prosperity-counseling" role="menuitem">Prosperity Counseling</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="ministriesDropdown">
+                            <li><a class="dropdown-item" href="#ministries" data-bs-toggle="tab" data-bs-target="#ministries">All Ministries</a></li>
+                            <li><a class="dropdown-item" href="#cryptstock" data-bs-toggle="tab" data-bs-target="#cryptstock">CrypStock Academy</a></li>
+                            <li><a class="dropdown-item" href="#faith" data-bs-toggle="tab" data-bs-target="#faith">Faith & Worship</a></li>
+                            <li><a class="dropdown-item" href="#fellowship" data-bs-toggle="tab" data-bs-target="#fellowship">Love in Action Fellowship</a></li>
+                            <li><a class="dropdown-item" href="#counseling" data-bs-toggle="tab" data-bs-target="#counseling">Prosperity Counseling</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown" role="none">
@@ -402,6 +402,7 @@
                         <div class="col-lg-8 mx-auto text-center">
                             <h1 class="display-4 text-white">Ministry & Initiatives</h1>
                             <div class="divider bg-gold mx-auto"></div>
+                            <p class="lead text-white mt-3">Bridging Faith and Prosperity Through Five Pillars of Service</p>
                         </div>
                     </div>
                 </div>
@@ -417,26 +418,190 @@
                         </div>
                     </div>
                     
-                    <div class="row mt-5">
-                        <div class="col-lg-6 mb-4">
-                            <div class="ministry-card">
-                                <div class="ministry-img cryptstock"></div>
-                                <div class="ministry-content">
-                                    <h3>CrypStock Prosperity Academy</h3>
-                                    <p>Our flagship program providing education on biblical financial principles alongside practical skills in investing, cryptocurrency, entrepreneurship, and wealth building strategies.</p>
-                                    <a href="#cryptstock" class="btn btn-primary" data-bs-toggle="tab" data-bs-target="#cryptstock">Learn More</a>
+                    <div class="row mt-5 justify-content-center">
+                        <!-- Ministry Feature Cards - First Row -->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="ministry-feature animate-fade-in">
+                                <div class="ministry-feature-icon">
+                                    <i class="fas fa-chart-line"></i>
                                 </div>
+                                <h3>CrypStock Prosperity Academy</h3>
+                                <p>Our flagship program providing education on biblical financial principles alongside practical skills in investing, cryptocurrency, entrepreneurship, and wealth building strategies.</p>
+                                <a href="#cryptstock" class="btn btn-primary" data-bs-toggle="tab" data-bs-target="#cryptstock">Explore Academy</a>
                             </div>
                         </div>
-                        <div class="col-lg-6 mb-4">
-                            <div class="ministry-card">
-                                <div class="ministry-img community"></div>
-                                <div class="ministry-content">
-                                    <h3>Community Impact</h3>
-                                    <p>Our outreach initiatives including food pantries, medical missions, and school programs that demonstrate God's love through practical service and community transformation.</p>
-                                    <a href="#community" class="btn btn-primary" data-bs-toggle="tab" data-bs-target="#community">Learn More</a>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="ministry-feature animate-fade-in" style="animation-delay: 0.2s;">
+                                <div class="ministry-feature-icon">
+                                    <i class="fas fa-church"></i>
                                 </div>
+                                <h3>Faith & Worship Ministry</h3>
+                                <p>The spiritual cornerstone of our community, offering worship services, Bible studies, prayer gatherings, and spiritual formation opportunities for all ages.</p>
+                                <a href="#worship" class="btn btn-primary" data-bs-toggle="tab" data-bs-target="#worship">Join in Worship</a>
                             </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="ministry-feature animate-fade-in" style="animation-delay: 0.4s;">
+                                <div class="ministry-feature-icon">
+                                    <i class="fas fa-hands-helping"></i>
+                                </div>
+                                <h3>Community Impact Projects</h3>
+                                <p>Our outreach initiatives including food pantries, medical missions, and school programs that demonstrate God's love through practical service and community transformation.</p>
+                                <a href="#community" class="btn btn-primary" data-bs-toggle="tab" data-bs-target="#community">See Our Impact</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Ministry Feature Cards - Second Row -->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="ministry-feature animate-fade-in" style="animation-delay: 0.6s;">
+                                <div class="ministry-feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3>Love in Action Fellowship Groups</h3>
+                                <p>Small groups that foster deep relationships, spiritual growth, and practical support through regular gatherings, shared meals, and life application of biblical principles.</p>
+                                <a href="#fellowship" class="btn btn-primary" data-bs-toggle="tab" data-bs-target="#fellowship">Find Your Group</a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="ministry-feature animate-fade-in" style="animation-delay: 0.8s;">
+                                <div class="ministry-feature-icon">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                </div>
+                                <h3>Prosperity Counseling</h3>
+                                <p>Personalized guidance for individuals and families seeking to align their financial decisions with biblical principles and overcome challenges through faith-based counseling.</p>
+                                <a href="#counseling" class="btn btn-primary" data-bs-toggle="tab" data-bs-target="#counseling">Get Guidance</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Ministry Impact Metrics -->
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Our Ministry Impact</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Through God's grace, we've been blessed to make a difference in many lives</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row text-center ministry-metrics">
+                        <div class="col-md-3 mb-4">
+                            <div class="metric-card animate-slide-up">
+                                <div class="metric-icon"><i class="fas fa-user-graduate"></i></div>
+                                <h3 class="counter-value" data-target="1250">0</h3>
+                                <p>Academy Graduates</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="metric-card animate-slide-up" style="animation-delay: 0.2s;">
+                                <div class="metric-icon"><i class="fas fa-hands-helping"></i></div>
+                                <h3 class="counter-value" data-target="3500">0</h3>
+                                <p>Community Members Served</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="metric-card animate-slide-up" style="animation-delay: 0.4s;">
+                                <div class="metric-icon"><i class="fas fa-users"></i></div>
+                                <h3 class="counter-value" data-target="45">0</h3>
+                                <p>Active Fellowship Groups</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="metric-card animate-slide-up" style="animation-delay: 0.6s;">
+                                <div class="metric-icon"><i class="fas fa-globe-americas"></i></div>
+                                <h3 class="counter-value" data-target="12">0</h3>
+                                <p>Countries Reached</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Testimonials Section -->
+            <section class="py-5">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Testimonials</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Hear from those whose lives have been transformed</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="ministryTestimonialCarousel" class="carousel slide ministry-testimonial-carousel" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <p>"The CrypStock Academy changed my financial future. I now understand how to honor God with my finances while building wealth for my family's future."</p>
+                                                <div class="testimonial-author">
+                                                    <h5>James Wilson</h5>
+                                                    <p>Academy Graduate, 2023</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <p>"Our family fellowship group has become like a second family to us. We've grown spiritually and built relationships that will last a lifetime."</p>
+                                                <div class="testimonial-author">
+                                                    <h5>Sarah & Michael Johnson</h5>
+                                                    <p>Fellowship Group Leaders</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <p>"The counseling services helped me align my business decisions with biblical principles. My company is now thriving in ways I never imagined possible."</p>
+                                                <div class="testimonial-author">
+                                                    <h5>Rebecca Thomas</h5>
+                                                    <p>Business Owner</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="carousel-control-prev" type="button" data-bs-target="#ministryTestimonialCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#ministryTestimonialCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Call to Action -->
+            <section class="py-5 bg-primary text-white">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8 text-center text-lg-start">
+                            <h2>Ready to Experience Holistic Prosperity?</h2>
+                            <p class="lead mb-0">Join us for a service, attend a class, or connect with one of our ministry leaders.</p>
+                        </div>
+                        <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0">
+                            <a href="#contact" class="btn btn-light btn-lg" data-bs-toggle="tab" data-bs-target="#contact">Connect With Us</a>
                         </div>
                     </div>
                 </div>
@@ -452,6 +617,7 @@
                         <div class="col-lg-8 mx-auto text-center">
                             <h1 class="display-4 text-white">CrypStock Prosperity Academy</h1>
                             <div class="divider bg-gold mx-auto"></div>
+                            <p class="lead text-white mt-3">Biblical Financial Wisdom for the Digital Age</p>
                         </div>
                     </div>
                 </div>
@@ -459,63 +625,339 @@
             
             <section class="py-5">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 animate-slide-right">
                             <h2 class="section-heading">Financial Education with Biblical Foundation</h2>
                             <div class="divider"></div>
-                            <p>The CrypStock Prosperity Academy is our flagship program that bridges biblical financial principles with practical education in modern investment strategies, including cryptocurrency, stocks, and entrepreneurship.</p>
+                            <p class="lead">The CrypStock Prosperity Academy is our flagship program that bridges biblical financial principles with practical education in modern investment strategies.</p>
                             <p>Our curriculum is designed to equip individuals with both spiritual wisdom and practical skills needed to achieve financial stability and generational wealth that can be used to bless others and advance God's kingdom.</p>
+                            <p>We believe that financial prosperity is not just about accumulating wealth, but about becoming good stewards of the resources God has entrusted to us.</p>
+                            <div class="mt-4">
+                                <a href="#contact" class="btn btn-primary me-2" data-bs-toggle="tab" data-bs-target="#contact">Enroll Now</a>
+                                <a href="#" class="btn btn-outline-primary">Download Brochure</a>
+                            </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="cryptstock-img"></div>
+                        <div class="col-lg-6 animate-slide-left">
+                            <div class="ministry-detail-card">
+                                <div class="ministry-detail-img cryptstock-img"></div>
+                                <div class="ministry-detail-overlay">
+                                    <div class="ministry-detail-content">
+                                        <h3>Next Cohort Starts</h3>
+                                        <p class="lead">September 15, 2025</p>
+                                        <p>Limited spots available. Apply today!</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
             
+            <!-- Philosophy and Approach Section -->
             <section class="py-5 bg-light">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-lg-8 mx-auto">
+                            <h2 class="section-heading">Our Philosophy & Approach</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">We integrate biblical wisdom with practical financial education</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="philosophy-card animate-fade-in">
+                                <div class="philosophy-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <h4>Biblical Foundation</h4>
+                                <p>All our teachings are grounded in Scripture, which provides timeless wisdom about stewardship, generosity, planning, and financial integrity.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="philosophy-card animate-fade-in" style="animation-delay: 0.2s;">
+                                <div class="philosophy-icon">
+                                    <i class="fas fa-hands"></i>
+                                </div>
+                                <h4>Practical Application</h4>
+                                <p>We emphasize hands-on learning with real-world applications, ensuring students can immediately apply what they learn to their financial decisions.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="philosophy-card animate-fade-in" style="animation-delay: 0.4s;">
+                                <div class="philosophy-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h4>Community Support</h4>
+                                <p>Learning happens in community. Our cohort model creates a supportive environment where students encourage one another on their financial journey.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Program Offerings Section -->
+            <section class="py-5">
                 <div class="container">
                     <div class="row text-center">
                         <div class="col-12">
                             <h2 class="section-heading">Program Offerings</h2>
                             <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Comprehensive curriculum designed for spiritual and financial growth</p>
                         </div>
                     </div>
-                    <div class="row mt-5">
-                        <div class="col-md-6 col-lg-3 mb-4">
-                            <div class="program-box">
-                                <div class="icon-box">
-                                    <i class="fas fa-book-bible"></i>
+                    
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="program-card">
+                                <div class="program-header" aria-expanded="false">
+                                    <div class="program-icon"><i class="fas fa-book-bible"></i></div>
+                                    <h4>Biblical Financial Principles</h4>
+                                    <div class="program-toggle"><i class="fas fa-plus"></i></div>
                                 </div>
-                                <h4>Biblical Financial Principles</h4>
-                                <p>Study what Scripture teaches about money, stewardship, generosity, and financial wisdom.</p>
+                                <div class="program-content">
+                                    <p>Study what Scripture teaches about money, stewardship, generosity, and financial wisdom.</p>
+                                    <ul class="program-features">
+                                        <li><i class="fas fa-check-circle"></i> Biblical perspectives on wealth and poverty</li>
+                                        <li><i class="fas fa-check-circle"></i> Stewardship principles from Scripture</li>
+                                        <li><i class="fas fa-check-circle"></i> Debt management according to biblical wisdom</li>
+                                        <li><i class="fas fa-check-circle"></i> Generosity as a spiritual discipline</li>
+                                    </ul>
+                                    <p class="program-duration"><i class="far fa-clock"></i> 6-week course module</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3 mb-4">
-                            <div class="program-box">
-                                <div class="icon-box">
-                                    <i class="fas fa-chart-line"></i>
+                        
+                        <div class="col-lg-6 mb-4">
+                            <div class="program-card">
+                                <div class="program-header" aria-expanded="false">
+                                    <div class="program-icon"><i class="fas fa-chart-line"></i></div>
+                                    <h4>Investment Fundamentals</h4>
+                                    <div class="program-toggle"><i class="fas fa-plus"></i></div>
                                 </div>
-                                <h4>Investment Fundamentals</h4>
-                                <p>Learn the basics of stocks, bonds, mutual funds, and building a diversified portfolio.</p>
+                                <div class="program-content">
+                                    <p>Learn the basics of stocks, bonds, mutual funds, and building a diversified portfolio.</p>
+                                    <ul class="program-features">
+                                        <li><i class="fas fa-check-circle"></i> Understanding market fundamentals</li>
+                                        <li><i class="fas fa-check-circle"></i> Asset allocation strategies</li>
+                                        <li><i class="fas fa-check-circle"></i> Risk management techniques</li>
+                                        <li><i class="fas fa-check-circle"></i> Long-term investment planning</li>
+                                    </ul>
+                                    <p class="program-duration"><i class="far fa-clock"></i> 8-week course module</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3 mb-4">
-                            <div class="program-box">
-                                <div class="icon-box">
-                                    <i class="fab fa-bitcoin"></i>
+                        
+                        <div class="col-lg-6 mb-4">
+                            <div class="program-card">
+                                <div class="program-header" aria-expanded="false">
+                                    <div class="program-icon"><i class="fab fa-bitcoin"></i></div>
+                                    <h4>Cryptocurrency Education</h4>
+                                    <div class="program-toggle"><i class="fas fa-plus"></i></div>
                                 </div>
-                                <h4>Cryptocurrency Education</h4>
-                                <p>Understand blockchain technology, major cryptocurrencies, and responsible investment strategies.</p>
+                                <div class="program-content">
+                                    <p>Understand blockchain technology, major cryptocurrencies, and responsible investment strategies.</p>
+                                    <ul class="program-features">
+                                        <li><i class="fas fa-check-circle"></i> Blockchain technology fundamentals</li>
+                                        <li><i class="fas fa-check-circle"></i> Bitcoin, Ethereum, and other major cryptocurrencies</li>
+                                        <li><i class="fas fa-check-circle"></i> Security and wallet management</li>
+                                        <li><i class="fas fa-check-circle"></i> Faith-aligned crypto investment strategies</li>
+                                    </ul>
+                                    <p class="program-duration"><i class="far fa-clock"></i> 6-week course module</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-3 mb-4">
-                            <div class="program-box">
-                                <div class="icon-box">
-                                    <i class="fas fa-store"></i>
+                        
+                        <div class="col-lg-6 mb-4">
+                            <div class="program-card">
+                                <div class="program-header" aria-expanded="false">
+                                    <div class="program-icon"><i class="fas fa-store"></i></div>
+                                    <h4>Entrepreneurship</h4>
+                                    <div class="program-toggle"><i class="fas fa-plus"></i></div>
                                 </div>
-                                <h4>Entrepreneurship</h4>
-                                <p>Develop business skills, learn startup strategies, and build enterprises that create value.</p>
+                                <div class="program-content">
+                                    <p>Develop business skills, learn startup strategies, and build enterprises that create value.</p>
+                                    <ul class="program-features">
+                                        <li><i class="fas fa-check-circle"></i> Business model development</li>
+                                        <li><i class="fas fa-check-circle"></i> Faith-based business ethics</li>
+                                        <li><i class="fas fa-check-circle"></i> Marketing and customer acquisition</li>
+                                        <li><i class="fas fa-check-circle"></i> Financial planning for startups</li>
+                                    </ul>
+                                    <p class="program-duration"><i class="far fa-clock"></i> 10-week course module</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Success Metrics Section -->
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Our Success Metrics</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Measurable impact through faith-based financial education</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row text-center ministry-metrics">
+                        <div class="col-md-3 mb-4">
+                            <div class="metric-card animate-slide-up">
+                                <div class="metric-icon"><i class="fas fa-user-graduate"></i></div>
+                                <h3 class="counter-value" data-target="1250">0</h3>
+                                <p>Academy Graduates</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="metric-card animate-slide-up" style="animation-delay: 0.2s;">
+                                <div class="metric-icon"><i class="fas fa-percentage"></i></div>
+                                <h3 class="counter-value" data-target="87">0</h3>
+                                <p>Success Rate</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="metric-card animate-slide-up" style="animation-delay: 0.4s;">
+                                <div class="metric-icon"><i class="fas fa-dollar-sign"></i></div>
+                                <h3>$<span class="counter-value" data-target="2500">0</span>+</h3>
+                                <p>Average Income Increase</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="metric-card animate-slide-up" style="animation-delay: 0.6s;">
+                                <div class="metric-icon"><i class="fas fa-globe-americas"></i></div>
+                                <h3 class="counter-value" data-target="12">0</h3>
+                                <p>Countries Reached</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Student Testimonials -->
+            <section class="py-5">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Student Testimonials</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Hear from those whose lives have been transformed through our academy</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="cryptstockTestimonialCarousel" class="carousel slide ministry-testimonial-carousel" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"The CrypStock Academy changed my financial future. I now understand how to honor God with my finances while building wealth for my family's future. The cryptocurrency module was especially eye-opening and helped me make informed investment decisions."</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James Wilson" class="testimonial-img">
+                                                    <div>
+                                                        <h5>James Wilson</h5>
+                                                        <p>Academy Graduate, 2023</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"As a single mother, I was struggling to make ends meet. The biblical financial principles I learned at CrypStock Academy helped me eliminate debt, create a sustainable budget, and start investing for my children's future. I'm now teaching these principles to my kids!"</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Maria Rodriguez" class="testimonial-img">
+                                                    <div>
+                                                        <h5>Maria Rodriguez</h5>
+                                                        <p>Entrepreneurship Track Graduate</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"I was skeptical about combining faith with financial education, but the CrypStock Academy showed me how these two aspects of life can work together harmoniously. The investment fundamentals course helped me build a retirement portfolio that aligns with my values."</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="David Chen" class="testimonial-img">
+                                                    <div>
+                                                        <h5>David Chen</h5>
+                                                        <p>Investment Track Graduate</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="carousel-control-prev" type="button" data-bs-target="#cryptstockTestimonialCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#cryptstockTestimonialCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Upcoming Cohort Information -->
+            <section class="py-5 bg-primary text-white">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-7">
+                            <h2>Next Cohort Starting Soon</h2>
+                            <p class="lead">September 15, 2025 | Limited Spots Available</p>
+                            <ul class="cohort-features">
+                                <li><i class="fas fa-check-circle"></i> 12-week comprehensive program</li>
+                                <li><i class="fas fa-check-circle"></i> Both in-person and virtual options</li>
+                                <li><i class="fas fa-check-circle"></i> One-on-one mentoring included</li>
+                                <li><i class="fas fa-check-circle"></i> Lifetime access to alumni resources</li>
+                            </ul>
+                            <div class="mt-4">
+                                <a href="#contact" class="btn btn-light" data-bs-toggle="tab" data-bs-target="#contact">Apply Now</a>
+                                <a href="#" class="btn btn-outline-light ms-2">Request Information</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 mt-4 mt-lg-0">
+                            <div class="cohort-card">
+                                <div class="cohort-header">
+                                    <h4>Tuition Options</h4>
+                                </div>
+                                <div class="cohort-body">
+                                    <div class="cohort-price-option">
+                                        <h5>Full Program</h5>
+                                        <p class="cohort-price">$1,997</p>
+                                        <p>Complete 12-week curriculum with all modules</p>
+                                    </div>
+                                    <div class="cohort-price-option">
+                                        <h5>Module-by-Module</h5>
+                                        <p class="cohort-price">$597</p>
+                                        <p>Per individual module (4 modules total)</p>
+                                    </div>
+                                    <div class="cohort-price-option">
+                                        <h5>Scholarship Available</h5>
+                                        <p>Financial assistance for qualified applicants</p>
+                                        <a href="#" class="btn btn-sm btn-primary">Learn More</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -536,6 +978,1066 @@
             </section>
         </div>
         
+        <!-- Faith & Worship Ministry Page -->
+        <div class="tab-pane fade" id="worship" role="tabpanel">
+            <section class="page-header">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto text-center">
+                            <h1 class="display-4 text-white">Faith & Worship Ministry</h1>
+                            <div class="divider bg-gold mx-auto"></div>
+                            <p class="lead text-white mt-3">Nurturing Spiritual Growth and Divine Connection</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Service Times Section -->
+            <section class="py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 animate-slide-right">
+                            <h2 class="section-heading">Worship Services</h2>
+                            <div class="divider"></div>
+                            <p class="lead">Join us in worship as we celebrate God's goodness and grow together in faith.</p>
+                            <p>Our worship services combine dynamic biblical teaching, contemporary and traditional music, and a welcoming atmosphere where everyone can experience God's presence.</p>
+                            
+                            <div class="service-times mt-4">
+                                <div class="service-time-card">
+                                    <div class="service-day">Sunday</div>
+                                    <div class="service-details">
+                                        <h5>Main Worship Service</h5>
+                                        <p><i class="far fa-clock"></i> 10:00 AM - 11:30 AM</p>
+                                        <p><i class="fas fa-map-marker-alt"></i> Main Sanctuary</p>
+                                        <p class="service-note">Children's Ministry Available</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="service-time-card">
+                                    <div class="service-day">Wednesday</div>
+                                    <div class="service-details">
+                                        <h5>Midweek Empowerment</h5>
+                                        <p><i class="far fa-clock"></i> 7:00 PM - 8:30 PM</p>
+                                        <p><i class="fas fa-map-marker-alt"></i> Fellowship Hall</p>
+                                        <p class="service-note">Focus on Practical Application</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="service-time-card">
+                                    <div class="service-day">First Friday</div>
+                                    <div class="service-details">
+                                        <h5>Prayer & Worship Night</h5>
+                                        <p><i class="far fa-clock"></i> 7:00 PM - 9:00 PM</p>
+                                        <p><i class="fas fa-map-marker-alt"></i> Main Sanctuary</p>
+                                        <p class="service-note">Extended Worship & Prayer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 animate-slide-left">
+                            <div class="ministry-detail-card">
+                                <div class="ministry-detail-img worship-img"></div>
+                                <div class="ministry-detail-overlay">
+                                    <div class="ministry-detail-content">
+                                        <h3>This Sunday</h3>
+                                        <p class="lead">"Prosperity Through Giving"</p>
+                                        <p>Join Pastor Thomas for a powerful message on biblical generosity.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Midweek Empowerment Section -->
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-lg-8 mx-auto">
+                            <h2 class="section-heading">Midweek Empowerment</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Practical spiritual teaching for everyday application</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="empowerment-card animate-fade-in">
+                                <div class="empowerment-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <h4>Bible Deep Dive</h4>
+                                <p>In-depth exploration of Scripture with practical applications for daily living and financial decisions.</p>
+                                <p class="empowerment-schedule">1st & 3rd Wednesdays</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="empowerment-card animate-fade-in" style="animation-delay: 0.2s;">
+                                <div class="empowerment-icon">
+                                    <i class="fas fa-praying-hands"></i>
+                                </div>
+                                <h4>Prayer & Intercession</h4>
+                                <p>Focused prayer for personal needs, community transformation, and global impact through faith-filled intercession.</p>
+                                <p class="empowerment-schedule">2nd Wednesdays</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4 mb-4">
+                            <div class="empowerment-card animate-fade-in" style="animation-delay: 0.4s;">
+                                <div class="empowerment-icon">
+                                    <i class="fas fa-hands-helping"></i>
+                                </div>
+                                <h4>Life Application</h4>
+                                <p>Practical workshops on applying biblical principles to relationships, work, finances, and personal growth.</p>
+                                <p class="empowerment-schedule">4th Wednesdays</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Bible Study Groups Section -->
+            <section class="py-5">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Bible Study Groups</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Join a group to grow in knowledge and application of God's Word</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="bible-study-card">
+                                <div class="bible-study-header" aria-expanded="false">
+                                    <h4>Financial Wisdom in Scripture</h4>
+                                    <div class="bible-study-toggle"><i class="fas fa-plus"></i></div>
+                                </div>
+                                <div class="bible-study-content">
+                                    <p>Explore what the Bible teaches about money, stewardship, generosity, and financial planning.</p>
+                                    <ul class="bible-study-details">
+                                        <li><i class="fas fa-calendar-alt"></i> Tuesdays, 7:00 PM</li>
+                                        <li><i class="fas fa-user"></i> Led by Elder James Wilson</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> Room 201</li>
+                                        <li><i class="fas fa-info-circle"></i> Materials provided, bring your Bible</li>
+                                    </ul>
+                                    <a href="#contact" class="btn btn-sm btn-primary" data-bs-toggle="tab" data-bs-target="#contact">Register</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="bible-study-card">
+                                <div class="bible-study-header" aria-expanded="false">
+                                    <h4>New Believers Foundations</h4>
+                                    <div class="bible-study-toggle"><i class="fas fa-plus"></i></div>
+                                </div>
+                                <div class="bible-study-content">
+                                    <p>Essential teachings for those new to faith or seeking to strengthen their spiritual foundation.</p>
+                                    <ul class="bible-study-details">
+                                        <li><i class="fas fa-calendar-alt"></i> Sundays, 9:00 AM</li>
+                                        <li><i class="fas fa-user"></i> Led by Pastor Sarah Johnson</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> Room 105</li>
+                                        <li><i class="fas fa-info-circle"></i> 8-week course, starts monthly</li>
+                                    </ul>
+                                    <a href="#contact" class="btn btn-sm btn-primary" data-bs-toggle="tab" data-bs-target="#contact">Register</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="bible-study-card">
+                                <div class="bible-study-header" aria-expanded="false">
+                                    <h4>Book of Proverbs Study</h4>
+                                    <div class="bible-study-toggle"><i class="fas fa-plus"></i></div>
+                                </div>
+                                <div class="bible-study-content">
+                                    <p>Verse-by-verse study of Proverbs, focusing on wisdom for daily decisions and godly living.</p>
+                                    <ul class="bible-study-details">
+                                        <li><i class="fas fa-calendar-alt"></i> Thursdays, 6:30 PM</li>
+                                        <li><i class="fas fa-user"></i> Led by Deacon Robert Thomas</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> Fellowship Hall</li>
+                                        <li><i class="fas fa-info-circle"></i> Ongoing study, join anytime</li>
+                                    </ul>
+                                    <a href="#contact" class="btn btn-sm btn-primary" data-bs-toggle="tab" data-bs-target="#contact">Register</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="bible-study-card">
+                                <div class="bible-study-header" aria-expanded="false">
+                                    <h4>Women's Bible Study</h4>
+                                    <div class="bible-study-toggle"><i class="fas fa-plus"></i></div>
+                                </div>
+                                <div class="bible-study-content">
+                                    <p>Study focused on women in Scripture and applying biblical principles to women's unique life experiences.</p>
+                                    <ul class="bible-study-details">
+                                        <li><i class="fas fa-calendar-alt"></i> Wednesdays, 10:00 AM</li>
+                                        <li><i class="fas fa-user"></i> Led by Minister Mary Davis</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> Room 203</li>
+                                        <li><i class="fas fa-info-circle"></i> Childcare provided</li>
+                                    </ul>
+                                    <a href="#contact" class="btn btn-sm btn-primary" data-bs-toggle="tab" data-bs-target="#contact">Register</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Prayer Resources Section -->
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 order-lg-2 animate-slide-left">
+                            <h2 class="section-heading">Prayer Resources</h2>
+                            <div class="divider"></div>
+                            <p class="lead">Strengthening your prayer life for spiritual and financial breakthrough</p>
+                            <p>Prayer is a cornerstone of our faith and a powerful tool for transformation in every area of life, including finances. We offer various resources to help you develop a consistent and effective prayer life.</p>
+                            
+                            <div class="prayer-resources mt-4">
+                                <div class="prayer-resource-item">
+                                    <i class="fas fa-book"></i>
+                                    <div>
+                                        <h5>Prayer Guides</h5>
+                                        <p>Downloadable guides for personal and family prayer times, including financial prayer points.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="prayer-resource-item">
+                                    <i class="fas fa-users"></i>
+                                    <div>
+                                        <h5>Prayer Partners</h5>
+                                        <p>Connect with a prayer partner for accountability and shared intercession.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="prayer-resource-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div>
+                                        <h5>Prayer Calendar</h5>
+                                        <p>Monthly prayer focus calendar to guide your daily intercession.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <a href="#" class="btn btn-primary">Download Prayer Resources</a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 order-lg-1 mt-4 mt-lg-0 animate-slide-right">
+                            <div class="prayer-request-card">
+                                <h4>Submit a Prayer Request</h4>
+                                <p>Share your prayer needs with our prayer team. All requests are kept confidential.</p>
+                                
+                                <form class="prayer-form mt-4">
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" placeholder="Your Name" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="email" class="form-control" placeholder="Email Address" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <textarea class="form-control" rows="4" placeholder="Your Prayer Request" required></textarea>
+                                    </div>
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="confidentialCheck">
+                                        <label class="form-check-label" for="confidentialCheck">Keep my request confidential (prayer team only)</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Submit Prayer Request</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Call to Action -->
+            <section class="py-5 bg-primary text-white">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8 text-center text-lg-start">
+                            <h2>Join Us This Sunday</h2>
+                            <p class="lead mb-0">Experience the power of worship and biblical teaching in a welcoming community.</p>
+                        </div>
+                        <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0">
+                            <a href="#" class="btn btn-light btn-lg">Get Directions</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Love in Action Fellowship Page -->
+        <div class="tab-pane fade" id="fellowship" role="tabpanel">
+            <section class="page-header">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto text-center">
+                            <h1 class="display-4 text-white">Love in Action Fellowship Groups</h1>
+                            <div class="divider bg-gold mx-auto"></div>
+                            <p class="lead text-white mt-3">Building Community and Growing Together in Faith</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Fellowship Overview Section -->
+            <section class="py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 animate-slide-right">
+                            <h2 class="section-heading">Connect in Community</h2>
+                            <div class="divider"></div>
+                            <p class="lead">Our fellowship groups provide a place to build meaningful relationships, grow spiritually, and support one another.</p>
+                            <p>Love in Action Fellowship Groups are at the heart of our ministry community. These small groups of 8-12 people meet regularly to study Scripture, share meals, pray together, and apply biblical principles to everyday life, including financial decisions.</p>
+                            <p>Each group has its own focus and personality, but all share the common goals of spiritual growth, authentic community, and practical application of faith.</p>
+                            
+                            <div class="mt-4">
+                                <a href="#contact" class="btn btn-primary me-2" data-bs-toggle="tab" data-bs-target="#contact">Find Your Group</a>
+                                <a href="#" class="btn btn-outline-primary">Become a Leader</a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 animate-slide-left">
+                            <div class="ministry-detail-card">
+                                <div class="ministry-detail-img fellowship-img"></div>
+                                <div class="ministry-detail-overlay">
+                                    <div class="ministry-detail-content">
+                                        <h3>Fellowship in Action</h3>
+                                        <p class="lead">"Not just a meeting, but a way of life."</p>
+                                        <p>Our groups extend beyond weekly gatherings to create lasting community.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Group Filtering Section -->
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Find Your Fellowship Group</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-4">Filter by category to find the perfect group for you</p>
+                            
+                            <div class="group-filter mb-5">
+                                <button class="btn btn-primary group-filter-btn active" data-filter="all">All Groups</button>
+                                <button class="btn btn-outline-primary group-filter-btn" data-filter="families">Families</button>
+                                <button class="btn btn-outline-primary group-filter-btn" data-filter="young-adults">Young Adults</button>
+                                <button class="btn btn-outline-primary group-filter-btn" data-filter="seniors">Seniors</button>
+                                <button class="btn btn-outline-primary group-filter-btn" data-filter="financial">Financial Focus</button>
+                                <button class="btn btn-outline-primary group-filter-btn" data-filter="online">Online</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Family Group -->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="fellowship-card" data-category="families">
+                                <div class="fellowship-card-header">
+                                    <h4>Family Life Fellowship</h4>
+                                    <span class="fellowship-category">Families</span>
+                                </div>
+                                <div class="fellowship-card-body">
+                                    <p>A group for families with children of all ages to grow together in faith and build strong biblical foundations.</p>
+                                    <ul class="fellowship-details">
+                                        <li><i class="fas fa-calendar-alt"></i> Every 2nd & 4th Sunday, 4:00 PM</li>
+                                        <li><i class="fas fa-user"></i> Led by James & Sarah Wilson</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> Rotating Homes</li>
+                                        <li><i class="fas fa-info-circle"></i> Childcare provided</li>
+                                    </ul>
+                                </div>
+                                <div class="fellowship-card-footer">
+                                    <a href="#contact" class="btn btn-sm btn-primary" data-bs-toggle="tab" data-bs-target="#contact">Join Group</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Young Adults Group -->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="fellowship-card" data-category="young-adults">
+                                <div class="fellowship-card-header">
+                                    <h4>NextGen Fellowship</h4>
+                                    <span class="fellowship-category">Young Adults</span>
+                                </div>
+                                <div class="fellowship-card-body">
+                                    <p>A dynamic group for young adults (18-35) focused on building community, spiritual growth, and navigating life's transitions.</p>
+                                    <ul class="fellowship-details">
+                                        <li><i class="fas fa-calendar-alt"></i> Thursdays, 7:00 PM</li>
+                                        <li><i class="fas fa-user"></i> Led by Michael Johnson</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> Church Fellowship Hall</li>
+                                        <li><i class="fas fa-info-circle"></i> Dinner included</li>
+                                    </ul>
+                                </div>
+                                <div class="fellowship-card-footer">
+                                    <a href="#contact" class="btn btn-sm btn-primary" data-bs-toggle="tab" data-bs-target="#contact">Join Group</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Seniors Group -->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="fellowship-card" data-category="seniors">
+                                <div class="fellowship-card-header">
+                                    <h4>Wisdom Keepers</h4>
+                                    <span class="fellowship-category">Seniors</span>
+                                </div>
+                                <div class="fellowship-card-body">
+                                    <p>A fellowship group for seniors (60+) to share life experiences, study Scripture, and support one another through life's later seasons.</p>
+                                    <ul class="fellowship-details">
+                                        <li><i class="fas fa-calendar-alt"></i> Tuesdays, 10:00 AM</li>
+                                        <li><i class="fas fa-user"></i> Led by Elder Robert Thomas</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> Room 105</li>
+                                        <li><i class="fas fa-info-circle"></i> Transportation available</li>
+                                    </ul>
+                                </div>
+                                <div class="fellowship-card-footer">
+                                    <a href="#contact" class="btn btn-sm btn-primary" data-bs-toggle="tab" data-bs-target="#contact">Join Group</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Financial Focus Group -->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="fellowship-card" data-category="financial">
+                                <div class="fellowship-card-header">
+                                    <h4>Financial Freedom Fellowship</h4>
+                                    <span class="fellowship-category">Financial Focus</span>
+                                </div>
+                                <div class="fellowship-card-body">
+                                    <p>A group dedicated to applying biblical financial principles, supporting debt freedom, and encouraging wise stewardship.</p>
+                                    <ul class="fellowship-details">
+                                        <li><i class="fas fa-calendar-alt"></i> Every 2nd & 4th Monday, 6:30 PM</li>
+                                        <li><i class="fas fa-user"></i> Led by David Chen, CPA</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> Room 201</li>
+                                        <li><i class="fas fa-info-circle"></i> Workbooks provided</li>
+                                    </ul>
+                                </div>
+                                <div class="fellowship-card-footer">
+                                    <a href="#contact" class="btn btn-sm btn-primary" data-bs-toggle="tab" data-bs-target="#contact">Join Group</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Online Group -->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="fellowship-card" data-category="online">
+                                <div class="fellowship-card-header">
+                                    <h4>Global Connect Fellowship</h4>
+                                    <span class="fellowship-category">Online</span>
+                                </div>
+                                <div class="fellowship-card-body">
+                                    <p>A virtual fellowship group connecting members across distances for Bible study, prayer, and community building.</p>
+                                    <ul class="fellowship-details">
+                                        <li><i class="fas fa-calendar-alt"></i> Wednesdays, 8:00 PM</li>
+                                        <li><i class="fas fa-user"></i> Led by Maria Rodriguez</li>
+                                        <li><i class="fas fa-laptop"></i> Zoom Meeting</li>
+                                        <li><i class="fas fa-info-circle"></i> Materials emailed in advance</li>
+                                    </ul>
+                                </div>
+                                <div class="fellowship-card-footer">
+                                    <a href="#contact" class="btn btn-sm btn-primary" data-bs-toggle="tab" data-bs-target="#contact">Join Group</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Another Family Group -->
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="fellowship-card" data-category="families">
+                                <div class="fellowship-card-header">
+                                    <h4>Parents of Teens Fellowship</h4>
+                                    <span class="fellowship-category">Families</span>
+                                </div>
+                                <div class="fellowship-card-body">
+                                    <p>A supportive community for parents navigating the teenage years with biblical wisdom and shared experiences.</p>
+                                    <ul class="fellowship-details">
+                                        <li><i class="fas fa-calendar-alt"></i> Every 1st & 3rd Friday, 7:00 PM</li>
+                                        <li><i class="fas fa-user"></i> Led by Pastor & Mrs. Thomas</li>
+                                        <li><i class="fas fa-map-marker-alt"></i> Youth Room</li>
+                                        <li><i class="fas fa-info-circle"></i> Teen activities concurrent</li>
+                                    </ul>
+                                </div>
+                                <div class="fellowship-card-footer">
+                                    <a href="#contact" class="btn btn-sm btn-primary" data-bs-toggle="tab" data-bs-target="#contact">Join Group</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- How to Join Section -->
+            <section class="py-5">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-lg-8 mx-auto">
+                            <h2 class="section-heading">How to Join a Fellowship Group</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Four simple steps to get connected</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3 mb-4">
+                            <div class="process-card animate-fade-in">
+                                <div class="process-number">1</div>
+                                <h4>Browse Groups</h4>
+                                <p>Explore our various fellowship groups to find ones that match your interests, schedule, and life stage.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="process-card animate-fade-in" style="animation-delay: 0.2s;">
+                                <div class="process-number">2</div>
+                                <h4>Complete Form</h4>
+                                <p>Fill out our simple registration form with your contact information and group preferences.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="process-card animate-fade-in" style="animation-delay: 0.4s;">
+                                <div class="process-number">3</div>
+                                <h4>Meet Leader</h4>
+                                <p>The group leader will contact you to welcome you and share specific details about the group.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="process-card animate-fade-in" style="animation-delay: 0.6s;">
+                                <div class="process-number">4</div>
+                                <h4>Attend & Connect</h4>
+                                <p>Attend your first meeting and begin building relationships within your new fellowship community.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-12 text-center">
+                            <a href="#contact" class="btn btn-lg btn-primary" data-bs-toggle="tab" data-bs-target="#contact">Register for a Group Today</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Testimonials Section -->
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Fellowship Testimonials</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Hear from those who have found community in our fellowship groups</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="fellowshipTestimonialCarousel" class="carousel slide ministry-testimonial-carousel" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"Our family fellowship group has become like a second family to us. We've grown spiritually and built relationships that will last a lifetime. The support we received during financial challenges was truly a blessing."</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson" class="testimonial-img">
+                                                    <div>
+                                                        <h5>Sarah Johnson</h5>
+                                                        <p>Family Life Fellowship Member</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"As a young professional new to the area, NextGen Fellowship provided me with instant community and spiritual guidance. The financial principles I've learned have transformed how I manage my resources."</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Marcus Williams" class="testimonial-img">
+                                                    <div>
+                                                        <h5>Marcus Williams</h5>
+                                                        <p>NextGen Fellowship Member</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"The online fellowship has been a lifeline for me as I travel frequently for work. I can stay connected to my church family no matter where I am, and the biblical financial discussions have helped me make better decisions."</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Jennifer Lee" class="testimonial-img">
+                                                    <div>
+                                                        <h5>Jennifer Lee</h5>
+                                                        <p>Global Connect Fellowship Member</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="carousel-control-prev" type="button" data-bs-target="#fellowshipTestimonialCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#fellowshipTestimonialCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Call to Action -->
+            <section class="py-5 bg-primary text-white">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8 text-center text-lg-start">
+                            <h2>Ready to Find Your Fellowship Community?</h2>
+                            <p class="lead mb-0">Take the first step toward meaningful connections and spiritual growth.</p>
+                        </div>
+                        <div class="col-lg-4 text-center text-lg-end mt-4 mt-lg-0">
+                            <a href="#contact" class="btn btn-light btn-lg" data-bs-toggle="tab" data-bs-target="#contact">Join a Group Today</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Prosperity Counseling Page -->
+        <div class="tab-pane fade" id="counseling" role="tabpanel">
+            <section class="page-header">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto text-center">
+                            <h1 class="display-4 text-white">Prosperity Counseling</h1>
+                            <div class="divider bg-gold mx-auto"></div>
+                            <p class="lead text-white mt-3">Faith-Based Guidance for Financial and Spiritual Well-Being</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Counseling Overview Section -->
+            <section class="py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 animate-slide-right">
+                            <h2 class="section-heading">Holistic Counseling Approach</h2>
+                            <div class="divider"></div>
+                            <p class="lead">Our counseling services integrate biblical wisdom with practical guidance for financial, spiritual, and relational well-being.</p>
+                            <p>At Holistic Prosperity Ministry, we believe that true prosperity encompasses every area of life. Our counseling services are designed to help individuals and families align their financial decisions with biblical principles while addressing the spiritual and emotional aspects of prosperity.</p>
+                            <p>Whether you're facing financial challenges, seeking guidance for major life decisions, or simply wanting to establish a more biblical approach to managing resources, our trained counselors are here to help.</p>
+                            
+                            <div class="mt-4">
+                                <a href="#appointment-form" class="btn btn-primary me-2 page-scroll">Request Appointment</a>
+                                <a href="#" class="btn btn-outline-primary">View Resources</a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6 animate-slide-left">
+                            <div class="ministry-detail-card">
+                                <div class="ministry-detail-img counseling-img"></div>
+                                <div class="ministry-detail-overlay">
+                                    <div class="ministry-detail-content">
+                                        <h3>Confidential & Compassionate</h3>
+                                        <p class="lead">"For I know the plans I have for you..."</p>
+                                        <p>Jeremiah 29:11</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Services Offered Section -->
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Services Offered</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Comprehensive counseling to address various aspects of prosperity</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="service-card animate-fade-in">
+                                <div class="service-icon">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <h4>Financial Counseling</h4>
+                                <ul class="service-features">
+                                    <li><i class="fas fa-check-circle"></i> Biblical financial principles</li>
+                                    <li><i class="fas fa-check-circle"></i> Debt reduction strategies</li>
+                                    <li><i class="fas fa-check-circle"></i> Budget creation and management</li>
+                                    <li><i class="fas fa-check-circle"></i> Investment guidance aligned with values</li>
+                                </ul>
+                                <p class="service-duration"><i class="far fa-clock"></i> 60-90 minute sessions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="service-card animate-fade-in" style="animation-delay: 0.2s;">
+                                <div class="service-icon">
+                                    <i class="fas fa-pray"></i>
+                                </div>
+                                <h4>Spiritual Direction</h4>
+                                <ul class="service-features">
+                                    <li><i class="fas fa-check-circle"></i> Discernment in major decisions</li>
+                                    <li><i class="fas fa-check-circle"></i> Discovering purpose and calling</li>
+                                    <li><i class="fas fa-check-circle"></i> Spiritual disciplines for growth</li>
+                                    <li><i class="fas fa-check-circle"></i> Faith and work integration</li>
+                                </ul>
+                                <p class="service-duration"><i class="far fa-clock"></i> 45-60 minute sessions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="service-card animate-fade-in" style="animation-delay: 0.4s;">
+                                <div class="service-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <h4>Marriage & Family</h4>
+                                <ul class="service-features">
+                                    <li><i class="fas fa-check-circle"></i> Financial communication</li>
+                                    <li><i class="fas fa-check-circle"></i> Unity in financial decisions</li>
+                                    <li><i class="fas fa-check-circle"></i> Teaching children about stewardship</li>
+                                    <li><i class="fas fa-check-circle"></i> Legacy planning</li>
+                                </ul>
+                                <p class="service-duration"><i class="far fa-clock"></i> 75-90 minute sessions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="service-card animate-fade-in" style="animation-delay: 0.6s;">
+                                <div class="service-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <h4>Business & Career</h4>
+                                <ul class="service-features">
+                                    <li><i class="fas fa-check-circle"></i> Faith-based business ethics</li>
+                                    <li><i class="fas fa-check-circle"></i> Career discernment and planning</li>
+                                    <li><i class="fas fa-check-circle"></i> Workplace challenges</li>
+                                    <li><i class="fas fa-check-circle"></i> Entrepreneurship guidance</li>
+                                </ul>
+                                <p class="service-duration"><i class="far fa-clock"></i> 60 minute sessions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="service-card animate-fade-in" style="animation-delay: 0.8s;">
+                                <div class="service-icon">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                </div>
+                                <h4>Generosity Planning</h4>
+                                <ul class="service-features">
+                                    <li><i class="fas fa-check-circle"></i> Biblical principles of giving</li>
+                                    <li><i class="fas fa-check-circle"></i> Strategic charitable planning</li>
+                                    <li><i class="fas fa-check-circle"></i> Creating a giving plan</li>
+                                    <li><i class="fas fa-check-circle"></i> Family philanthropy</li>
+                                </ul>
+                                <p class="service-duration"><i class="far fa-clock"></i> 60 minute sessions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="service-card animate-fade-in" style="animation-delay: 1s;">
+                                <div class="service-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h4>Group Workshops</h4>
+                                <ul class="service-features">
+                                    <li><i class="fas fa-check-circle"></i> Financial Freedom classes</li>
+                                    <li><i class="fas fa-check-circle"></i> Pre-marital financial counseling</li>
+                                    <li><i class="fas fa-check-circle"></i> Retirement stewardship</li>
+                                    <li><i class="fas fa-check-circle"></i> Debt reduction groups</li>
+                                </ul>
+                                <p class="service-duration"><i class="far fa-clock"></i> 4-8 week programs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Counselor Profiles Section -->
+            <section class="py-5">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Meet Our Counselors</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Experienced professionals combining biblical wisdom with practical expertise</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="counselor-card animate-fade-in">
+                                <div class="counselor-img">
+                                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Dr. James Wilson">
+                                </div>
+                                <div class="counselor-info">
+                                    <h4>Dr. James Wilson</h4>
+                                    <p class="counselor-title">Lead Financial Counselor</p>
+                                    <p>MBA, PhD in Economics, Certified Financial Planner</p>
+                                    <p class="counselor-bio">Dr. Wilson combines 20 years of financial industry experience with deep biblical knowledge to help clients align their finances with God's principles.</p>
+                                    <div class="counselor-specialties">
+                                        <span>Financial Planning</span>
+                                        <span>Debt Reduction</span>
+                                        <span>Retirement</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="counselor-card animate-fade-in" style="animation-delay: 0.3s;">
+                                <div class="counselor-img">
+                                    <img src="https://randomuser.me/api/portraits/women/42.jpg" alt="Sarah Johnson, M.Div">
+                                </div>
+                                <div class="counselor-info">
+                                    <h4>Sarah Johnson, M.Div</h4>
+                                    <p class="counselor-title">Spiritual Director</p>
+                                    <p>Master of Divinity, Certified Spiritual Director</p>
+                                    <p class="counselor-bio">Sarah helps individuals discern God's guidance in their financial and life decisions through prayer, Scripture, and spiritual disciplines.</p>
+                                    <div class="counselor-specialties">
+                                        <span>Spiritual Direction</span>
+                                        <span>Discernment</span>
+                                        <span>Life Purpose</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="counselor-card animate-fade-in" style="animation-delay: 0.6s;">
+                                <div class="counselor-img">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="David Chen, CPA">
+                                </div>
+                                <div class="counselor-info">
+                                    <h4>David Chen, CPA</h4>
+                                    <p class="counselor-title">Business & Entrepreneurship Counselor</p>
+                                    <p>CPA, MBA, Former Business Owner</p>
+                                    <p class="counselor-bio">David specializes in helping entrepreneurs and business professionals integrate faith principles into their business practices and career decisions.</p>
+                                    <div class="counselor-specialties">
+                                        <span>Business Ethics</span>
+                                        <span>Entrepreneurship</span>
+                                        <span>Career Planning</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Appointment Request Form Section -->
+            <section id="appointment-form" class="py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 mb-4 mb-lg-0">
+                            <h2 class="section-heading">Request an Appointment</h2>
+                            <div class="divider"></div>
+                            <p class="lead">Take the first step toward financial and spiritual alignment</p>
+                            <p>Our counseling services are available to both church members and the broader community. Initial consultations are complimentary, and ongoing sessions are offered on a sliding scale based on ability to pay.</p>
+                            
+                            <div class="appointment-info mt-4">
+                                <div class="appointment-info-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div>
+                                        <h5>Locations</h5>
+                                        <p>In-person at our Heartland, TX campus or virtual via secure video conference</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="appointment-info-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div>
+                                        <h5>Availability</h5>
+                                        <p>Monday-Thursday: 9am-7pm<br>Friday: 9am-5pm<br>Saturday: 9am-12pm</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="appointment-info-item">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <div>
+                                        <h5>Direct Line</h5>
+                                        <p>+1 (469) 703-1453 ext. 2</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <div class="appointment-form-card">
+                                <form class="appointment-form">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="firstName" class="form-label">First Name</label>
+                                            <input type="text" class="form-control" id="firstName" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="lastName" class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" id="lastName" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" required>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="serviceType" class="form-label">Service Type</label>
+                                        <select class="form-select" id="serviceType" required>
+                                            <option value="" selected disabled>Select a service</option>
+                                            <option value="financial">Financial Counseling</option>
+                                            <option value="spiritual">Spiritual Direction</option>
+                                            <option value="marriage">Marriage & Family</option>
+                                            <option value="business">Business & Career</option>
+                                            <option value="generosity">Generosity Planning</option>
+                                            <option value="group">Group Workshop</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="preferredCounselor" class="form-label">Preferred Counselor (Optional)</label>
+                                        <select class="form-select" id="preferredCounselor">
+                                            <option value="" selected>No preference</option>
+                                            <option value="james">Dr. James Wilson</option>
+                                            <option value="sarah">Sarah Johnson, M.Div</option>
+                                            <option value="david">David Chen, CPA</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="message" class="form-label">Brief Description of Need</label>
+                                        <textarea class="form-control" id="message" rows="3" required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="confidentialCheck" checked>
+                                        <label class="form-check-label" for="confidentialCheck">I understand that all counseling is confidential</label>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary w-100">Request Appointment</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Testimonials Section -->
+            <section class="py-5">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Counseling Testimonials</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Hear from those who have experienced transformation through our counseling services</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="counselingTestimonialCarousel" class="carousel slide ministry-testimonial-carousel" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"The counseling services helped me align my business decisions with biblical principles. My company is now thriving in ways I never imagined possible, and I've found purpose beyond just profit."</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Rebecca Thomas" class="testimonial-img">
+                                                    <div>
+                                                        <h5>Rebecca Thomas</h5>
+                                                        <p>Business Owner</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"After years of financial struggle and debt, the biblical principles I learned through counseling helped my wife and I get on the same page. We're now debt-free and building wealth with purpose."</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Michael Johnson" class="testimonial-img">
+                                                    <div>
+                                                        <h5>Michael Johnson</h5>
+                                                        <p>Financial Counseling Client</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"The spiritual direction I received helped me discern God's calling for my career. I made a major job change that aligned with my values, and though it meant a pay cut initially, I've found fulfillment and unexpected provision."</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/women/52.jpg" alt="Jennifer Lee" class="testimonial-img">
+                                                    <div>
+                                                        <h5>Jennifer Lee</h5>
+                                                        <p>Spiritual Direction Client</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="carousel-control-prev" type="button" data-bs-target="#counselingTestimonialCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#counselingTestimonialCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
         <!-- Community Impact Page -->
         <div class="tab-pane fade" id="community" role="tabpanel">
             <section class="page-header">
@@ -550,16 +2052,470 @@
                 </div>
             </section>
             
+            <!-- Image Gallery Section -->
             <section class="py-5">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto text-center">
-                            <h2 class="section-heading">Transforming Communities Through Love in Action</h2>
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Our Impact in Action</h2>
                             <div class="divider mx-auto"></div>
-                            <p class="lead">Our community impact initiatives demonstrate God's love through practical service and support to those in need.</p>
+                            <p class="lead mb-5">A glimpse into our community outreach events and initiatives</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row gallery-container">
+                        <div class="col-lg-4 col-md-6 mb-4 gallery-item">
+                            <div class="gallery-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="https://source.unsplash.com/random/800x600/?food-drive">
+                                <img src="https://source.unsplash.com/random/800x600/?food-drive" alt="Food Drive Event">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-info">
+                                        <h5>Thanksgiving Food Drive</h5>
+                                        <p>November 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4 gallery-item">
+                            <div class="gallery-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="https://source.unsplash.com/random/800x600/?mentoring">
+                                <img src="https://source.unsplash.com/random/800x600/?mentoring" alt="Youth Mentorship Program">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-info">
+                                        <h5>Youth Mentorship Program</h5>
+                                        <p>Ongoing Initiative</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4 gallery-item">
+                            <div class="gallery-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="https://source.unsplash.com/random/800x600/?financial-workshop">
+                                <img src="https://source.unsplash.com/random/800x600/?financial-workshop" alt="Financial Literacy Workshop">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-info">
+                                        <h5>Financial Literacy Workshop</h5>
+                                        <p>Quarterly Events</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4 gallery-item">
+                            <div class="gallery-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="https://source.unsplash.com/random/800x600/?homeless-outreach">
+                                <img src="https://source.unsplash.com/random/800x600/?homeless-outreach" alt="Homeless Outreach">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-info">
+                                        <h5>Street Hope Outreach</h5>
+                                        <p>Weekly Ministry</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4 gallery-item">
+                            <div class="gallery-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="https://source.unsplash.com/random/800x600/?school-supplies">
+                                <img src="https://source.unsplash.com/random/800x600/?school-supplies" alt="Back to School Drive">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-info">
+                                        <h5>Back to School Supply Drive</h5>
+                                        <p>August 2023</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4 gallery-item">
+                            <div class="gallery-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="https://source.unsplash.com/random/800x600/?community-garden">
+                                <img src="https://source.unsplash.com/random/800x600/?community-garden" alt="Community Garden Project">
+                                <div class="gallery-overlay">
+                                    <div class="gallery-info">
+                                        <h5>Community Garden Project</h5>
+                                        <p>Spring Initiative</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Gallery Modal -->
+                <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="galleryModalLabel">Community Impact Gallery</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="" class="img-fluid" id="galleryModalImage" alt="Gallery Image">
+                                <div class="mt-3" id="galleryModalCaption"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Impact Statistics Section -->
+            <section class="py-5 bg-primary text-white">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading text-white">Our Impact By The Numbers</h2>
+                            <div class="divider bg-gold mx-auto"></div>
+                            <p class="lead mb-5">Measuring our community impact through lives touched and needs met</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row text-center">
+                        <div class="col-md-3 mb-4">
+                            <div class="impact-metric">
+                                <div class="impact-number"><span class="counter" data-count="5000">0</span>+</div>
+                                <div class="impact-label">Meals Served Monthly</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="impact-metric">
+                                <div class="impact-number"><span class="counter" data-count="750">0</span></div>
+                                <div class="impact-label">Financial Workshop Graduates</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="impact-metric">
+                                <div class="impact-number"><span class="counter" data-count="32">0</span></div>
+                                <div class="impact-label">Small Businesses Launched</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="impact-metric">
+                                <div class="impact-number"><span class="counter" data-count="125">0</span></div>
+                                <div class="impact-label">Youth in Mentorship Program</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row text-center mt-4">
+                        <div class="col-md-3 mb-4">
+                            <div class="impact-metric">
+                                <div class="impact-number"><span class="counter" data-count="12">0</span></div>
+                                <div class="impact-label">Community Partnerships</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="impact-metric">
+                                <div class="impact-number"><span class="counter" data-count="1200">0</span></div>
+                                <div class="impact-label">Volunteer Hours Monthly</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="impact-metric">
+                                <div class="impact-number"><span class="counter" data-count="500">0</span></div>
+                                <div class="impact-label">School Supply Kits Distributed</div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-3 mb-4">
+                            <div class="impact-metric">
+                                <div class="impact-number">$<span class="counter" data-count="250000">0</span></div>
+                                <div class="impact-label">Community Investment</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Volunteer Opportunities Section -->
+            <section id="volunteer-section" class="py-5 bg-light">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Volunteer Opportunities</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Join us in making a difference in our community</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="volunteer-card animate-fade-in">
+                                <div class="volunteer-icon">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <h4>Food Pantry Volunteer</h4>
+                                <p>Help sort, pack, and distribute food to families in need through our weekly Prosperity Pantry program.</p>
+                                <ul class="volunteer-details">
+                                    <li><i class="fas fa-clock"></i> 3-4 hours weekly or bi-weekly</li>
+                                    <li><i class="fas fa-users"></i> Teams of 5-10 people</li>
+                                    <li><i class="fas fa-calendar-alt"></i> Saturdays, 8am-12pm</li>
+                                </ul>
+                                <a href="#volunteer-form" class="btn btn-primary mt-3 page-scroll">Sign Up</a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="volunteer-card animate-fade-in" style="animation-delay: 0.2s;">
+                                <div class="volunteer-icon">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                </div>
+                                <h4>Financial Literacy Coach</h4>
+                                <p>Share your financial expertise by teaching budgeting, saving, and financial planning skills to community members.</p>
+                                <ul class="volunteer-details">
+                                    <li><i class="fas fa-clock"></i> 2-3 hours monthly</li>
+                                    <li><i class="fas fa-users"></i> Individual mentoring</li>
+                                    <li><i class="fas fa-calendar-alt"></i> Flexible scheduling</li>
+                                </ul>
+                                <a href="#volunteer-form" class="btn btn-primary mt-3 page-scroll">Sign Up</a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="volunteer-card animate-fade-in" style="animation-delay: 0.4s;">
+                                <div class="volunteer-icon">
+                                    <i class="fas fa-hands-helping"></i>
+                                </div>
+                                <h4>Street Hope Outreach Team</h4>
+                                <p>Join our team that provides meals, hygiene kits, prayer, and connection to resources for individuals experiencing homelessness.</p>
+                                <ul class="volunteer-details">
+                                    <li><i class="fas fa-clock"></i> 3 hours weekly</li>
+                                    <li><i class="fas fa-users"></i> Teams of 6-8 people</li>
+                                    <li><i class="fas fa-calendar-alt"></i> Friday evenings</li>
+                                </ul>
+                                <a href="#volunteer-form" class="btn btn-primary mt-3 page-scroll">Sign Up</a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="volunteer-card animate-fade-in" style="animation-delay: 0.6s;">
+                                <div class="volunteer-icon">
+                                    <i class="fas fa-child"></i>
+                                </div>
+                                <h4>Youth Mentor</h4>
+                                <p>Provide guidance, support, and positive role modeling to at-risk youth through our Prosperity Youth Mentorship program.</p>
+                                <ul class="volunteer-details">
+                                    <li><i class="fas fa-clock"></i> 4-8 hours monthly</li>
+                                    <li><i class="fas fa-users"></i> One-on-one mentoring</li>
+                                    <li><i class="fas fa-calendar-alt"></i> Minimum 6-month commitment</li>
+                                </ul>
+                                <a href="#volunteer-form" class="btn btn-primary mt-3 page-scroll">Sign Up</a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="volunteer-card animate-fade-in" style="animation-delay: 0.8s;">
+                                <div class="volunteer-icon">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                                <h4>Digital Skills Instructor</h4>
+                                <p>Teach basic computer skills, internet safety, and digital literacy to seniors and job seekers in our community.</p>
+                                <ul class="volunteer-details">
+                                    <li><i class="fas fa-clock"></i> 2 hours weekly</li>
+                                    <li><i class="fas fa-users"></i> Small group teaching</li>
+                                    <li><i class="fas fa-calendar-alt"></i> Tuesday or Thursday evenings</li>
+                                </ul>
+                                <a href="#volunteer-form" class="btn btn-primary mt-3 page-scroll">Sign Up</a>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-4">
+                            <div class="volunteer-card animate-fade-in" style="animation-delay: 1s;">
+                                <div class="volunteer-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <h4>Business Mentor</h4>
+                                <p>Support aspiring entrepreneurs from underserved communities with business planning, marketing, and operational guidance.</p>
+                                <ul class="volunteer-details">
+                                    <li><i class="fas fa-clock"></i> 2-4 hours monthly</li>
+                                    <li><i class="fas fa-users"></i> One-on-one or small group</li>
+                                    <li><i class="fas fa-calendar-alt"></i> Flexible scheduling</li>
+                                </ul>
+                                <a href="#volunteer-form" class="btn btn-primary mt-3 page-scroll">Sign Up</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Volunteer Sign-Up Form -->
+            <section id="volunteer-form" class="py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 mb-4 mb-lg-0">
+                            <h2 class="section-heading">Ready to Make an Impact?</h2>
+                            <div class="divider"></div>
+                            <p class="lead">Complete the form to join our volunteer team</p>
+                            <p>Thank you for your interest in volunteering with Holistic Prosperity Ministry's community impact initiatives. Your time and talents can make a significant difference in the lives of those we serve.</p>
+                            <p>After submitting this form, our Volunteer Coordinator will contact you within 3 business days to discuss the next steps, including orientation and training opportunities.</p>
+                            
+                            <div class="volunteer-info mt-4">
+                                <div class="volunteer-info-item">
+                                    <i class="fas fa-info-circle"></i>
+                                    <div>
+                                        <h5>Volunteer Requirements</h5>
+                                        <p>All volunteers must complete a background check and attend a volunteer orientation session.</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="volunteer-info-item">
+                                    <i class="fas fa-heart"></i>
+                                    <div>
+                                        <h5>Why We Serve</h5>
+                                        <p>"For even the Son of Man did not come to be served, but to serve..." - Mark 10:45</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-6">
+                            <div class="volunteer-form-card">
+                                <form class="volunteer-form">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="firstName" class="form-label">First Name</label>
+                                            <input type="text" class="form-control" id="firstName" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="lastName" class="form-label">Last Name</label>
+                                            <input type="text" class="form-control" id="lastName" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" required>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="volunteerInterest" class="form-label">Area of Interest</label>
+                                        <select class="form-select" id="volunteerInterest" required>
+                                            <option value="" selected disabled>Select an area</option>
+                                            <option value="food">Food Pantry Volunteer</option>
+                                            <option value="financial">Financial Literacy Coach</option>
+                                            <option value="outreach">Street Hope Outreach Team</option>
+                                            <option value="youth">Youth Mentor</option>
+                                            <option value="digital">Digital Skills Instructor</option>
+                                            <option value="business">Business Mentor</option>
+                                            <option value="other">Other (please specify)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="availability" class="form-label">Availability</label>
+                                        <select class="form-select" id="availability" required>
+                                            <option value="" selected disabled>Select availability</option>
+                                            <option value="weekday-morning">Weekday Mornings</option>
+                                            <option value="weekday-afternoon">Weekday Afternoons</option>
+                                            <option value="weekday-evening">Weekday Evenings</option>
+                                            <option value="weekend-morning">Weekend Mornings</option>
+                                            <option value="weekend-afternoon">Weekend Afternoons</option>
+                                            <option value="flexible">Flexible</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="message" class="form-label">Why are you interested in volunteering?</label>
+                                        <textarea class="form-control" id="message" rows="3" required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="checkbox" id="agreeCheck" required>
+                                        <label class="form-check-label" for="agreeCheck">I understand that a background check is required for all volunteers</label>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary w-100">Submit Volunteer Application</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Testimonials Section -->
+            <section class="py-5 bg-light">
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="col-12">
+                            <h2 class="section-heading">Volunteer Testimonials</h2>
+                            <div class="divider mx-auto"></div>
+                            <p class="lead mb-5">Hear from those who are making a difference in our community</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="communityTestimonialCarousel" class="carousel slide ministry-testimonial-carousel" data-bs-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"Volunteering at the food pantry has been one of the most rewarding experiences of my life. Seeing the direct impact we have on families facing food insecurity has changed my perspective on what it means to serve others."</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Maria Rodriguez" class="testimonial-img">
+                                                    <div>
+                                                        <h5>Maria Rodriguez</h5>
+                                                        <p>Food Pantry Volunteer, 2 years</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"As a financial literacy coach, I've seen people transform their relationship with money and break generational cycles of debt. The biblical principles we teach provide both practical skills and spiritual foundation."</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="James Wilson" class="testimonial-img">
+                                                    <div>
+                                                        <h5>James Wilson</h5>
+                                                        <p>Financial Literacy Coach, 3 years</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="carousel-item">
+                                        <div class="testimonial-card">
+                                            <div class="testimonial-content">
+                                                <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                                                <p>"Mentoring a young person has been as transformative for me as it has been for my mentee. Watching her grow in confidence and develop a vision for her future is an incredible blessing I didn't expect."</p>
+                                                <div class="testimonial-author">
+                                                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Diane Foster" class="testimonial-img">
+                                                    <div>
+                                                        <h5>Diane Foster</h5>
+                                                        <p>Youth Mentor, 18 months</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="carousel-control-prev" type="button" data-bs-target="#communityTestimonialCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#communityTestimonialCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
             </section>
             
             <section class="py-5 bg-light">

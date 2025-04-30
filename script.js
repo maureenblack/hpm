@@ -4,6 +4,15 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     
+    // Initialize current year
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    
+    // Initialize gallery modal functionality
+    initGalleryModal();
+    
+    // Initialize initiatives filter
+    initInitiativesFilter();
+    
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     
@@ -246,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Add class to animate elements when they come into view
     function animateOnScroll() {
-        const elements = document.querySelectorAll('.value-card, .program-card, .team-card, .ministry-card, .impact-card, .event-card, .resource-card, .involvement-card, .support-card');
+        const elements = document.querySelectorAll('.value-card, .program-card, .team-card, .ministry-card, .impact-card, .event-card, .resource-card, .involvement-card, .support-card, .ministry-feature, .ministry-detail-card');
         
         elements.forEach(element => {
             const elementPosition = element.getBoundingClientRect().top;
@@ -261,6 +270,219 @@ document.addEventListener('DOMContentLoaded', function() {
     // Run animation check on load and scroll
     window.addEventListener('load', animateOnScroll);
     window.addEventListener('scroll', animateOnScroll);
+    
+    // Ministry Pages Interactive Elements
+    
+    // Counter animation for ministry metrics
+    function initCounters() {
+        const counters = document.querySelectorAll('.counter-value');
+        
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const step = target / (duration / 16); // ~60fps
+            let current = 0;
+            
+            const updateCounter = () => {
+                current += step;
+                if (current < target) {
+                    counter.textContent = Math.ceil(current);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+            
+            updateCounter();
+        });
+    }
+    
+    // Initialize counter animation when metrics section is in view
+    const metricsSection = document.querySelector('.ministry-metrics');
+    if (metricsSection) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    initCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(metricsSection);
+    }
+    
+    // Bible Study Group Toggle
+    const bibleStudyHeaders = document.querySelectorAll('.bible-study-header');
+    bibleStudyHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const card = this.closest('.bible-study-card');
+            
+            // Toggle active class
+            card.classList.toggle('active');
+            
+            // Toggle aria-expanded
+            const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+            this.setAttribute('aria-expanded', !expanded);
+            
+            // Toggle content visibility
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        });
+    });
+    
+    // Fellowship Group Filtering
+    const filterButtons = document.querySelectorAll('.group-filter-btn');
+    const fellowshipCards = document.querySelectorAll('.fellowship-card');
+    
+    if (filterButtons.length > 0 && fellowshipCards.length > 0) {
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                // Get filter value
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Filter fellowship cards
+                fellowshipCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.style.display = 'block';
+                    } else if (card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+    
+    // Gallery Modal Functionality
+    function initGalleryModal() {
+        const galleryCards = document.querySelectorAll('.gallery-card');
+        const modalImage = document.getElementById('galleryModalImage');
+        const modalCaption = document.getElementById('galleryModalCaption');
+        
+        if (galleryCards && modalImage) {
+            galleryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const imgSrc = this.getAttribute('data-img');
+                    const imgTitle = this.querySelector('.gallery-info h5')?.textContent || '';
+                    const imgDate = this.querySelector('.gallery-info p')?.textContent || '';
+                    
+                    modalImage.src = imgSrc;
+                    if (modalCaption) {
+                        modalCaption.innerHTML = `<h5>${imgTitle}</h5><p>${imgDate}</p>`;
+                    }
+                });
+            });
+        }
+    }
+    
+    // Initiatives Filter Functionality
+    function initInitiativesFilter() {
+        const filterButtons = document.querySelectorAll('.initiatives-filter .btn');
+        const initiativeItems = document.querySelectorAll('.initiative-item');
+        
+        if (filterButtons && initiativeItems.length > 0) {
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filterValue = this.getAttribute('data-filter');
+                    
+                    // Show/hide items based on filter
+                    initiativeItems.forEach(item => {
+                        if (filterValue === 'all') {
+                            item.style.display = 'block';
+                        } else {
+                            const categories = item.getAttribute('data-category').split(' ');
+                            if (categories.includes(filterValue)) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+        }
+    }
+    
+    // Program Details Collapse
+    const programHeaders = document.querySelectorAll('.program-header');
+    
+    programHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            const card = this.closest('.program-card');
+            
+            // Toggle active class
+            card.classList.toggle('active');
+            
+            // Toggle aria-expanded
+            const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+            this.setAttribute('aria-expanded', !expanded);
+            
+            // Toggle content visibility
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+            }
+        });
+    });
+    
+    // Testimonial Carousel for Ministry Pages
+    const ministryCarousels = document.querySelectorAll('.ministry-testimonial-carousel');
+    ministryCarousels.forEach(carousel => {
+        new bootstrap.Carousel(carousel, {
+            interval: 6000,
+            wrap: true
+        });
+    });
+    
+    // Image Gallery Lightbox
+    const galleryImages = document.querySelectorAll('.gallery-image');
+    
+    galleryImages.forEach(image => {
+        image.addEventListener('click', function() {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const captionText = document.getElementById('imageCaption');
+            
+            if (modal && modalImg) {
+                modal.style.display = 'block';
+                modalImg.src = this.src;
+                if (captionText) {
+                    captionText.innerHTML = this.alt;
+                }
+            }
+        });
+    });
+    
+    // Close Modal
+    const closeBtn = document.querySelector('.close-modal');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            const modal = document.getElementById('imageModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
     
     // Initialize current year in footer copyright
     const yearElement = document.querySelector('.copyright');
