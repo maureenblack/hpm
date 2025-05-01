@@ -1,0 +1,324 @@
+/**
+ * Holistic Prosperity Ministry Website
+ * Responsive Design Styles
+ */
+
+/* Base Mobile-First Styles */
+:root {
+    --primary: #4B0082;    /* Royal Purple */
+    --secondary: #FFD700;  /* Gold */
+    --light: #FFFFFF;      /* White */
+    --dark: #333333;       /* Dark Gray */
+    --gray-light: #f8f9fa;
+    --gray: #6c757d;
+}
+
+/* Global Responsive Adjustments */
+html {
+    font-size: 16px; /* Base font size for mobile */
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* Touch-friendly buttons (minimum 44×44px) */
+.btn {
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Improved touch targets for navigation */
+.navbar-nav .nav-link {
+    padding: 0.75rem 1rem;
+}
+
+/* Mobile-optimized hamburger menu */
+.navbar-toggler {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem;
+    border: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+    outline: 2px solid var(--secondary);
+}
+
+/* Responsive Typography */
+h1, .h1 { font-size: 2rem; }
+h2, .h2 { font-size: 1.75rem; }
+h3, .h3 { font-size: 1.5rem; }
+h4, .h4 { font-size: 1.25rem; }
+h5, .h5 { font-size: 1.1rem; }
+p, li { font-size: 1rem; line-height: 1.6; }
+
+/* Responsive Cards */
+.card {
+    height: auto;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive Tables */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Responsive Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Lazy Loading for Images */
+.lazy-load {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.lazy-load.loaded {
+    opacity: 1;
+}
+
+/* Responsive Forms */
+input, select, textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    max-width: 100%;
+}
+
+/* Responsive Spacing */
+.section-padding {
+    padding: 3rem 0;
+}
+
+/* Optimize animations for mobile */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    html {
+        font-size: 16px;
+    }
+    
+    h1, .h1 { font-size: 2.25rem; }
+    h2, .h2 { font-size: 1.85rem; }
+    h3, .h3 { font-size: 1.6rem; }
+    
+    .section-padding {
+        padding: 4rem 0;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+    
+    h1, .h1 { font-size: 2.5rem; }
+    h2, .h2 { font-size: 2rem; }
+    h3, .h3 { font-size: 1.75rem; }
+    
+    .section-padding {
+        padding: 5rem 0;
+    }
+    
+    /* Improved card layouts for tablets */
+    .card-deck {
+        display: flex;
+        flex-flow: row wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+    
+    .card-deck .card {
+        flex: 1 0 0%;
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    html {
+        font-size: 17px;
+    }
+    
+    h1, .h1 { font-size: 2.75rem; }
+    h2, .h2 { font-size: 2.25rem; }
+    h3, .h3 { font-size: 1.85rem; }
+    
+    .section-padding {
+        padding: 6rem 0;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    html {
+        font-size: 18px;
+    }
+    
+    h1, .h1 { font-size: 3rem; }
+    h2, .h2 { font-size: 2.5rem; }
+    h3, .h3 { font-size: 2rem; }
+    
+    .section-padding {
+        padding: 7rem 0;
+    }
+}
+
+/* Component-Specific Responsive Styles */
+
+/* Hero Sections */
+.hero-section {
+    min-height: 50vh;
+    padding: 4rem 0;
+}
+
+@media (min-width: 768px) {
+    .hero-section {
+        min-height: 60vh;
+        padding: 6rem 0;
+    }
+}
+
+@media (min-width: 992px) {
+    .hero-section {
+        min-height: 70vh;
+        padding: 8rem 0;
+    }
+}
+
+/* Navigation */
+.navbar-brand img {
+    height: 40px;
+}
+
+@media (min-width: 768px) {
+    .navbar-brand img {
+        height: 50px;
+    }
+}
+
+/* Footer Responsive */
+.footer {
+    text-align: center;
+}
+
+.footer-links, .footer-contact {
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .footer {
+        text-align: left;
+    }
+}
+
+/* Team Members */
+.team-member {
+    margin-bottom: 2rem;
+}
+
+/* Events Calendar */
+.calendar-container {
+    overflow-x: auto;
+}
+
+.calendar-day {
+    min-height: 80px;
+}
+
+@media (min-width: 768px) {
+    .calendar-day {
+        min-height: 120px;
+    }
+}
+
+/* Testimonials */
+.testimonial-card {
+    padding: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .testimonial-card {
+        padding: 2rem;
+    }
+}
+
+/* Timeline */
+.timeline {
+    padding-left: 2rem;
+}
+
+.timeline-content {
+    padding: 1rem;
+    margin-left: 1rem;
+}
+
+@media (min-width: 768px) {
+    .timeline {
+        padding-left: 0;
+    }
+    
+    .timeline-content {
+        padding: 1.5rem;
+        margin-left: 2rem;
+    }
+    
+    .timeline-content.right {
+        margin-left: auto;
+        margin-right: 2rem;
+    }
+}
+
+/* Image Optimization */
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Fix for iOS input zooming */
+@media screen and (-webkit-min-device-pixel-ratio: 0) { 
+    select,
+    textarea,
+    input {
+        font-size: 16px;
+    }
+}
+
+/* Accessibility Improvements */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus visible for keyboard users */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--secondary);
+    outline-offset: 2px;
+}
