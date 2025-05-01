@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Holistic Prosperity Ministry</title>
+    <link rel="icon" href="images/hpm-favicon.svg" type="image/svg+xml">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html#our-story">Our Story</a></li>
+                            <li><a class="dropdown-item" href="about.html#leadership-team">Leadership Team</a></li>
+                            <li><a class="dropdown-item" href="about.html#core-values">Core Values</a></li>
+                            <li><a class="dropdown-item" href="about.html#faq">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="ministries.html" id="ministryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ministries
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="ministryDropdown">
+                            <li><a class="dropdown-item" href="ministries/cryptstock.html">CrypStock Prosperity Academy</a></li>
+                            <li><a class="dropdown-item" href="ministries/faith-worship.html">Faith & Worship Ministry</a></li>
+                            <li><a class="dropdown-item" href="ministries/community.html">Community Impact Projects</a></li>
+                            <li><a class="dropdown-item" href="ministries/love-in-action.html">Love in Action Fellowship</a></li>
+                            <li><a class="dropdown-item" href="ministries/prosperity-counseling.html">Prosperity Counseling</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="resources.html" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Resources
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                            <li><a class="dropdown-item active" href="resources/events.html">Events</a></li>
+                            <li><a class="dropdown-item" href="resources/sermons.html">Sermons Archive</a></li>
+                            <li><a class="dropdown-item" href="resources/financial-literacy.html">Financial Literacy PDFs</a></li>
+                            <li><a class="dropdown-item" href="resources/devotionals.html">Devotionals</a></li>
+                            <li><a class="dropdown-item" href="resources/recommended-reading.html">Recommended Reading</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle donate-btn" href="donate.html" id="donateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Donate
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="donateDropdown">
+                            <li><a class="dropdown-item" href="donate/one-time.html">One-Time Giving</a></li>
+                            <li><a class="dropdown-item" href="donate/monthly.html">Monthly Partnership</a></li>
+                            <li><a class="dropdown-item" href="donate/sponsor.html">Sponsor a Student</a></li>
+                            <li><a class="dropdown-item" href="donate/corporate.html">Corporate Donations</a></li>
+                            <li><a class="dropdown-item" href="donate/impact-reports.html">Transparent Impact Reports</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1>Events</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Events</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Events Calendar Section -->
+    <section class="events-calendar py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Upcoming Events</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Join us for these transformative gatherings</p>
+            </div>
+            
+            <!-- Calendar Navigation -->
+            <div class="calendar-nav mb-4">
+                <div class="row align-items-center">
+                    <div class="col-md-4 text-center text-md-start">
+                        <button class="btn btn-outline-primary" id="prevMonth"><i class="fas fa-chevron-left"></i> Previous</button>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <h3 class="current-month mb-0">May 2025</h3>
+                    </div>
+                    <div class="col-md-4 text-center text-md-end">
+                        <button class="btn btn-outline-primary" id="nextMonth">Next <i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filter Options -->
+            <div class="event-filters mb-4">
+                <div class="row">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search events..." id="eventSearch">
+                            <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-select" id="eventCategory">
+                            <option value="all">All Categories</option>
+                            <option value="conference">Conferences & Summits</option>
+                            <option value="workshop">Workshops & Training</option>
+                            <option value="community">Community Outreach</option>
+                            <option value="worship">Worship & Prayer</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Events Section -->
+    <section class="featured-events py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Featured Events</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Don't miss these transformative gatherings</p>
+            </div>
+            
+            <!-- Annual Prosperity Summit -->
+            <div class="event-feature mb-5" id="prosperity-summit">
+                <div class="row g-0">
+                    <div class="col-lg-6">
+                        <div class="event-image h-100">
+                            <img src="images/prosperity-summit.jpg" alt="Annual Prosperity Summit" class="img-fluid h-100 object-fit-cover">
+                            <div class="event-date-badge">
+                                <div class="month">JUN</div>
+                                <div class="day">15-17</div>
+                                <div class="year">2025</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="event-details h-100">
+                            <h3>Annual Prosperity Summit</h3>
+                            <div class="event-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Main Campus Auditorium</span>
+                                <span><i class="fas fa-clock"></i> 9:00 AM - 5:00 PM</span>
+                                <span><i class="fas fa-tag"></i> Conference</span>
+                            </div>
+                            <p class="lead">A three-day conference featuring renowned speakers on faith-based financial principles and practical wealth-building strategies.</p>
+                            <p>Join us for our flagship event of the year! The Annual Prosperity Summit brings together thought leaders, financial experts, and spiritual mentors for an immersive experience that will transform your approach to prosperity.</p>
+                            <h4>Featured Speakers:</h4>
+                            <ul>
+                                <li>Pastor Jonathan Williams - "The Biblical Foundation of Prosperity"</li>
+                                <li>Dr. Sarah Chen - "Integrating Faith and Finance in Today's Economy"</li>
+                                <li>Michael Rodriguez - "Cryptocurrency and the Future of Wealth"</li>
+                                <li>Rev. David Thompson - "Stewardship as a Spiritual Discipline"</li>
+                            </ul>
+                            <div class="event-actions">
+                                <a href="#" class="btn btn-primary">Register Now</a>
+                                <a href="#" class="btn btn-outline-primary">View Schedule</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Faith & Finance Bootcamp -->
+            <div class="event-feature mb-5" id="finance-bootcamp">
+                <div class="row g-0">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="event-image h-100">
+                            <img src="images/finance-bootcamp.jpg" alt="Faith & Finance Bootcamp" class="img-fluid h-100 object-fit-cover">
+                            <div class="event-date-badge">
+                                <div class="month">JUL</div>
+                                <div class="day">08-09</div>
+                                <div class="year">2025</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="event-details h-100">
+                            <h3>Faith & Finance Bootcamp</h3>
+                            <div class="event-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Financial Education Center</span>
+                                <span><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</span>
+                                <span><i class="fas fa-tag"></i> Workshop</span>
+                            </div>
+                            <p class="lead">An intensive weekend workshop teaching practical financial skills grounded in biblical principles.</p>
+                            <p>The Faith & Finance Bootcamp is designed for those who want to take immediate action to improve their financial situation while honoring God with their resources. This hands-on workshop will equip you with practical tools and biblical wisdom.</p>
+                            <h4>What You'll Learn:</h4>
+                            <ul>
+                                <li>Creating a faith-based budget that works</li>
+                                <li>Biblical strategies for debt elimination</li>
+                                <li>Saving and investing with purpose</li>
+                                <li>Giving generously while building wealth</li>
+                            </ul>
+                            <div class="event-actions">
+                                <a href="#" class="btn btn-primary">Register Now</a>
+                                <a href="#" class="btn btn-outline-primary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Community Giveback Day -->
+            <div class="event-feature" id="community-giveback">
+                <div class="row g-0">
+                    <div class="col-lg-6">
+                        <div class="event-image h-100">
+                            <img src="images/community-giveback.jpg" alt="Community Giveback Day" class="img-fluid h-100 object-fit-cover">
+                            <div class="event-date-badge">
+                                <div class="month">AUG</div>
+                                <div class="day">22</div>
+                                <div class="year">2025</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="event-details h-100">
+                            <h3>Community Giveback Day</h3>
+                            <div class="event-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Multiple Locations</span>
+                                <span><i class="fas fa-clock"></i> 8:00 AM - 2:00 PM</span>
+                                <span><i class="fas fa-tag"></i> Community Outreach</span>
+                            </div>
+                            <p class="lead">Join us as we serve our local community through various outreach initiatives and volunteer opportunities.</p>
+                            <p>Community Giveback Day is our quarterly opportunity to put our faith into action by serving those in need. Volunteers can choose from multiple service projects across the city, including:</p>
+                            <h4>Service Opportunities:</h4>
+                            <ul>
+                                <li>Food Pantry Distribution</li>
+                                <li>School Supply Drive</li>
+                                <li>Home Repairs for Seniors</li>
+                                <li>Community Garden Planting</li>
+                                <li>Free Financial Counseling Clinic</li>
+                            </ul>
+                            <div class="event-actions">
+                                <a href="#" class="btn btn-primary">Sign Up to Volunteer</a>
+                                <a href="#" class="btn btn-outline-primary">View Locations</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Monthly Events Section -->
+    <section class="monthly-events py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Regular Events</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Join us for these recurring opportunities for growth and connection</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Weekly Bible Study -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="regular-event-card h-100">
+                        <div class="event-icon">
+                            <i class="fas fa-bible"></i>
+                        </div>
+                        <h3>Prosperity Principles Bible Study</h3>
+                        <div class="event-schedule">
+                            <p><i class="fas fa-calendar-alt"></i> Every Wednesday</p>
+                            <p><i class="fas fa-clock"></i> 7:00 PM - 8:30 PM</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Main Campus, Room 201</p>
+                        </div>
+                        <p>Explore biblical teachings on prosperity, stewardship, and abundance in this weekly study led by Pastor Jonathan.</p>
+                        <a href="#" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Prayer & Meditation -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="regular-event-card h-100">
+                        <div class="event-icon">
+                            <i class="fas fa-pray"></i>
+                        </div>
+                        <h3>Prayer & Meditation Group</h3>
+                        <div class="event-schedule">
+                            <p><i class="fas fa-calendar-alt"></i> Every Monday</p>
+                            <p><i class="fas fa-clock"></i> 6:00 AM - 7:00 AM</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Prayer Garden</p>
+                        </div>
+                        <p>Start your week with spiritual alignment through guided prayer and meditation focused on prosperity mindset and gratitude.</p>
+                        <a href="#" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Financial Workshop -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="regular-event-card h-100">
+                        <div class="event-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h3>Financial Foundations Workshop</h3>
+                        <div class="event-schedule">
+                            <p><i class="fas fa-calendar-alt"></i> First Saturday Monthly</p>
+                            <p><i class="fas fa-clock"></i> 10:00 AM - 12:00 PM</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Financial Education Center</p>
+                        </div>
+                        <p>A beginner-friendly workshop covering essential financial skills like budgeting, saving, and debt management from a biblical perspective.</p>
+                        <a href="#" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Entrepreneurship Meetup -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="regular-event-card h-100">
+                        <div class="event-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Kingdom Entrepreneurs Meetup</h3>
+                        <div class="event-schedule">
+                            <p><i class="fas fa-calendar-alt"></i> Third Thursday Monthly</p>
+                            <p><i class="fas fa-clock"></i> 6:30 PM - 8:30 PM</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Innovation Hub</p>
+                        </div>
+                        <p>Network with like-minded entrepreneurs and learn how to build a business that honors God while creating prosperity for your community.</p>
+                        <a href="#" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Youth Financial Literacy -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="regular-event-card h-100">
+                        <div class="event-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Youth Financial Literacy Program</h3>
+                        <div class="event-schedule">
+                            <p><i class="fas fa-calendar-alt"></i> Every Sunday</p>
+                            <p><i class="fas fa-clock"></i> 11:00 AM - 12:30 PM</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Youth Center</p>
+                        </div>
+                        <p>Age-appropriate financial education for children and teens, teaching them biblical money principles early in life.</p>
+                        <a href="#" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+                
+                <!-- Community Service -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="regular-event-card h-100">
+                        <div class="event-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Food Pantry Distribution</h3>
+                        <div class="event-schedule">
+                            <p><i class="fas fa-calendar-alt"></i> Every Tuesday</p>
+                            <p><i class="fas fa-clock"></i> 4:00 PM - 6:00 PM</p>
+                            <p><i class="fas fa-map-marker-alt"></i> Community Center</p>
+                        </div>
+                        <p>Volunteer to help distribute food and essential items to families in need while sharing hope and encouragement.</p>
+                        <a href="#" class="btn btn-outline-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Registration CTA -->
+    <section class="event-registration-cta py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <h2>Want to Stay Updated on All Events?</h2>
+                    <p class="lead mb-0">Subscribe to our events newsletter and never miss an opportunity to grow and connect.</p>
+                </div>
+                <div class="col-lg-4">
+                    <form class="event-subscribe-form">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" class="footer-logo mb-3" height="60">
+                    <p class="text-white-50">Empowering lives through biblical teachings, practical financial education, and community transformation since 2015.</p>
+                    <div class="social-icons">
+                        <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h4 class="text-white">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="get-involved.html">Get Involved</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h4 class="text-white">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Prosperity Lane, Faithville, CA 90210</li>
+                        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@holisticprosperity.org</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white">Newsletter</h4>
+                    <p class="text-white-50">Subscribe to receive updates on events, resources, and ministry news.</p>
+                    <form class="newsletter-form">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email" aria-label="Your Email" required>
+                            <button class="btn btn-gold" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-white-50">&copy; 2025 Holistic Prosperity Ministry. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <ul class="footer-bottom-links">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
