@@ -81,10 +81,13 @@ date_default_timezone_set('America/Chicago');
 
 // Security headers - only set if headers haven't been sent yet
 if (!headers_sent()) {
+    // Content Security Policy - Allow inline styles for development
+    header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://js.stripe.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; connect-src 'self' https://api.stripe.com; frame-src 'self' https://js.stripe.com https://hooks.stripe.com;");
+    
+    // Other security headers
     header("X-Content-Type-Options: nosniff");
     header("X-Frame-Options: SAMEORIGIN");
     header("X-XSS-Protection: 1; mode=block");
-    header("Content-Security-Policy: default-src 'self'; script-src 'self' https://js.stripe.com https://cdn.jsdelivr.net https://code.jquery.com; style-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; img-src 'self' data:; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://api.stripe.com; frame-src https://js.stripe.com");
     header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
     header("Referrer-Policy: strict-origin-when-cross-origin");
 }

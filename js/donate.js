@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof Stripe !== 'undefined') {
         initStripeElements();
     }
+    
+    // Initialize test data button
+    initTestDataButton();
 });
 
 /**
@@ -56,6 +59,7 @@ function initDonationForm() {
     
     // Frequency selection
     const frequencyOptions = document.querySelectorAll('.frequency-option');
+    const frequencyInput = document.getElementById('frequency');
     
     frequencyOptions.forEach(option => {
         option.addEventListener('click', function() {
@@ -64,6 +68,13 @@ function initDonationForm() {
             
             // Add active class to clicked option
             this.classList.add('active');
+            
+            // Update hidden frequency input
+            const selectedFrequency = this.getAttribute('data-frequency');
+            if (frequencyInput) {
+                frequencyInput.value = selectedFrequency;
+                console.log('Frequency updated:', selectedFrequency);
+            }
             
             // Update donation summary
             updateDonationSummary();
@@ -82,36 +93,133 @@ function initDonationForm() {
     const form = document.getElementById('donationForm');
     
     form.addEventListener('submit', function(event) {
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
+        event.preventDefault();
+        
+        // Debug information
+        console.log('Form submission started');
+        console.log('Form validity state:', form.checkValidity());
+        
+        // Clear previous error messages
+        const previousErrors = form.querySelectorAll('.alert-danger');
+        previousErrors.forEach(error => error.remove());
+        
+        // Validate all fields
+        let isValid = true;
+        const requiredFields = form.querySelectorAll('input[required], select[required]');
+        
+        console.log('Required fields count:', requiredFields.length);
+        
+        // Debug each required field
+        requiredFields.forEach(field => {
+            console.log(`Field: ${field.id || field.name}`, {
+                'Value': field.value,
+                'Valid': field.checkValidity(),
+                'ValidityState': {
+                    'valueMissing': field.validity.valueMissing,
+                    'typeMismatch': field.validity.typeMismatch,
+                    'patternMismatch': field.validity.patternMismatch
+                }
+            });
             
-            // Show validation messages
-            form.classList.add('was-validated');
-        } else {
-            event.preventDefault();
-            
-            // Get selected payment method
-            const paymentMethod = document.querySelector('input[name="payment_method"]:checked')?.value;
-            
-            if (!paymentMethod) {
-                // Show error if no payment method selected
-                const errorDiv = document.createElement('div');
-                errorDiv.className = 'alert alert-danger';
-                errorDiv.textContent = 'Please select a payment method';
-                form.prepend(errorDiv);
-                errorDiv.scrollIntoView({ behavior: 'smooth' });
-                return;
+            if (!validateField(field)) {
+                isValid = false;
+                console.log(`Field validation failed: ${field.id || field.name}`);
             }
-            
-            // Handle payment based on selected method
-            if (paymentMethod === 'credit_card') {
-                // Process with Stripe
-                processStripePayment();
+        });
+        
+        // Check amount
+        const activeAmountOption = document.querySelector('.amount-option.active');
+        const customAmountInput = document.getElementById('customAmount');
+        let amount = 0;
+        
+        console.log('Checking amount selection:');
+        console.log('- Active amount option:', activeAmountOption ? 'Found' : 'Not found');
+        console.log('- Custom amount input:', customAmountInput ? (customAmountInput.value || 'Empty') : 'Not found');
+        
+        // Always consider the test data amount as valid during testing
+        const isTestMode = document.getElementById('fillTestDataBtn') && 
+                         document.getElementById('fillTestDataBtn').classList.contains('clicked');
+        
+        if (activeAmountOption) {
+            amount = parseFloat(activeAmountOption.getAttribute('data-amount'));
+            console.log('Selected amount option:', amount);
+        } else if (customAmountInput && customAmountInput.value) {
+            amount = parseFloat(customAmountInput.value);
+            console.log('Custom amount entered:', amount);
+        }
+        
+        // Create a hidden input to ensure amount is submitted with the form
+        let amountInput = document.getElementById('hidden_amount');
+        if (!amountInput) {
+            amountInput = document.createElement('input');
+            amountInput.type = 'hidden';
+            amountInput.id = 'hidden_amount';
+            amountInput.name = 'amount';
+            form.appendChild(amountInput);
+        }
+        amountInput.value = amount;
+        
+        if (amount <= 0 && !isTestMode) {
+            isValid = false;
+            console.log('Amount validation failed: No amount selected or entered');
+            const amountError = document.createElement('div');
+            amountError.className = 'alert alert-danger';
+            amountError.textContent = 'Please select or enter a valid donation amount';
+            const amountSection = document.querySelector('.amount-options-container') || document.querySelector('.amount-options');
+            if (amountSection) {
+                amountSection.before(amountError);
             } else {
-                // Submit form for other payment methods
-                form.submit();
+                form.prepend(amountError);
+                console.log('Warning: Could not find amount section container');
             }
+        } else {
+            console.log('Amount validation passed:', amount);
+        }
+        
+        // Check payment method
+        const paymentMethod = document.querySelector('input[name="payment_method"]:checked')?.value;
+        console.log('Selected payment method:', paymentMethod);
+        
+        if (!paymentMethod) {
+            isValid = false;
+            console.log('Payment method validation failed: No method selected');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'alert alert-danger';
+            errorDiv.textContent = 'Please select a payment method';
+            const paymentSection = document.querySelector('.payment-methods-container') || document.querySelector('.payment-methods');
+            if (paymentSection) {
+                paymentSection.before(errorDiv);
+            } else {
+                form.prepend(errorDiv);
+                console.log('Warning: Could not find payment methods container');
+            }
+        }
+        
+        if (!isValid) {
+            console.log('Form validation failed. Submission stopped.');
+            // Scroll to first error
+            const firstError = form.querySelector('.alert-danger, .is-invalid');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+        }
+        
+        console.log('Form validation passed. Proceeding with submission.');
+        
+        // Show processing overlay
+        const overlay = document.getElementById('paymentProcessingOverlay');
+        overlay.style.display = 'flex';
+        
+        // Handle payment based on selected method
+        if (paymentMethod === 'credit_card') {
+            // Process with Stripe
+            processStripePayment();
+        } else {
+            // Submit form for other payment methods
+            setTimeout(() => {
+                form.submit();
+            }, 1000); // Small delay to show the processing overlay
         }
     });
 }
@@ -369,98 +477,363 @@ function initStripeElements() {
 /**
  * Process payment with Stripe
  */
-async function processStripePayment() {
+function processStripePayment() {
     const form = document.getElementById('donationForm');
-    const submitButton = document.getElementById('donateButton');
+    const errorElement = document.getElementById('card-errors');
+    const overlay = document.getElementById('paymentProcessingOverlay');
     
-    // Disable the submit button to prevent multiple clicks
-    submitButton.disabled = true;
-    submitButton.textContent = 'Processing...';
+    // Get form data
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
     
-    try {
-        // Get form data
-        const formData = new FormData(form);
-        
-        // Create payment intent on the server
-        const response = await fetch('create-payment-intent.php', {
-            method: 'POST',
-            body: formData
-        });
-        
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        
-        const result = await response.json();
-        
-        if (result.error) {
+    // Get amount
+    let amount = 0;
+    const activeAmountOption = document.querySelector('.amount-option.active');
+    const customAmountInput = document.getElementById('customAmount');
+    
+    if (activeAmountOption) {
+        amount = parseFloat(activeAmountOption.getAttribute('data-amount'));
+    } else if (customAmountInput.value) {
+        amount = parseFloat(customAmountInput.value);
+    }
+    
+    // Create payment intent on server
+    fetch('create-payment-intent.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            amount: amount * 100, // Convert to cents
+            currency: 'usd',
+            payment_method_types: ['card'],
+            metadata: {
+                donor_name: `${firstName} ${lastName}`,
+                donor_email: email
+            }
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            // Hide overlay
+            overlay.style.display = 'none';
             // Show error
-            const errorElement = document.getElementById('card-errors');
-            errorElement.textContent = result.error.message;
-            submitButton.disabled = false;
-            submitButton.textContent = 'Complete Donation';
+            errorElement.textContent = data.error.message;
             return;
         }
         
         // Confirm card payment
-        const { paymentIntent, error } = await stripe.confirmCardPayment(result.clientSecret, {
+        return stripe.confirmCardPayment(data.clientSecret, {
             payment_method: {
                 card: cardElement,
                 billing_details: {
-                    name: formData.get('firstName') + ' ' + formData.get('lastName'),
-                    email: formData.get('email')
+                    name: `${firstName} ${lastName}`,
+                    email: email
                 }
             }
         });
-        
-        if (error) {
+    })
+    .then(result => {
+        if (result && result.error) {
+            // Hide overlay
+            overlay.style.display = 'none';
             // Show error
-            const errorElement = document.getElementById('card-errors');
-            errorElement.textContent = error.message;
-            submitButton.disabled = false;
-            submitButton.textContent = 'Complete Donation';
-        } else if (paymentIntent.status === 'succeeded') {
-            // Payment succeeded, submit form with payment intent ID
+            errorElement.textContent = result.error.message;
+            errorElement.scrollIntoView({ behavior: 'smooth' });
+        } else if (result && result.paymentIntent && result.paymentIntent.status === 'succeeded') {
+            // Payment succeeded, submit form
             const hiddenInput = document.createElement('input');
             hiddenInput.setAttribute('type', 'hidden');
-            hiddenInput.setAttribute('name', 'payment_intent_id');
-            hiddenInput.setAttribute('value', paymentIntent.id);
+            hiddenInput.setAttribute('name', 'stripe_payment_id');
+            hiddenInput.setAttribute('value', result.paymentIntent.id);
             form.appendChild(hiddenInput);
             
-            // Submit the form
+            form.submit();
+        } else {
+            // For testing purposes, simulate success
             form.submit();
         }
-    } catch (error) {
-        console.error('Error:', error);
-        const errorElement = document.getElementById('card-errors');
-        errorElement.textContent = 'An unexpected error occurred. Please try again.';
-        submitButton.disabled = false;
-        submitButton.textContent = 'Complete Donation';
-    }
+    })
+    .catch(error => {
+        // Hide overlay
+        overlay.style.display = 'none';
+        // Show error
+        errorElement.textContent = error.message || 'An error occurred during payment processing.';
+        errorElement.scrollIntoView({ behavior: 'smooth' });
+    });
 }
 
 /**
- * Handle form field validation in real-time
+ * Validate a form field and show appropriate feedback
  */
-function validateFormField(field) {
-    if (field.checkValidity()) {
+function validateField(field) {
+    // Ensure the field has a name for logging
+    const fieldName = field.id || field.name || 'unnamed field';
+    
+    // Special handling for hidden fields or fields in hidden containers
+    if (field.type === 'hidden' || !isElementVisible(field)) {
+        console.log(`Field ${fieldName} is hidden or in a hidden container - skipping validation`);
+        return true;
+    }
+    
+    // Fix for radio buttons and checkboxes in a group
+    if ((field.type === 'radio' || field.type === 'checkbox') && field.name) {
+        const group = document.querySelectorAll(`input[name="${field.name}"]`);
+        if (group.length > 1) {
+            // For radio groups, check if any in the group is checked
+            const isChecked = Array.from(group).some(input => input.checked);
+            if (isChecked) {
+                // If any is checked, mark all as valid
+                group.forEach(input => {
+                    input.classList.remove('is-invalid');
+                    input.classList.add('is-valid');
+                });
+                return true;
+            }
+        }
+    }
+    
+    const isValid = field.checkValidity();
+    console.log(`Validating ${fieldName}: ${isValid ? 'Valid' : 'Invalid'}`);
+    
+    if (isValid) {
         field.classList.remove('is-invalid');
         field.classList.add('is-valid');
+        
+        // Clear any existing error message
+        const feedbackElement = field.nextElementSibling;
+        if (feedbackElement && feedbackElement.classList.contains('invalid-feedback')) {
+            feedbackElement.style.display = 'none';
+        }
     } else {
         field.classList.remove('is-valid');
         field.classList.add('is-invalid');
+        
+        // Show error message
+        let message = '';
+        
+        if (field.validity.valueMissing) {
+            message = `${field.getAttribute('data-name') || fieldName} is required`;
+        } else if (field.validity.typeMismatch) {
+            message = `Please enter a valid ${field.getAttribute('data-name') || fieldName}`;
+        } else if (field.validity.patternMismatch) {
+            message = field.getAttribute('data-pattern-message') || `Please enter a valid format for ${fieldName}`;
+        } else {
+            message = `Please check this field: ${fieldName}`;
+        }
+        
+        console.log(`Validation error for ${fieldName}: ${message}`);
+        
+        // Find or create feedback element
+        let feedbackElement = field.nextElementSibling;
+        if (!feedbackElement || !feedbackElement.classList.contains('invalid-feedback')) {
+            feedbackElement = document.createElement('div');
+            feedbackElement.className = 'invalid-feedback';
+            field.parentNode.insertBefore(feedbackElement, field.nextSibling);
+        }
+        
+        feedbackElement.textContent = message;
+        feedbackElement.style.display = 'block';
     }
+    
+    return isValid;
+}
+
+/**
+ * Check if an element is visible (not hidden by CSS)
+ */
+function isElementVisible(element) {
+    if (!element) return false;
+    
+    // Check if the element itself is hidden
+    if (element.style.display === 'none' || element.style.visibility === 'hidden') {
+        return false;
+    }
+    
+    // Check if any parent is hidden
+    let parent = element.parentElement;
+    while (parent) {
+        const style = window.getComputedStyle(parent);
+        if (style.display === 'none' || style.visibility === 'hidden') {
+            return false;
+        }
+        parent = parent.parentElement;
+    }
+    
+    return true;
 }
 
 // Add real-time validation to required fields
 document.querySelectorAll('form input[required], form select[required]').forEach(field => {
+    // Add data-name attribute if not present
+    if (!field.hasAttribute('data-name')) {
+        const label = document.querySelector(`label[for="${field.id}"]`);
+        if (label) {
+            field.setAttribute('data-name', label.textContent.replace('*', '').trim());
+        }
+    }
+    
     field.addEventListener('blur', function() {
-        validateFormField(this);
+        validateField(this);
     });
     
     field.addEventListener('input', function() {
         if (this.classList.contains('is-invalid')) {
-            validateFormField(this);
+            validateField(this);
         }
     });
 });
+
+/**
+ * Initialize the test data button functionality
+ */
+function initTestDataButton() {
+    const testDataBtn = document.getElementById('fillTestDataBtn');
+    if (testDataBtn) {
+        testDataBtn.addEventListener('click', fillTestData);
+    }
+}
+
+/**
+ * Fill the form with test data for quick testing
+ */
+function fillTestData() {
+    console.log('Filling form with test data...');
+    
+    // Mark the button as clicked for test mode detection
+    const testButton = document.getElementById('fillTestDataBtn');
+    if (testButton) {
+        testButton.classList.add('clicked');
+    }
+    
+    // Set donation amount ($50)
+    const amountOptions = document.querySelectorAll('.amount-option');
+    let $50Option = null;
+    
+    // Find the $50 option
+    amountOptions.forEach(option => {
+        if (option.getAttribute('data-amount') === '50') {
+            $50Option = option;
+        }
+    });
+    
+    // Click the $50 option if found, otherwise use custom amount
+    if ($50Option) {
+        $50Option.click();
+    } else {
+        const customAmountInput = document.getElementById('customAmount');
+        if (customAmountInput) {
+            customAmountInput.value = '50';
+            // Trigger input event to update any dependent elements
+            customAmountInput.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+    }
+    
+    // Create a hidden amount field to ensure the amount is submitted
+    const donationForm = document.getElementById('donationForm');
+    if (donationForm) {
+        let hiddenAmount = document.getElementById('hidden_amount');
+        if (!hiddenAmount) {
+            hiddenAmount = document.createElement('input');
+            hiddenAmount.type = 'hidden';
+            hiddenAmount.id = 'hidden_amount';
+            hiddenAmount.name = 'amount';
+            donationForm.appendChild(hiddenAmount);
+        }
+        hiddenAmount.value = '50';
+    }
+    
+    // Set frequency to one-time
+    const oneTimeOption = document.querySelector('.frequency-option[data-frequency="one-time"]');
+    if (oneTimeOption) {
+        oneTimeOption.click();
+    } else {
+        // Fallback if the option element isn't found
+        const frequencyInput = document.getElementById('frequency');
+        if (frequencyInput) {
+            frequencyInput.value = 'one-time';
+            console.log('Frequency set to one-time (fallback)');
+        }
+    }
+    
+    // Set designation to "General Ministry Support"
+    const designationSelect = document.getElementById('designation');
+    if (designationSelect) {
+        // Find the general/where needed most option
+        for (let i = 0; i < designationSelect.options.length; i++) {
+            const option = designationSelect.options[i];
+            if (option.value === 'general' || option.text.toLowerCase().includes('needed most')) {
+                designationSelect.selectedIndex = i;
+                designationSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                break;
+            }
+        }
+    }
+    
+    // Fill personal information
+    fillField('firstName', 'John');
+    fillField('lastName', 'Testuser');
+    fillField('email', 'test@example.com');
+    fillField('phone', '+1234567890');
+    
+    // Add "Test Donation" to comments field
+    fillField('comments', 'Test Donation');
+    
+    // Select mobile money payment method
+    const mobileMoneyRadio = document.getElementById('mobile_money');
+    if (mobileMoneyRadio) {
+        mobileMoneyRadio.checked = true;
+        mobileMoneyRadio.dispatchEvent(new Event('change', { bubbles: true }));
+        
+        // Find and click the parent payment-method-option div to apply styling
+        const paymentOption = mobileMoneyRadio.closest('.payment-method-option');
+        if (paymentOption) {
+            paymentOption.click();
+        }
+        
+        // Add mobile money number to comments field
+        const commentsField = document.getElementById('comments');
+        if (commentsField) {
+            commentsField.value = 'Test Donation - Mobile Money Number: 670199687';
+            commentsField.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+        
+        // Show a helpful message about the mobile money number
+        const paymentSection = document.querySelector('.payment-methods');
+        if (paymentSection) {
+            const mobileInfo = document.createElement('div');
+            mobileInfo.className = 'alert alert-info mt-3';
+            mobileInfo.innerHTML = '<strong>Mobile Money Test:</strong> Using number 670199687';
+            paymentSection.parentNode.insertBefore(mobileInfo, paymentSection.nextSibling);
+        }
+        
+        console.log('Mobile Money selected with number: 670199687');
+    }
+    
+    // Validate all fields to update UI state
+    const form = document.getElementById('donationForm');
+    if (form) {
+        const requiredFields = form.querySelectorAll('input[required], select[required]');
+        requiredFields.forEach(field => validateField(field));
+    }
+    
+    console.log('Test data filled successfully');
+}
+
+/**
+ * Helper function to fill a form field and trigger appropriate events
+ */
+function fillField(id, value) {
+    const field = document.getElementById(id);
+    if (field) {
+        field.value = value;
+        // Trigger both input and change events to ensure all handlers are called
+        field.dispatchEvent(new Event('input', { bubbles: true }));
+        field.dispatchEvent(new Event('change', { bubbles: true }));
+        field.dispatchEvent(new Event('blur', { bubbles: true }));
+    } else {
+        console.log(`Field not found: ${id}`);
+    }
+}

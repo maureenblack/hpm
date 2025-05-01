@@ -42,6 +42,69 @@ unset($_SESSION['success_message']);
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/donate.css">
+    <style>
+        /* Payment Processing Overlay */
+        .payment-processing-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+            color: white;
+        }
+        
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #FFD700;
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .payment-method-option {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method-option:hover,
+        .payment-method-option.selected {
+            border-color: #4B0082;
+            background-color: #f9f5ff;
+        }
+        
+        .form-control.is-invalid {
+            border-color: #dc3545;
+            padding-right: calc(1.5em + 0.75rem);
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(0.375em + 0.1875rem) center;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+        }
+        
+        .invalid-feedback {
+            display: none;
+            width: 100%;
+            margin-top: 0.25rem;
+            font-size: 0.875em;
+            color: #dc3545;
+        }
+    </style>
     <!-- Chart.js for donation charts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Stripe.js for secure payments -->
@@ -319,12 +382,21 @@ unset($_SESSION['success_message']);
                             </div>
                         <?php endif; ?>
                         
+                        <!-- Test Data Button -->
+                        <div class="test-data-container mb-4">
+                            <button type="button" id="fillTestDataBtn" class="btn btn-warning w-100 py-2">
+                                <i class="fas fa-vial me-2"></i> FILL TEST DATA (For Testing Only)
+                            </button>
+                        </div>
+                        
                         <form id="donationForm" class="needs-validation" action="test-process-donation.php" method="post" novalidate data-stripe-key="<?php echo getenv('STRIPE_PUBLISHABLE_KEY'); ?>">
                             <!-- CSRF Token for security -->
                             <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                             <!-- Amount Selection -->
                             <div class="form-section">
                                 <h3 class="form-section-title">Select Amount</h3>
+                                <!-- Hidden amount field that will be populated by JavaScript -->
+                                <input type="hidden" id="hidden_amount" name="amount" value="">
                                 <div class="amount-options">
                                     <div class="amount-option" data-amount="25">$25</div>
                                     <div class="amount-option" data-amount="50">$50</div>
@@ -336,7 +408,7 @@ unset($_SESSION['success_message']);
                                 <div class="mt-3">
                                     <div class="custom-amount input-group">
                                         <span class="input-group-text">$</span>
-                                        <input type="text" class="form-control" id="customAmount" placeholder="Other Amount" aria-label="Custom donation amount">
+                                        <input type="text" class="form-control" id="customAmount" name="custom_amount" placeholder="Other Amount" aria-label="Custom donation amount">
                                     </div>
                                 </div>
                             </div>
@@ -344,6 +416,7 @@ unset($_SESSION['success_message']);
                             <!-- Frequency Selection -->
                             <div class="form-section">
                                 <h3 class="form-section-title">Select Frequency</h3>
+                                <input type="hidden" id="frequency" name="frequency" value="one-time">
                                 <div class="frequency-options">
                                     <div class="frequency-option active" data-frequency="one-time">One-Time</div>
                                     <div class="frequency-option" data-frequency="monthly">Monthly</div>
@@ -354,7 +427,7 @@ unset($_SESSION['success_message']);
                             <!-- Designation Selection -->
                             <div class="form-section">
                                 <h3 class="form-section-title">Designation</h3>
-                                <select class="form-select" id="designation" required>
+                                <select class="form-select" id="designation" name="designation" required data-name="Designation">
                                     <option value="" selected disabled>Select where you'd like your gift to go</option>
                                     <option value="general">Where Needed Most</option>
                                     <option value="cryptstock">CrypStock Academy</option>
@@ -373,28 +446,28 @@ unset($_SESSION['success_message']);
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="firstName" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" id="firstName" required>
+                                        <input type="text" class="form-control" id="firstName" name="firstName" required data-name="First Name">
                                         <div class="invalid-feedback">
                                             Please provide your first name.
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="lastName" class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" id="lastName" required>
+                                        <input type="text" class="form-control" id="lastName" name="lastName" required data-name="Last Name">
                                         <div class="invalid-feedback">
                                             Please provide your last name.
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="email" class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" id="email" required>
+                                        <input type="email" class="form-control" id="email" name="email" required data-name="Email Address">
                                         <div class="invalid-feedback">
                                             Please provide a valid email address.
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="phone" class="form-label">Phone Number</label>
-                                        <input type="tel" class="form-control" id="phone">
+                                        <input type="tel" class="form-control" id="phone" name="phone" data-name="Phone Number">
                                     </div>
                                 </div>
                             </div>
@@ -402,7 +475,7 @@ unset($_SESSION['success_message']);
                             <!-- Memorial/Honor Gift -->
                             <div class="form-section">
                                 <div class="form-check mb-3">
-                                    <input class="form-check-input" type="checkbox" id="memorialGift">
+                                    <input class="form-check-input" type="checkbox" id="memorialGift" name="is_memorial_gift" value="1">
                                     <label class="form-check-label" for="memorialGift">
                                         This gift is in memory/honor of someone
                                     </label>
@@ -410,24 +483,24 @@ unset($_SESSION['success_message']);
                                 <div id="memorialFields" class="d-none">
                                     <div class="row g-3">
                                         <div class="col-md-6">
-                                            <select class="form-select" id="tributeType">
+                                            <select class="form-select" id="tributeType" name="tribute_type">
                                                 <option value="memory">In Memory Of</option>
                                                 <option value="honor">In Honor Of</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="tributeName" placeholder="Name of Honoree">
+                                            <input type="text" class="form-control" id="tributeName" name="tribute_name" placeholder="Name of Honoree">
                                         </div>
                                         <div class="col-12">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="sendNotification">
+                                                <input class="form-check-input" type="checkbox" id="sendNotification" name="send_notification" value="1">
                                                 <label class="form-check-label" for="sendNotification">
                                                     Send notification of this gift
                                                 </label>
                                             </div>
                                         </div>
                                         <div id="notificationFields" class="col-12 d-none">
-                                            <textarea class="form-control" id="notificationAddress" rows="3" placeholder="Recipient's mailing or email address"></textarea>
+                                            <textarea class="form-control" id="notificationAddress" name="notification_address" rows="3" placeholder="Recipient's mailing or email address"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -436,7 +509,7 @@ unset($_SESSION['success_message']);
                             <!-- Comments/Special Instructions -->
                             <div class="form-section">
                                 <h3 class="form-section-title">Comments/Special Instructions</h3>
-                                <textarea class="form-control" id="comments" rows="3" placeholder="Any special instructions or comments about your gift"></textarea>
+                                <textarea class="form-control" id="comments" name="comments" rows="3" placeholder="Any special instructions or comments about your gift"></textarea>
                             </div>
                             
                             <!-- Payment Method Selection -->
@@ -510,6 +583,45 @@ unset($_SESSION['success_message']);
 
                             <div class="form-section text-center">
                                 <button type="submit" id="donateButton" class="btn btn-primary btn-lg px-5">Complete Donation</button>
+                                <style>
+        :root {
+            --royal-purple: #4B0082;
+            --gold: #FFD700;
+            --white: #FFFFFF;
+            --dark-gray: #333333;
+        }
+        
+        /* Payment Processing Overlay */
+        .payment-processing-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+            color: white;
+            display: none;
+        }
+        
+        .spinner {
+            width: 80px;
+            height: 80px;
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--gold);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+                                </style>
                             </div>
                         </form>
                     </div>
@@ -707,5 +819,12 @@ unset($_SESSION['success_message']);
     <script src="js/main.js"></script>
     <script src="js/responsive.js"></script>
     <script src="js/donate.js"></script>
+<!-- Payment Processing Overlay -->
+<div class="payment-processing-overlay" id="paymentProcessingOverlay">
+    <div class="spinner"></div>
+    <h3>Processing Your Donation</h3>
+    <p>Please wait while we process your generous contribution...</p>
+</div>
+
 </body>
 </html>
