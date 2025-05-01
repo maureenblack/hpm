@@ -87,8 +87,10 @@ if (!headers_sent()) {
     header("Content-Security-Policy: default-src 'self'; script-src 'self' https://js.stripe.com https://cdn.jsdelivr.net https://code.jquery.com; style-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; img-src 'self' data:; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self' https://api.stripe.com; frame-src https://js.stripe.com");
     header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
     header("Referrer-Policy: strict-origin-when-cross-origin");
-    
-    // Set secure cookie parameters
+}
+
+// Set secure cookie parameters only if session hasn't started yet
+if (session_status() === PHP_SESSION_NONE) {
     ini_set('session.cookie_httponly', 1);
     ini_set('session.cookie_secure', 1); // Requires HTTPS
     ini_set('session.use_only_cookies', 1);

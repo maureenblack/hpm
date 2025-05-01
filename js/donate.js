@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', function() {
     initAllocationChart();
     initMemorialFields();
     initCounterAnimation();
+    initPaymentMethods();
+    
+    // Initialize Stripe if available
+    if (typeof Stripe !== 'undefined') {
+        initStripeElements();
+    }
 });
 
 /**
@@ -85,8 +91,27 @@ function initDonationForm() {
         } else {
             event.preventDefault();
             
-            // Show success message (in a real implementation, this would submit to payment processor)
-            showDonationSuccess();
+            // Get selected payment method
+            const paymentMethod = document.querySelector('input[name="payment_method"]:checked')?.value;
+            
+            if (!paymentMethod) {
+                // Show error if no payment method selected
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-danger';
+                errorDiv.textContent = 'Please select a payment method';
+                form.prepend(errorDiv);
+                errorDiv.scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            
+            // Handle payment based on selected method
+            if (paymentMethod === 'credit_card') {
+                // Process with Stripe
+                processStripePayment();
+            } else {
+                // Submit form for other payment methods
+                form.submit();
+            }
         }
     });
 }
@@ -261,6 +286,157 @@ function initCounterAnimation() {
     counters.forEach(counter => {
         observer.observe(counter);
     });
+}
+
+/**
+ * Initialize payment method selection
+ */
+function initPaymentMethods() {
+    const paymentMethodOptions = document.querySelectorAll('input[name="payment_method"]');
+    const creditCardForm = document.getElementById('creditCardForm');
+    
+    if (!paymentMethodOptions || !creditCardForm) return;
+    
+    paymentMethodOptions.forEach(option => {
+        option.addEventListener('change', function() {
+            // Show/hide credit card form based on selection
+            if (this.value === 'credit_card') {
+                creditCardForm.style.display = 'block';
+            } else {
+                creditCardForm.style.display = 'none';
+            }
+        });
+    });
+}
+
+// Stripe variables
+let stripe;
+let elements;
+let cardElement;
+let paymentIntentClientSecret;
+
+/**
+ * Initialize Stripe Elements
+ */
+function initStripeElements() {
+    // Get Stripe publishable key from data attribute
+    const stripePublishableKey = document.getElementById('donationForm').dataset.stripeKey;
+    
+    if (!stripePublishableKey) {
+        console.error('Stripe publishable key not found');
+        return;
+    }
+    
+    // Initialize Stripe
+    stripe = Stripe(stripePublishableKey);
+    
+    // Create Elements instance
+    elements = stripe.elements();
+    
+    // Create Card Element
+    cardElement = elements.create('card', {
+        style: {
+            base: {
+                color: '#32325d',
+                fontFamily: '"Montserrat", sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        }
+    });
+    
+    // Mount Card Element
+    cardElement.mount('#card-element');
+    
+    // Handle real-time validation errors
+    cardElement.on('change', function(event) {
+        const displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+}
+
+/**
+ * Process payment with Stripe
+ */
+async function processStripePayment() {
+    const form = document.getElementById('donationForm');
+    const submitButton = document.getElementById('donateButton');
+    
+    // Disable the submit button to prevent multiple clicks
+    submitButton.disabled = true;
+    submitButton.textContent = 'Processing...';
+    
+    try {
+        // Get form data
+        const formData = new FormData(form);
+        
+        // Create payment intent on the server
+        const response = await fetch('create-payment-intent.php', {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        
+        const result = await response.json();
+        
+        if (result.error) {
+            // Show error
+            const errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+            submitButton.disabled = false;
+            submitButton.textContent = 'Complete Donation';
+            return;
+        }
+        
+        // Confirm card payment
+        const { paymentIntent, error } = await stripe.confirmCardPayment(result.clientSecret, {
+            payment_method: {
+                card: cardElement,
+                billing_details: {
+                    name: formData.get('firstName') + ' ' + formData.get('lastName'),
+                    email: formData.get('email')
+                }
+            }
+        });
+        
+        if (error) {
+            // Show error
+            const errorElement = document.getElementById('card-errors');
+            errorElement.textContent = error.message;
+            submitButton.disabled = false;
+            submitButton.textContent = 'Complete Donation';
+        } else if (paymentIntent.status === 'succeeded') {
+            // Payment succeeded, submit form with payment intent ID
+            const hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'payment_intent_id');
+            hiddenInput.setAttribute('value', paymentIntent.id);
+            form.appendChild(hiddenInput);
+            
+            // Submit the form
+            form.submit();
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        const errorElement = document.getElementById('card-errors');
+        errorElement.textContent = 'An unexpected error occurred. Please try again.';
+        submitButton.disabled = false;
+        submitButton.textContent = 'Complete Donation';
+    }
 }
 
 /**

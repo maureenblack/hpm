@@ -4,484 +4,512 @@
  * Holistic Prosperity Ministry Payment System
  */
 
-// Initialize session
-session_start();
-
 // Include configuration and functions
 require_once 'includes/config.php';
+require_once 'includes/functions.php';
 
-// Get donation categories
-$categories = getDonationCategories();
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Generate CSRF token
-$csrf_token = generateCSRFToken();
+$csrfToken = generateCSRFToken();
 
-// Set default values
-$defaultAmount = 50;
-$defaultCategory = 1; // General Fund
+// Get any error messages
+$errorMessage = $_SESSION['error_message'] ?? '';
+unset($_SESSION['error_message']);
+
+// Get any success messages
+$successMessage = $_SESSION['success_message'] ?? '';
+unset($_SESSION['success_message']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Make a Donation | <?php echo SITE_NAME; ?></title>
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Font Awesome -->
+    <title>Donate - Holistic Prosperity Ministry</title>
+    <link rel="icon" href="images/hpm-favicon.svg" type="image/svg+xml">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/donate.css">
-    <link rel="stylesheet" href="css/payment.css">
-    
-    <!-- Stripe JS -->
+    <!-- Chart.js for donation charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Stripe.js for secure payments -->
     <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
-    <!-- Navigation -->
-    <?php include 'includes/header.php'; ?>
-    
-    <!-- Donation Form Section -->
-    <section class="donation-form-section py-5">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="donation-form-wrapper">
-                        <h1 class="text-center mb-4">Support Our Ministry</h1>
-                        <p class="text-center mb-5">Your generous contribution helps us continue our mission of empowering individuals and communities through biblical prosperity principles.</p>
-                        
-                        <!-- Progress Steps -->
-                        <div class="donation-steps mb-5">
-                            <div class="step active" id="step-1">
-                                <div class="step-number">1</div>
-                                <div class="step-label">Donation Details</div>
-                            </div>
-                            <div class="step" id="step-2">
-                                <div class="step-number">2</div>
-                                <div class="step-label">Personal Information</div>
-                            </div>
-                            <div class="step" id="step-3">
-                                <div class="step-number">3</div>
-                                <div class="step-label">Payment Method</div>
-                            </div>
-                            <div class="step" id="step-4">
-                                <div class="step-number">4</div>
-                                <div class="step-label">Confirmation</div>
-                            </div>
+            <a class="navbar-brand" href="index.html">
+                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html#our-story">Our Story</a></li>
+                            <li><a class="dropdown-item" href="about.html#leadership-team">Leadership Team</a></li>
+                            <li><a class="dropdown-item" href="about.html#core-values">Core Values</a></li>
+                            <li><a class="dropdown-item" href="about.html#faq">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="ministries.html" id="ministryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ministries
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="ministryDropdown">
+                            <li><a class="dropdown-item" href="ministries/cryptstock.html">CrypStock Prosperity Academy</a></li>
+                            <li><a class="dropdown-item" href="ministries/faith-worship.html">Faith & Worship Ministry</a></li>
+                            <li><a class="dropdown-item" href="ministries/community.html">Community Impact Projects</a></li>
+                            <li><a class="dropdown-item" href="ministries/love-in-action.html">Love in Action Fellowship</a></li>
+                            <li><a class="dropdown-item" href="ministries/prosperity-counseling.html">Prosperity Counseling</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="get-involved.html">Get Involved</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="donate.html" id="donateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Donate
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="donateDropdown">
+                            <li><a class="dropdown-item" href="donate.html#giving-options">Ways to Give</a></li>
+                            <li><a class="dropdown-item" href="donate.html#donation-form">Give Now</a></li>
+                            <li><a class="dropdown-item" href="donate.html#transparent-impact">Transparent Impact</a></li>
+                            <li><a class="dropdown-item" href="donate.html#planned-giving">Planned Giving</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="donation-hero d-flex align-items-center text-white">
+        <div class="overlay"></div>
+        <div class="container position-relative">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-3">Empower change. Plant a seed.</h1>
+                    <p class="lead mb-4">Your generosity transforms lives through biblical prosperity principles and community impact.</p>
+                    <div class="hero-buttons">
+                        <a href="#giving-options" class="btn btn-primary btn-lg me-2 mb-2">Ways to Give</a>
+                        <a href="#donation-form" class="btn btn-gold btn-lg mb-2">Give Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Impact Statistics Section -->
+    <section class="impact-stats py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Your Impact</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Together, we're creating lasting change</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="impact-stat-card text-center h-100">
+                        <div class="impact-icon">
+                            <i class="fas fa-users fa-3x text-primary"></i>
                         </div>
+                        <div class="impact-number counter" data-count="5000">5000+</div>
+                        <div class="impact-label">Lives Transformed</div>
+                        <p class="impact-description">Individuals and families experiencing spiritual and financial transformation</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="impact-stat-card text-center h-100">
+                        <div class="impact-icon">
+                            <i class="fas fa-graduation-cap fa-3x text-primary"></i>
+                        </div>
+                        <div class="impact-number counter" data-count="1500">1500+</div>
+                        <div class="impact-label">Academy Graduates</div>
+                        <p class="impact-description">Students equipped with financial literacy and biblical prosperity principles</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="impact-stat-card text-center h-100">
+                        <div class="impact-icon">
+                            <i class="fas fa-hands-helping fa-3x text-primary"></i>
+                        </div>
+                        <div class="impact-number counter" data-count="120">120+</div>
+                        <div class="impact-label">Community Projects</div>
+                        <p class="impact-description">Outreach initiatives bringing hope and practical support to communities</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="impact-stat-card text-center h-100">
+                        <div class="impact-icon">
+                            <i class="fas fa-globe fa-3x text-primary"></i>
+                        </div>
+                        <div class="impact-number counter" data-count="32">32</div>
+                        <div class="impact-label">Countries Reached</div>
+                        <p class="impact-description">Global impact through our online programs and international partnerships</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transformation Stories Section -->
+    <section class="transformation-stories py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Transformation Stories</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Real people, real change through your generosity</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="story-card">
+                        <div class="story-content">
+                            <h3 class="story-title">Sarah's Journey</h3>
+                            <p class="story-quote">The CrypStock Academy changed my life. I was drowning in debt, but now I'm debt-free and building wealth for my family's future.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="story-card">
+                        <div class="story-content">
+                            <h3 class="story-title">James' Journey</h3>
+                            <p class="story-quote">The mentorship I received gave me the confidence to pursue my business dream. Now I'm employing others from my community.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mx-auto">
+                    <div class="story-card">
+                        <div class="story-content">
+                            <h3 class="story-title">The Williams Family</h3>
+                            <p class="story-quote">We've learned that prosperity isn't just about money—it's about creating a legacy of faith and generosity for generations to come.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#donation-form" class="btn btn-primary btn-lg">Help Write the Next Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Giving Options Section -->
+    <section id="giving-options" class="giving-options py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Ways to Give</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Choose the giving option that works best for you</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="giving-option-card text-center">
+                        <div class="giving-option-icon">
+                            <i class="fas fa-hand-holding-heart fa-2x"></i>
+                        </div>
+                        <h3 class="giving-option-title">One-Time & Monthly</h3>
+                        <p class="giving-option-description">Support our mission with a one-time gift or become a monthly partner for sustained impact.</p>
+                        <ul class="giving-option-features">
+                            <li>Flexible giving amounts</li>
+                            <li>Easy online process</li>
+                            <li>Tax-deductible</li>
+                            <li>Impact updates</li>
+                        </ul>
+                        <a href="#donation-form" class="btn btn-primary">Give Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="giving-option-card text-center">
+                        <div class="giving-option-icon">
+                            <i class="fas fa-church fa-2x"></i>
+                        </div>
+                        <h3 class="giving-option-title">Tithes & Offerings</h3>
+                        <p class="giving-option-description">Honor God with your tithes and offerings to support the ministry's operations and outreach.</p>
+                        <ul class="giving-option-features">
+                            <li>Biblical stewardship</li>
+                            <li>Ministry sustainability</li>
+                            <li>Community impact</li>
+                            <li>Spiritual growth</li>
+                        </ul>
+                        <a href="#donation-form" class="btn btn-primary">Give Tithe</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="giving-option-card text-center">
+                        <div class="giving-option-icon">
+                            <i class="fas fa-graduation-cap fa-2x"></i>
+                        </div>
+                        <h3 class="giving-option-title">Sponsor a Student</h3>
+                        <p class="giving-option-description">Provide a scholarship for a student to attend our CrypStock Academy programs.</p>
+                        <ul class="giving-option-features">
+                            <li>Full/partial scholarships</li>
+                            <li>Student progress updates</li>
+                            <li>Transformational impact</li>
+                            <li>Mentorship opportunity</li>
+                        </ul>
+                        <a href="#donation-form" class="btn btn-primary">Sponsor Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="giving-option-card text-center">
+                        <div class="giving-option-icon">
+                            <i class="fas fa-building fa-2x"></i>
+                        </div>
+                        <h3 class="giving-option-title">Corporate Donations</h3>
+                        <p class="giving-option-description">Partner your business with our ministry for community impact and social responsibility.</p>
+                        <ul class="giving-option-features">
+                            <li>Corporate matching</li>
+                            <li>Sponsorship opportunities</li>
+                            <li>CSR partnership</li>
+                            <li>Employee engagement</li>
+                        </ul>
+                        <a href="#donation-form" class="btn btn-primary">Partner With Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Form Section -->
+    <section id="donation-form" class="donation-form-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Give Today</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Your generosity makes a lasting difference</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="donation-form-container">
+                        <?php if ($errorMessage): ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo $errorMessage; ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($successMessage): ?>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo $successMessage; ?>
+                            </div>
+                        <?php endif; ?>
                         
-                        <!-- Donation Form -->
-                        <form id="donation-form" method="post" action="process-donation.php">
-                            <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
-                            <input type="hidden" name="payment_intent_id" id="payment_intent_id">
-                            <input type="hidden" name="reference_code" id="reference_code" value="<?php echo generateReferenceCode(); ?>">
+                        <form id="donationForm" class="needs-validation" action="test-process-donation.php" method="post" novalidate data-stripe-key="<?php echo getenv('STRIPE_PUBLISHABLE_KEY'); ?>">
+                            <!-- CSRF Token for security -->
+                            <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
+                            <!-- Amount Selection -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">Select Amount</h3>
+                                <div class="amount-options">
+                                    <div class="amount-option" data-amount="25">$25</div>
+                                    <div class="amount-option" data-amount="50">$50</div>
+                                    <div class="amount-option" data-amount="100">$100</div>
+                                    <div class="amount-option" data-amount="250">$250</div>
+                                    <div class="amount-option" data-amount="500">$500</div>
+                                    <div class="amount-option" data-amount="1000">$1,000</div>
+                                </div>
+                                <div class="mt-3">
+                                    <div class="custom-amount input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="text" class="form-control" id="customAmount" placeholder="Other Amount" aria-label="Custom donation amount">
+                                    </div>
+                                </div>
+                            </div>
                             
-                            <!-- Step 1: Donation Details -->
-                            <div class="form-step" id="donation-details">
-                                <h3 class="mb-4">Donation Details</h3>
-                                
-                                <!-- Donation Amount -->
-                                <div class="mb-4">
-                                    <label class="form-label">Donation Amount</label>
-                                    <div class="amount-options">
-                                        <?php foreach (DONATION_AMOUNTS as $amount): ?>
-                                            <div class="amount-option">
-                                                <input type="radio" name="donation_amount_preset" id="amount-<?php echo $amount; ?>" value="<?php echo $amount; ?>" <?php echo ($amount == $defaultAmount) ? 'checked' : ''; ?>>
-                                                <label for="amount-<?php echo $amount; ?>"><?php echo formatCurrency($amount); ?></label>
-                                            </div>
-                                        <?php endforeach; ?>
-                                        <div class="amount-option custom">
-                                            <input type="radio" name="donation_amount_preset" id="amount-custom" value="custom">
-                                            <label for="amount-custom">Custom</label>
+                            <!-- Frequency Selection -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">Select Frequency</h3>
+                                <div class="frequency-options">
+                                    <div class="frequency-option active" data-frequency="one-time">One-Time</div>
+                                    <div class="frequency-option" data-frequency="monthly">Monthly</div>
+                                    <div class="frequency-option" data-frequency="quarterly">Quarterly</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Designation Selection -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">Designation</h3>
+                                <select class="form-select" id="designation" required>
+                                    <option value="" selected disabled>Select where you'd like your gift to go</option>
+                                    <option value="general">Where Needed Most</option>
+                                    <option value="cryptstock">CrypStock Academy</option>
+                                    <option value="community">Community Impact Projects</option>
+                                    <option value="worship">Faith & Worship Ministry</option>
+                                    <option value="building">Building Fund</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select a designation for your gift.
+                                </div>
+                            </div>
+                            
+                            <!-- Donor Information -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">Your Information</h3>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                        <div class="invalid-feedback">
+                                            Please provide your first name.
                                         </div>
                                     </div>
-                                    <div class="custom-amount-wrapper mt-3" style="display: none;">
-                                        <div class="input-group">
-                                            <span class="input-group-text">$</span>
-                                            <input type="number" class="form-control" id="custom_amount" name="custom_amount" min="<?php echo MIN_DONATION_AMOUNT; ?>" step="0.01" placeholder="Enter amount">
+                                    <div class="col-md-6">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                        <div class="invalid-feedback">
+                                            Please provide your last name.
                                         </div>
-                                        <small class="text-muted">Minimum donation: <?php echo formatCurrency(MIN_DONATION_AMOUNT); ?></small>
                                     </div>
-                                    <input type="hidden" name="donation_amount" id="donation_amount" value="<?php echo $defaultAmount; ?>">
-                                </div>
-                                
-                                <!-- Donation Category -->
-                                <div class="mb-4">
-                                    <label for="donation_category" class="form-label">Designation</label>
-                                    <select class="form-select" id="donation_category" name="donation_category">
-                                        <?php foreach ($categories as $category): ?>
-                                            <option value="<?php echo $category['category_id']; ?>" <?php echo ($category['category_id'] == $defaultCategory) ? 'selected' : ''; ?>>
-                                                <?php echo $category['category_name']; ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <small class="text-muted">Select where you would like your donation to be directed</small>
-                                </div>
-                                
-                                <!-- Donation Frequency -->
-                                <div class="mb-4">
-                                    <label class="form-label">Donation Frequency</label>
-                                    <div class="frequency-options">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="donation_frequency" id="frequency-one-time" value="one-time" checked>
-                                            <label class="form-check-label" for="frequency-one-time">
-                                                One-time Donation
-                                            </label>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                        <div class="invalid-feedback">
+                                            Please provide a valid email address.
                                         </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="donation_frequency" id="frequency-monthly" value="monthly">
-                                            <label class="form-check-label" for="frequency-monthly">
-                                                Monthly Recurring
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="donation_frequency" id="frequency-quarterly" value="quarterly">
-                                            <label class="form-check-label" for="frequency-quarterly">
-                                                Quarterly Recurring
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="donation_frequency" id="frequency-annual" value="annual">
-                                            <label class="form-check-label" for="frequency-annual">
-                                                Annual Recurring
-                                            </label>
-                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="phone" class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone">
                                     </div>
                                 </div>
-                                
-                                <!-- Cover Processing Fees -->
-                                <div class="mb-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="cover_fees" name="cover_fees" value="1">
-                                        <label class="form-check-label" for="cover_fees">
-                                            Add <?php echo PROCESSING_FEE_PERCENTAGE; ?>% + $<?php echo PROCESSING_FEE_FIXED; ?> to cover processing fees
-                                        </label>
-                                    </div>
-                                    <div id="fee-explanation" class="mt-2" style="display: none;">
-                                        <small class="text-muted">
-                                            By covering the processing fee, 100% of your intended donation goes directly to our ministry.
-                                            <span id="fee-amount"></span>
-                                        </small>
-                                    </div>
+                            </div>
+                            
+                            <!-- Memorial/Honor Gift -->
+                            <div class="form-section">
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="memorialGift">
+                                    <label class="form-check-label" for="memorialGift">
+                                        This gift is in memory/honor of someone
+                                    </label>
                                 </div>
-                                
-                                <!-- Donation in Honor/Memory -->
-                                <div class="mb-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="is_tribute" name="is_tribute" value="1">
-                                        <label class="form-check-label" for="is_tribute">
-                                            Make this donation in honor or memory of someone
-                                        </label>
-                                    </div>
-                                    <div id="tribute-fields" class="mt-3" style="display: none;">
-                                        <div class="mb-3">
-                                            <select class="form-select" id="tribute_type" name="tribute_type">
-                                                <option value="honor">In Honor Of</option>
+                                <div id="memorialFields" class="d-none">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <select class="form-select" id="tributeType">
                                                 <option value="memory">In Memory Of</option>
+                                                <option value="honor">In Honor Of</option>
                                             </select>
                                         </div>
-                                        <div class="mb-3">
-                                            <input type="text" class="form-control" id="tribute_name" name="tribute_name" placeholder="Name of Honoree">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="tributeName" placeholder="Name of Honoree">
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="sendNotification">
+                                                <label class="form-check-label" for="sendNotification">
+                                                    Send notification of this gift
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div id="notificationFields" class="col-12 d-none">
+                                            <textarea class="form-control" id="notificationAddress" rows="3" placeholder="Recipient's mailing or email address"></textarea>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <div class="form-navigation">
-                                    <button type="button" class="btn btn-primary next-step">Continue to Personal Information</button>
-                                </div>
                             </div>
                             
-                            <!-- Step 2: Personal Information -->
-                            <div class="form-step" id="personal-information" style="display: none;">
-                                <h3 class="mb-4">Personal Information</h3>
-                                
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="first_name" class="form-label">First Name*</label>
-                                        <input type="text" class="form-control" id="first_name" name="first_name" required>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="last_name" class="form-label">Last Name*</label>
-                                        <input type="text" class="form-control" id="last_name" name="last_name" required>
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email Address*</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="phone" class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone">
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="address" class="form-label">Address</label>
-                                    <input type="text" class="form-control" id="address" name="address">
-                                </div>
-                                
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="city" class="form-label">City</label>
-                                        <input type="text" class="form-control" id="city" name="city">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="state" class="form-label">State/Province</label>
-                                        <input type="text" class="form-control" id="state" name="state">
-                                    </div>
-                                </div>
-                                
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="postal_code" class="form-label">Postal Code</label>
-                                        <input type="text" class="form-control" id="postal_code" name="postal_code">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="country" class="form-label">Country</label>
-                                        <input type="text" class="form-control" id="country" name="country" value="United States">
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="is_anonymous" name="is_anonymous" value="1">
-                                        <label class="form-check-label" for="is_anonymous">
-                                            Make this donation anonymous
-                                        </label>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-navigation">
-                                    <button type="button" class="btn btn-secondary prev-step">Back</button>
-                                    <button type="button" class="btn btn-primary next-step">Continue to Payment</button>
-                                </div>
+                            <!-- Comments/Special Instructions -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">Comments/Special Instructions</h3>
+                                <textarea class="form-control" id="comments" rows="3" placeholder="Any special instructions or comments about your gift"></textarea>
                             </div>
                             
-                            <!-- Step 3: Payment Method -->
-                            <div class="form-step" id="payment-method" style="display: none;">
-                                <h3 class="mb-4">Payment Method</h3>
-                                
-                                <div class="payment-methods mb-4">
-                                    <div class="form-check payment-method-option">
-                                        <input class="form-check-input" type="radio" name="payment_method" id="method-card" value="credit_card" checked>
-                                        <label class="form-check-label" for="method-card">
-                                            <i class="fas fa-credit-card"></i> Credit/Debit Card
-                                        </label>
-                                    </div>
-                                    <div class="form-check payment-method-option">
-                                        <input class="form-check-input" type="radio" name="payment_method" id="method-mobile" value="mobile_money">
-                                        <label class="form-check-label" for="method-mobile">
-                                            <i class="fas fa-mobile-alt"></i> Mobile Money
-                                        </label>
-                                    </div>
-                                    <div class="form-check payment-method-option">
-                                        <input class="form-check-input" type="radio" name="payment_method" id="method-paypal" value="paypal">
-                                        <label class="form-check-label" for="method-paypal">
-                                            <i class="fab fa-paypal"></i> PayPal
-                                        </label>
-                                    </div>
-                                    <div class="form-check payment-method-option">
-                                        <input class="form-check-input" type="radio" name="payment_method" id="method-zelle" value="zelle">
-                                        <label class="form-check-label" for="method-zelle">
-                                            <i class="fas fa-exchange-alt"></i> Zelle
-                                        </label>
-                                    </div>
-                                    <div class="form-check payment-method-option">
-                                        <input class="form-check-input" type="radio" name="payment_method" id="method-cashapp" value="cashapp">
-                                        <label class="form-check-label" for="method-cashapp">
-                                            <i class="fas fa-dollar-sign"></i> CashApp
-                                        </label>
-                                    </div>
-                                    <div class="form-check payment-method-option">
-                                        <input class="form-check-input" type="radio" name="payment_method" id="method-bank" value="bank_transfer">
-                                        <label class="form-check-label" for="method-bank">
-                                            <i class="fas fa-university"></i> Bank Transfer
-                                        </label>
-                                    </div>
-                                </div>
-                                
-                                <!-- Credit Card Payment Form -->
-                                <div class="payment-form" id="credit-card-form">
-                                    <div class="mb-3">
-                                        <label for="card-element" class="form-label">Credit or Debit Card</label>
-                                        <div id="card-element" class="form-control">
-                                            <!-- Stripe Card Element will be inserted here -->
+                            <!-- Payment Method Selection -->
+                            <div class="form-section">
+                                <h3 class="form-section-title">Payment Method</h3>
+                                <div class="payment-methods">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <div class="payment-method-option">
+                                                <input type="radio" class="form-check-input" name="payment_method" id="credit_card" value="credit_card" required>
+                                                <label class="form-check-label" for="credit_card">
+                                                    <i class="fas fa-credit-card"></i> Credit/Debit Card
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div id="card-errors" class="text-danger mt-2" role="alert"></div>
+                                        <div class="col-md-6">
+                                            <div class="payment-method-option">
+                                                <input type="radio" class="form-check-input" name="payment_method" id="mobile_money" value="mobile_money">
+                                                <label class="form-check-label" for="mobile_money">
+                                                    <i class="fas fa-mobile-alt"></i> Mobile Money (MoMo)
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="payment-method-option">
+                                                <input type="radio" class="form-check-input" name="payment_method" id="paypal" value="paypal">
+                                                <label class="form-check-label" for="paypal">
+                                                    <i class="fab fa-paypal"></i> PayPal
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="payment-method-option">
+                                                <input type="radio" class="form-check-input" name="payment_method" id="zelle" value="zelle">
+                                                <label class="form-check-label" for="zelle">
+                                                    <i class="fas fa-exchange-alt"></i> Zelle
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="payment-method-option">
+                                                <input type="radio" class="form-check-input" name="payment_method" id="cashapp" value="cashapp">
+                                                <label class="form-check-label" for="cashapp">
+                                                    <i class="fas fa-dollar-sign"></i> CashApp
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="payment-method-option">
+                                                <input type="radio" class="form-check-input" name="payment_method" id="bank_transfer" value="bank_transfer">
+                                                <label class="form-check-label" for="bank_transfer">
+                                                    <i class="fas fa-university"></i> Bank Transfer
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <!-- Mobile Money Payment Form -->
-                                <div class="payment-form" id="mobile-money-form" style="display: none;">
-                                    <div class="alert alert-info">
-                                        <h5><i class="fas fa-info-circle"></i> Mobile Money Payment Instructions</h5>
-                                        <p>Please send your donation to the following Mobile Money account:</p>
-                                        <ul>
-                                            <li><strong>Name:</strong> <?php echo MOBILE_MONEY_NAME; ?></li>
-                                            <li><strong>Number:</strong> <?php echo MOBILE_MONEY_NUMBER; ?></li>
-                                            <li><strong>Reference:</strong> <span id="momo-reference"><?php echo $_SESSION['reference_code'] ?? generateReferenceCode(); ?></span></li>
-                                        </ul>
-                                        <p>After sending the payment, please fill out the verification form below.</p>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="mobile_number" class="form-label">Your Mobile Money Number*</label>
-                                        <input type="tel" class="form-control" id="mobile_number" name="mobile_number">
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="mobile_provider" class="form-label">Mobile Money Provider*</label>
-                                        <select class="form-select" id="mobile_provider" name="mobile_provider">
-                                            <option value="MTN">MTN Mobile Money</option>
-                                            <option value="Orange">Orange Money</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="transaction_id" class="form-label">Transaction ID/Reference (if available)</label>
-                                        <input type="text" class="form-control" id="transaction_id" name="transaction_id">
-                                    </div>
-                                </div>
-                                
-                                <!-- PayPal Payment Form -->
-                                <div class="payment-form" id="paypal-form" style="display: none;">
-                                    <div class="alert alert-info">
-                                        <h5><i class="fas fa-info-circle"></i> PayPal Payment</h5>
-                                        <p>You will be redirected to PayPal to complete your donation after reviewing your information.</p>
-                                    </div>
-                                    <div id="paypal-button-container" class="mt-3"></div>
-                                </div>
-                                
-                                <!-- Zelle Payment Form -->
-                                <div class="payment-form" id="zelle-form" style="display: none;">
-                                    <div class="alert alert-info">
-                                        <h5><i class="fas fa-info-circle"></i> Zelle Payment Instructions</h5>
-                                        <p>Please send your donation to the following Zelle account:</p>
-                                        <ul>
-                                            <li><strong>Email:</strong> <?php echo ADMIN_EMAIL; ?></li>
-                                            <li><strong>Name:</strong> Holistic Prosperity Ministry</li>
-                                            <li><strong>Reference:</strong> <span id="zelle-reference"><?php echo $_SESSION['reference_code'] ?? generateReferenceCode(); ?></span></li>
-                                        </ul>
-                                        <p>After sending the payment, please fill out the verification form below.</p>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="zelle_email" class="form-label">Your Zelle Email/Phone*</label>
-                                        <input type="text" class="form-control" id="zelle_email" name="zelle_email">
-                                    </div>
-                                </div>
-                                
-                                <!-- CashApp Payment Form -->
-                                <div class="payment-form" id="cashapp-form" style="display: none;">
-                                    <div class="alert alert-info">
-                                        <h5><i class="fas fa-info-circle"></i> CashApp Payment Instructions</h5>
-                                        <p>Please send your donation to the following CashApp account:</p>
-                                        <ul>
-                                            <li><strong>$Cashtag:</strong> $HolisticPM</li>
-                                            <li><strong>Reference:</strong> <span id="cashapp-reference"><?php echo $_SESSION['reference_code'] ?? generateReferenceCode(); ?></span></li>
-                                        </ul>
-                                        <p>After sending the payment, please fill out the verification form below.</p>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="cashapp_name" class="form-label">Your CashApp Name*</label>
-                                        <input type="text" class="form-control" id="cashapp_name" name="cashapp_name">
-                                    </div>
-                                </div>
-                                
-                                <!-- Bank Transfer Payment Form -->
-                                <div class="payment-form" id="bank-form" style="display: none;">
-                                    <div class="alert alert-info">
-                                        <h5><i class="fas fa-info-circle"></i> Bank Transfer Instructions</h5>
-                                        <p>Please transfer your donation to the following bank account:</p>
-                                        <ul>
-                                            <li><strong>Bank Name:</strong> First National Bank</li>
-                                            <li><strong>Account Name:</strong> Holistic Prosperity Ministry</li>
-                                            <li><strong>Account Number:</strong> 1234567890</li>
-                                            <li><strong>Routing Number:</strong> 987654321</li>
-                                            <li><strong>Reference:</strong> <span id="bank-reference"><?php echo $_SESSION['reference_code'] ?? generateReferenceCode(); ?></span></li>
-                                        </ul>
-                                        <p>After sending the payment, please fill out the verification form below.</p>
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="bank_name" class="form-label">Your Bank Name*</label>
-                                        <input type="text" class="form-control" id="bank_name" name="bank_name">
-                                    </div>
-                                    
-                                    <div class="mb-3">
-                                        <label for="bank_reference" class="form-label">Your Transfer Reference*</label>
-                                        <input type="text" class="form-control" id="bank_reference" name="bank_reference">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-navigation">
-                                    <button type="button" class="btn btn-secondary prev-step">Back</button>
-                                    <button type="button" class="btn btn-primary next-step" id="payment-button">Review Donation</button>
                                 </div>
                             </div>
-                            
-                            <!-- Step 4: Confirmation -->
-                            <div class="form-step" id="confirmation" style="display: none;">
-                                <h3 class="mb-4">Review Your Donation</h3>
-                                
-                                <div class="donation-summary card mb-4">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Donation Summary</h5>
-                                        <table class="table table-borderless">
-                                            <tbody>
-                                                <tr>
-                                                    <th>Amount:</th>
-                                                    <td id="summary-amount"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Designation:</th>
-                                                    <td id="summary-category"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Frequency:</th>
-                                                    <td id="summary-frequency"></td>
-                                                </tr>
-                                                <tr id="summary-fees-row" style="display: none;">
-                                                    <th>Processing Fee:</th>
-                                                    <td id="summary-fees"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Total Amount:</th>
-                                                    <td id="summary-total"></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Payment Method:</th>
-                                                    <td id="summary-method"></td>
-                                                </tr>
-                                                <tr id="summary-tribute-row" style="display: none;">
-                                                    <th id="summary-tribute-type"></th>
-                                                    <td id="summary-tribute-name"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+
+                            <!-- Credit Card Payment Form (will be shown/hidden with JavaScript) -->
+                            <div id="creditCardForm" class="form-section payment-details" style="display: none;">
+                                <h3 class="form-section-title">Card Details</h3>
+                                <div id="card-element" class="form-control mb-3">
+                                    <!-- Stripe Elements will be inserted here -->
                                 </div>
-                                
-                                <div class="mb-4">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="terms_agreement" name="terms_agreement" required>
-                                        <label class="form-check-label" for="terms_agreement">
-                                            I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">terms and conditions</a>
-                                        </label>
-                                    </div>
+                                <div id="card-errors" class="text-danger mb-3" role="alert"></div>
+                                <div class="security-badge mb-3">
+                                    <i class="fas fa-lock"></i> Secure Payment Powered by Stripe
                                 </div>
-                                
-                                <div class="form-navigation">
-                                    <button type="button" class="btn btn-secondary prev-step">Back</button>
-                                    <button type="submit" class="btn btn-success" id="submit-donation">Complete Donation</button>
-                                </div>
+                            </div>
+
+                            <div class="form-section text-center">
+                                <button type="submit" id="donateButton" class="btn btn-primary btn-lg px-5">Complete Donation</button>
                             </div>
                         </form>
                     </div>
@@ -489,77 +517,195 @@ $defaultCategory = 1; // General Fund
             </div>
         </div>
     </section>
-    
-    <!-- Terms and Conditions Modal -->
-    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+    <!-- Transparent Impact Section -->
+    <section id="transparent-impact" class="transparent-impact py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Transparent Impact</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">See exactly how your donations are making a difference</p>
+            </div>
+            <div class="row g-4 align-items-center">
+                <div class="col-lg-6">
+                    <h3 class="mb-4">Fund Allocation</h3>
+                    <div class="impact-chart-container">
+                        <canvas id="allocationChart"></canvas>
+                    </div>
+                    <div class="allocation-legend mt-4">
+                        <div class="allocation-item">
+                            <div class="allocation-color" style="background-color: #4B0082;"></div>
+                            <div class="allocation-label">CrypStock Academy</div>
+                            <div class="allocation-percentage">40%</div>
+                        </div>
+                        <div class="allocation-item">
+                            <div class="allocation-color" style="background-color: #FFD700;"></div>
+                            <div class="allocation-label">Community Outreach</div>
+                            <div class="allocation-percentage">25%</div>
+                        </div>
+                        <div class="allocation-item">
+                            <div class="allocation-color" style="background-color: #9370DB;"></div>
+                            <div class="allocation-label">Worship & Ministry</div>
+                            <div class="allocation-percentage">20%</div>
+                        </div>
+                        <div class="allocation-item">
+                            <div class="allocation-color" style="background-color: #20B2AA;"></div>
+                            <div class="allocation-label">Operations</div>
+                            <div class="allocation-percentage">10%</div>
+                        </div>
+                        <div class="allocation-item">
+                            <div class="allocation-color" style="background-color: #87CEEB;"></div>
+                            <div class="allocation-label">Future Growth</div>
+                            <div class="allocation-percentage">5%</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <h6>Donation Agreement</h6>
-                    <p>By making a donation to Holistic Prosperity Ministry, you agree to the following terms:</p>
-                    <ul>
-                        <li>All donations are final and non-refundable.</li>
-                        <li>For recurring donations, you authorize Holistic Prosperity Ministry to charge your payment method on a recurring basis until you notify us to stop.</li>
-                        <li>You confirm that you are using your own payment method and have the authority to make this donation.</li>
-                        <li>Holistic Prosperity Ministry will use your donation for its charitable purposes in accordance with its mission.</li>
-                        <li>Your personal information will be handled in accordance with our Privacy Policy.</li>
-                    </ul>
-                    
-                    <h6>Tax Deductibility</h6>
-                    <p>Holistic Prosperity Ministry is a registered 501(c)(3) non-profit organization. Donations are tax-deductible to the extent allowed by law. Please consult your tax advisor for specific guidance.</p>
-                    
-                    <h6>Privacy Policy</h6>
-                    <p>We respect your privacy and will not sell, rent, or lease your personal information to third parties. Your information will be used solely for processing your donation and communicating with you about ministry activities.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">I Understand</button>
+                <div class="col-lg-6">
+                    <h3 class="mb-4">Our Commitment to Transparency</h3>
+                    <div class="transparency-content">
+                        <p class="mb-4">At Holistic Prosperity Ministry, we believe in complete transparency with how your donations are used. We are committed to responsible stewardship of all resources entrusted to us.</p>
+                        <div class="commitment-points">
+                            <div class="commitment-item mb-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-check-circle text-primary me-2"></i>
+                                    <h5 class="mb-0">Financial Integrity</h5>
+                                </div>
+                                <p>We maintain the highest standards of financial accountability and undergo regular financial reviews.</p>
+                            </div>
+                            <div class="commitment-item mb-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-check-circle text-primary me-2"></i>
+                                    <h5 class="mb-0">Impact Reporting</h5>
+                                </div>
+                                <p>We regularly share stories and updates about how your donations are making a difference in people's lives.</p>
+                            </div>
+                            <div class="commitment-item">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-check-circle text-primary me-2"></i>
+                                    <h5 class="mb-0">Donor Privacy</h5>
+                                </div>
+                                <p>We respect your privacy and will never share your personal information with third parties.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    
+    </section>
+
+    <!-- Planned Giving Section -->
+    <section id="planned-giving" class="planned-giving py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Planned Giving</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Create a legacy of faith and prosperity for generations to come</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="planned-giving-card text-center">
+                        <div class="planned-giving-icon mx-auto">
+                            <i class="fas fa-scroll fa-2x"></i>
+                        </div>
+                        <h3 class="planned-giving-title">Bequest in Will</h3>
+                        <p>Include Holistic Prosperity Ministry in your will or living trust to leave a lasting legacy.</p>
+                        <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="planned-giving-card text-center">
+                        <div class="planned-giving-icon mx-auto">
+                            <i class="fas fa-hand-holding-usd fa-2x"></i>
+                        </div>
+                        <h3 class="planned-giving-title">Charitable Trust</h3>
+                        <p>Establish a charitable trust to benefit both your loved ones and our ministry.</p>
+                        <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mx-auto">
+                    <div class="planned-giving-card text-center">
+                        <div class="planned-giving-icon mx-auto">
+                            <i class="fas fa-seedling fa-2x"></i>
+                        </div>
+                        <h3 class="planned-giving-title">Endowment Fund</h3>
+                        <p>Create an endowment fund to provide ongoing support for specific ministry programs.</p>
+                        <a href="#" class="btn btn-outline-primary mt-3">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <p>For more information about planned giving options, please contact our Stewardship Team:</p>
+                <p><strong>Email:</strong> <a href="mailto:stewardship@holisticprosperityministry.org">stewardship@holisticprosperityministry.org</a> | <strong>Phone:</strong> <a href="tel:+14697031453">+1 (469) 703-1453</a></p>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <?php include 'includes/footer.php'; ?>
-    
-    <!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    
-    <!-- Custom JS -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-about">
+                        <p>Empowering individuals and communities through biblical prosperity principles, financial literacy, and faith-based community development.</p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="get-involved.html">Get Involved</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Our Ministries</h5>
+                    <ul class="footer-links">
+                        <li><a href="ministries/cryptstock.html">CrypStock Academy</a></li>
+                        <li><a href="ministries/faith-worship.html">Faith & Worship</a></li>
+                        <li><a href="ministries/community.html">Community Impact</a></li>
+                        <li><a href="ministries/love-in-action.html">Love in Action</a></li>
+                        <li><a href="ministries/prosperity-counseling.html">Prosperity Counseling</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Heartland, Texas</li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+14697031453">+1 (469) 703-1453</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:hello@holisticprosperityministry.org">hello@holisticprosperityministry.org</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 Holistic Prosperity Ministry. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
     <script src="js/main.js"></script>
-    <script src="js/payment.js"></script>
-    
-    <script>
-        // Initialize Stripe
-        const stripe = Stripe('<?php echo STRIPE_PUBLISHABLE_KEY; ?>');
-        const elements = stripe.elements();
-        
-        // Create card element
-        const cardElement = elements.create('card', {
-            style: {
-                base: {
-                    fontSize: '16px',
-                    color: '#32325d',
-                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                    '::placeholder': {
-                        color: '#aab7c4'
-                    }
-                },
-                invalid: {
-                    color: '#fa755a',
-                    iconColor: '#fa755a'
-                }
-            }
-        });
-        
-        // Mount the card element
-        cardElement.mount('#card-element');
-    </script>
+    <script src="js/responsive.js"></script>
+    <script src="js/donate.js"></script>
 </body>
 </html>

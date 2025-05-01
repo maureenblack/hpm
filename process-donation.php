@@ -11,8 +11,8 @@
  * - PCI compliance considerations
  */
 
-// Ensure this file is not accessed directly
-if (basename($_SERVER['PHP_SELF']) === basename(__FILE__)) {
+// Ensure this file is not accessed directly via GET request
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     // Log potential direct access attempt
     error_log("Direct access attempt to process-donation.php");
     header('HTTP/1.0 403 Forbidden');
