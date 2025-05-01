@@ -1,0 +1,808 @@
+/**
+ * Holistic Prosperity Ministry Website
+ * Payment System Styles
+ */
+
+/* Payment Header */
+.payment-header {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/donation-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 40vh;
+    position: relative;
+    padding: 8rem 0 4rem;
+    color: var(--light);
+    text-align: center;
+}
+
+/* Payment Pathway Cards */
+.pathway-card {
+    background-color: var(--light);
+    border-radius: 10px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.pathway-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.pathway-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: var(--primary);
+}
+
+.ministry-pathway::before {
+    background-color: var(--secondary);
+}
+
+.pathway-icon {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(75, 0, 130, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--primary);
+}
+
+.ministry-pathway .pathway-icon {
+    background-color: rgba(255, 215, 0, 0.1);
+    color: var(--secondary);
+}
+
+.pathway-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.ministry-pathway .pathway-title {
+    color: var(--dark);
+}
+
+.pathway-description {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--gray);
+}
+
+.pathway-features ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.pathway-features li {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.pathway-features li i {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    color: var(--primary);
+}
+
+.ministry-pathway .pathway-features li i {
+    color: var(--secondary);
+}
+
+/* Payment Security Badge */
+.payment-security-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(75, 0, 130, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+.payment-security-badge i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-right: 1rem;
+}
+
+.payment-security-badge p {
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    color: var(--gray);
+}
+
+/* Payment Methods Section */
+.payment-methods-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.payment-method-item {
+    background-color: var(--light);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.payment-method-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.payment-method-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(75, 0, 130, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.payment-method-info {
+    flex: 1;
+}
+
+.payment-method-info h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+}
+
+.payment-method-info p {
+    margin-bottom: 0;
+    color: var(--gray);
+    font-size: 0.95rem;
+}
+
+/* Payment FAQ Section */
+.payment-faq-section .accordion-item {
+    border: none;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.payment-faq-section .accordion-button {
+    font-weight: 600;
+    padding: 1.25rem 1.5rem;
+    background-color: var(--light);
+    color: var(--primary);
+}
+
+.payment-faq-section .accordion-button:not(.collapsed) {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+.payment-faq-section .accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(75, 0, 130, 0.25);
+}
+
+.payment-faq-section .accordion-body {
+    padding: 1.5rem;
+    background-color: var(--light);
+}
+
+/* Need Help Section */
+.need-help-section {
+    background-color: var(--gray-light);
+}
+
+/* Academy Payment Form Styles */
+.payment-form-container {
+    background-color: var(--light);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--gray-light);
+}
+
+.payment-method-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.payment-method-option {
+    flex: 1;
+    min-width: 120px;
+    background-color: var(--light);
+    border: 2px solid var(--gray-light);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment-method-option:hover {
+    border-color: var(--primary);
+}
+
+.payment-method-option.active {
+    border-color: var(--primary);
+    background-color: rgba(75, 0, 130, 0.05);
+}
+
+.payment-method-option i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--gray);
+}
+
+.payment-method-option.active i {
+    color: var(--primary);
+}
+
+.payment-method-option p {
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.payment-form-panel {
+    display: none;
+}
+
+.payment-form-panel.active {
+    display: block;
+}
+
+/* Credit Card Form Styles */
+.card-input-container {
+    position: relative;
+}
+
+.card-type-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+}
+
+.card-security-note {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.card-security-note i {
+    margin-right: 0.5rem;
+    color: var(--primary);
+}
+
+/* Mobile Money Form Styles */
+.country-selector {
+    margin-bottom: 1.5rem;
+}
+
+.momo-instructions {
+    background-color: rgba(75, 0, 130, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.momo-instructions h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.momo-instructions ol {
+    padding-left: 1.5rem;
+    margin-bottom: 0;
+}
+
+.momo-instructions li {
+    margin-bottom: 0.75rem;
+}
+
+.reference-code-display {
+    background-color: var(--light);
+    border: 2px dashed var(--primary);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.reference-code {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 2px;
+}
+
+.copy-btn {
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: var(--primary-dark);
+}
+
+.copy-btn i {
+    margin-right: 0.5rem;
+}
+
+/* Payment Plan Options */
+.payment-plan-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.payment-plan-option {
+    flex: 1;
+    min-width: 200px;
+    background-color: var(--light);
+    border: 2px solid var(--gray-light);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment-plan-option:hover {
+    border-color: var(--primary);
+}
+
+.payment-plan-option.active {
+    border-color: var(--primary);
+    background-color: rgba(75, 0, 130, 0.05);
+}
+
+.payment-plan-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+}
+
+.payment-plan-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.payment-plan-description {
+    font-size: 0.95rem;
+    color: var(--gray);
+    margin-bottom: 0;
+}
+
+/* Course Selection Styles */
+.course-selection {
+    margin-bottom: 1.5rem;
+}
+
+.course-option {
+    background-color: var(--light);
+    border: 2px solid var(--gray-light);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.course-option:hover {
+    border-color: var(--primary);
+}
+
+.course-option.active {
+    border-color: var(--primary);
+    background-color: rgba(75, 0, 130, 0.05);
+}
+
+.course-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.course-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0;
+}
+
+.course-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.course-description {
+    font-size: 0.95rem;
+    color: var(--gray);
+    margin-bottom: 0;
+}
+
+/* Recurring Payment Options */
+.recurring-toggle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.recurring-toggle-label {
+    margin-right: 1rem;
+    font-weight: 600;
+}
+
+.recurring-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.recurring-option {
+    background-color: var(--light);
+    border: 2px solid var(--gray-light);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.recurring-option:hover {
+    border-color: var(--primary);
+}
+
+.recurring-option.active {
+    border-color: var(--primary);
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+/* Donation Amount Options */
+.amount-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.amount-option {
+    background-color: var(--light);
+    border: 2px solid var(--gray-light);
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.amount-option:hover, .amount-option.active {
+    background-color: var(--primary);
+    color: var(--light);
+    border-color: var(--primary);
+}
+
+.custom-amount {
+    position: relative;
+}
+
+.custom-amount span {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 600;
+}
+
+.custom-amount input {
+    padding-left: 2rem;
+}
+
+/* Payment Confirmation Styles */
+.payment-confirmation {
+    background-color: var(--light);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.confirmation-icon {
+    width: 100px;
+    height: 100px;
+    background-color: rgba(75, 0, 130, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--primary);
+    font-size: 3rem;
+}
+
+.confirmation-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.confirmation-message {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--gray);
+}
+
+.confirmation-details {
+    background-color: rgba(75, 0, 130, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.confirmation-details h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(75, 0, 130, 0.1);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: var(--gray);
+}
+
+.detail-value {
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.receipt-actions {
+    margin-top: 1.5rem;
+}
+
+.receipt-actions .btn {
+    margin: 0 0.5rem 0.5rem;
+}
+
+/* QR Code Styles */
+.qr-code-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.qr-code-image {
+    width: 200px;
+    height: 200px;
+    background-color: var(--light);
+    border: 2px solid var(--gray-light);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0 auto 1rem;
+}
+
+.qr-code-caption {
+    font-size: 0.95rem;
+    color: var(--gray);
+}
+
+/* Bank Details Styles */
+.bank-details {
+    background-color: rgba(75, 0, 130, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.bank-details h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.bank-detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(75, 0, 130, 0.1);
+}
+
+.bank-detail-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.bank-detail-label {
+    font-weight: 600;
+    color: var(--gray);
+}
+
+.bank-detail-value {
+    font-weight: 600;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+}
+
+.bank-detail-value .copy-btn {
+    margin-left: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+/* File Upload Styles */
+.file-upload-container {
+    margin-bottom: 1.5rem;
+}
+
+.file-upload-box {
+    border: 2px dashed var(--gray-light);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.file-upload-box:hover {
+    border-color: var(--primary);
+}
+
+.file-upload-icon {
+    font-size: 2.5rem;
+    color: var(--gray);
+    margin-bottom: 1rem;
+}
+
+.file-upload-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+.file-upload-subtext {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.file-upload-input {
+    display: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 991.98px) {
+    .payment-method-selector {
+        flex-wrap: wrap;
+    }
+    
+    .payment-method-option {
+        flex: 0 0 calc(50% - 0.5rem);
+    }
+    
+    .payment-plan-options {
+        flex-direction: column;
+    }
+    
+    .payment-plan-option {
+        width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .payment-header {
+        min-height: 30vh;
+        padding: 6rem 0 3rem;
+    }
+    
+    .payment-method-option {
+        flex: 0 0 100%;
+    }
+    
+    .amount-options, .recurring-options {
+        justify-content: center;
+    }
+    
+    .amount-option, .recurring-option {
+        flex: 0 0 calc(50% - 0.5rem);
+        text-align: center;
+    }
+    
+    .course-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .course-price {
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .payment-header h1 {
+        font-size: 2rem;
+    }
+    
+    .amount-option, .recurring-option {
+        flex: 0 0 100%;
+    }
+    
+    .qr-code-image {
+        width: 150px;
+        height: 150px;
+    }
+}

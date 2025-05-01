@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway - Holistic Prosperity Ministry</title>
+    <link rel="icon" href="images/hpm-favicon.svg" type="image/svg+xml">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/payment.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html#our-story">Our Story</a></li>
+                            <li><a class="dropdown-item" href="about.html#leadership-team">Leadership Team</a></li>
+                            <li><a class="dropdown-item" href="about.html#core-values">Core Values</a></li>
+                            <li><a class="dropdown-item" href="about.html#faq">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="ministries.html" id="ministryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ministries
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="ministryDropdown">
+                            <li><a class="dropdown-item" href="ministries/cryptstock.html">CrypStock Prosperity Academy</a></li>
+                            <li><a class="dropdown-item" href="ministries/faith-worship.html">Faith & Worship Ministry</a></li>
+                            <li><a class="dropdown-item" href="ministries/community.html">Community Impact Projects</a></li>
+                            <li><a class="dropdown-item" href="ministries/love-in-action.html">Love in Action Fellowship</a></li>
+                            <li><a class="dropdown-item" href="ministries/prosperity-counseling.html">Prosperity Counseling</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.html">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="resources.html">Resources</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="get-involved.html">Get Involved</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="donate.html" id="donateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Donate
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="donateDropdown">
+                            <li><a class="dropdown-item" href="donate.html#giving-options">Ways to Give</a></li>
+                            <li><a class="dropdown-item" href="donate.html#donation-form">Give Now</a></li>
+                            <li><a class="dropdown-item" href="donate.html#transparent-impact">Transparent Impact</a></li>
+                            <li><a class="dropdown-item" href="donate.html#planned-giving">Planned Giving</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Payment Gateway Header -->
+    <header class="payment-header d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-3">Payment Gateway</h1>
+                    <p class="lead mb-4">Select your payment pathway below</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Payment Pathway Selection -->
+    <section class="payment-pathway-section py-5">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-5 col-md-6">
+                    <div class="pathway-card academy-pathway h-100">
+                        <div class="pathway-icon">
+                            <i class="fas fa-graduation-cap fa-3x"></i>
+                        </div>
+                        <h2 class="pathway-title">CrypStock Academy Payments</h2>
+                        <p class="pathway-description">Support your financial education journey through our specialized programs.</p>
+                        <div class="pathway-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Course registration fees</li>
+                                <li><i class="fas fa-check-circle"></i> Academy sponsorships</li>
+                                <li><i class="fas fa-check-circle"></i> Educational materials</li>
+                                <li><i class="fas fa-check-circle"></i> Mentorship programs</li>
+                            </ul>
+                        </div>
+                        <a href="academy-payment.html" class="btn btn-primary btn-lg w-100 mt-3">Select Academy Payment</a>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <div class="pathway-card ministry-pathway h-100">
+                        <div class="pathway-icon">
+                            <i class="fas fa-church fa-3x"></i>
+                        </div>
+                        <h2 class="pathway-title">Ministry Donations</h2>
+                        <p class="pathway-description">Support our mission to transform lives through biblical prosperity principles.</p>
+                        <div class="pathway-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Tithes & offerings</li>
+                                <li><i class="fas fa-check-circle"></i> Community outreach support</li>
+                                <li><i class="fas fa-check-circle"></i> General ministry operations</li>
+                                <li><i class="fas fa-check-circle"></i> Special projects</li>
+                            </ul>
+                        </div>
+                        <a href="ministry-payment.html" class="btn btn-gold btn-lg w-100 mt-3">Select Ministry Donation</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <div class="payment-security-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        <p>Your payment information is secure and encrypted. We never store your complete payment details.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Methods Overview -->
+    <section class="payment-methods-section py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Available Payment Methods</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">We offer multiple convenient ways to give</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="payment-methods-container">
+                        <div class="payment-method-item">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="payment-method-info">
+                                <h3>Credit/Debit Card</h3>
+                                <p>Secure payment using major credit and debit cards. Supports recurring payments.</p>
+                            </div>
+                        </div>
+                        <div class="payment-method-item">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="payment-method-info">
+                                <h3>Mobile Money (MoMo)</h3>
+                                <p>Pay using mobile money services from your region. Manual renewal for subscriptions.</p>
+                            </div>
+                        </div>
+                        <div class="payment-method-item">
+                            <div class="payment-method-icon">
+                                <i class="fab fa-paypal"></i>
+                            </div>
+                            <div class="payment-method-info">
+                                <h3>PayPal</h3>
+                                <p>Quick and secure payment through PayPal. Supports recurring payments.</p>
+                            </div>
+                        </div>
+                        <div class="payment-method-item">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <div class="payment-method-info">
+                                <h3>Zelle</h3>
+                                <p>Fast bank-to-bank transfers through Zelle. Manual verification required.</p>
+                            </div>
+                        </div>
+                        <div class="payment-method-item">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="payment-method-info">
+                                <h3>CashApp</h3>
+                                <p>Easy payments through CashApp. Includes QR code option for mobile.</p>
+                            </div>
+                        </div>
+                        <div class="payment-method-item">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="payment-method-info">
+                                <h3>Bank Transfer</h3>
+                                <p>Direct bank transfer to our ministry account. Manual verification required.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="payment-faq-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Payment FAQs</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Answers to common questions about our payment process</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="accordion" id="paymentFaqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Is my payment information secure?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#paymentFaqAccordion">
+                                <div class="accordion-body">
+                                    <p>Yes, all payment information is encrypted and processed securely. We use industry-standard security protocols to protect your data. We do not store complete credit card information on our servers.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    How do I set up recurring payments?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#paymentFaqAccordion">
+                                <div class="accordion-body">
+                                    <p>Recurring payments can be set up using credit/debit cards or PayPal. During the payment process, simply select the "Make this recurring" option and choose your preferred frequency (monthly, quarterly, or annual). For payment methods that don't support automatic recurring payments (MoMo, Zelle, CashApp, Bank Transfer), you can sign up for payment reminders.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Will I receive a receipt for my payment?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#paymentFaqAccordion">
+                                <div class="accordion-body">
+                                    <p>Yes, you will receive an email receipt for all payments. For ministry donations, you will also receive a tax receipt that can be used for tax deduction purposes. You can also create an account to access your payment history and receipts at any time.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    How do I verify my manual payment was received?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#paymentFaqAccordion">
+                                <div class="accordion-body">
+                                    <p>For manual payment methods (MoMo, Zelle, CashApp, Bank Transfer), you will receive a reference code during the payment process. Include this code with your payment. Once we verify the payment, you will receive a confirmation email. This process typically takes 1-2 business days. You can also contact our finance team at <a href="mailto:finance@holisticprosperityministry.org">finance@holisticprosperityministry.org</a> for verification.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    Are there payment plans available for Academy courses?
+                                </button>
+                            </h2>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#paymentFaqAccordion">
+                                <div class="accordion-body">
+                                    <p>Yes, most CrypStock Academy courses offer payment plan options. You can choose to pay in full or in monthly installments. The specific payment plan options will be displayed during the course selection process. We also offer scholarships for qualified individuals. Contact our education team at <a href="mailto:education@holisticprosperityministry.org">education@holisticprosperityministry.org</a> for more information.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Need Help Section -->
+    <section class="need-help-section py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-4 mb-lg-0">
+                    <h2>Need Assistance with Your Payment?</h2>
+                    <p class="lead mb-0">Our team is here to help you with any payment questions or issues.</p>
+                </div>
+                <div class="col-lg-5 text-lg-end">
+                    <a href="tel:+14697031453" class="btn btn-outline-primary btn-lg me-2 mb-2 mb-md-0"><i class="fas fa-phone me-2"></i>Call Us</a>
+                    <a href="mailto:finance@holisticprosperityministry.org" class="btn btn-primary btn-lg"><i class="fas fa-envelope me-2"></i>Email Support</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-about">
+                        <img src="images/hpm-logo-light.svg" alt="Holistic Prosperity Ministry Logo" class="footer-logo mb-3" height="60">
+                        <p>Empowering individuals and communities through biblical prosperity principles, financial literacy, and faith-based community development.</p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="get-involved.html">Get Involved</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Our Ministries</h5>
+                    <ul class="footer-links">
+                        <li><a href="ministries/cryptstock.html">CrypStock Academy</a></li>
+                        <li><a href="ministries/faith-worship.html">Faith & Worship</a></li>
+                        <li><a href="ministries/community.html">Community Impact</a></li>
+                        <li><a href="ministries/love-in-action.html">Love in Action</a></li>
+                        <li><a href="ministries/prosperity-counseling.html">Prosperity Counseling</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <h5 class="footer-heading">Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Heartland, Texas</li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+14697031453">+1 (469) 703-1453</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:hello@holisticprosperityministry.org">hello@holisticprosperityministry.org</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 Holistic Prosperity Ministry. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+    <script src="js/responsive.js"></script>
+    <script src="js/payment.js"></script>
+</body>
+</html>
