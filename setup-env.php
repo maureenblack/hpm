@@ -55,11 +55,11 @@ $smtpPass = readline("SMTP Password: ");
 $hashSalt = bin2hex(random_bytes(16)); // Generate a random salt
 
 // Create .env file content
-$date = date('Y-m-d H:i:s');
 $envContent = "# Holistic Prosperity Ministry - Environment Variables\n";
-$envContent .= "# Created: $date\n";
-$envContent .= "# IMPORTANT: Keep this file secure and never commit to version control\n\n";
+$envContent .= "# Generated on " . date('Y-m-d H:i:s') . "\n";
+$envContent .= "# IMPORTANT: This file contains sensitive information and should never be committed to version control\n\n";
 
+// Group the variables by section
 $envContent .= "# Database Configuration\n";
 $envContent .= "DB_HOST=$dbHost\n";
 $envContent .= "DB_NAME=$dbName\n";
@@ -68,7 +68,11 @@ $envContent .= "DB_PASS=$dbPass\n\n";
 
 $envContent .= "# Stripe API Keys\n";
 $envContent .= "STRIPE_PUBLISHABLE_KEY=$stripePublishable\n";
-$envContent .= "STRIPE_SECRET_KEY=$stripeSecret\n\n";
+$envContent .= "STRIPE_SECRET_KEY=$stripeSecret\n";
+
+// Add Stripe webhook secret
+$stripeWebhookSecret = readline("Stripe Webhook Secret: ");
+$envContent .= "STRIPE_WEBHOOK_SECRET=$stripeWebhookSecret\n\n";
 
 $envContent .= "# Email Configuration\n";
 $envContent .= "SMTP_HOST=$smtpHost\n";
@@ -76,17 +80,24 @@ $envContent .= "SMTP_PORT=$smtpPort\n";
 $envContent .= "SMTP_USERNAME=$smtpUser\n";
 $envContent .= "SMTP_PASSWORD=$smtpPass\n\n";
 
+$envContent .= "# Mobile Money Configuration\n";
+$envContent .= "MOMO_RECIPIENT_NAME=Kort Godlove Fai\n";
+$envContent .= "MOMO_RECIPIENT_NUMBER=652444097\n";
+$envContent .= "MOMO_WHATSAPP_NUMBER=+14697031453\n";
+$envContent .= "USD_TO_FCFA_RATE=650\n\n";
+
 $envContent .= "# Security Settings\n";
 $envContent .= "HASH_SALT=$hashSalt\n";
 
-// Write to .env file
-if (file_put_contents($envFile, $envContent)) {
-    // Set proper permissions (readable only by owner)
-    chmod($envFile, 0600);
-    
-    echo "\nSuccess! .env file has been created with your settings.\n";
-    echo "For security, please delete this setup script after use.\n";
+// Write to file
+if (file_put_contents('.env', $envContent)) {
+    // Set permissions to 0600 (readable/writable only by owner)
+    chmod('.env', 0600);
+    echo "\nSuccessfully created .env file with secure permissions.\n";
+    echo "Please edit the file to set your actual values.\n";
+    echo "\nIMPORTANT: For production, replace the Stripe test keys with live keys.\n";
 } else {
-    echo "\nError: Failed to create .env file. Please check directory permissions.\n";
+    echo "Failed to create .env file.\n";
+    exit(1);
 }
 ?>

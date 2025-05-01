@@ -16,16 +16,26 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0);
 
 // Include configuration and functions
-require_once 'includes/config.php';
-require_once 'includes/functions.php';
-
-// Check if Stripe handler exists
-if (file_exists('includes/stripe-handler.php')) {
-    require_once 'includes/stripe-handler.php';
-} else {
-    // For testing without Stripe SDK
-    http_response_code(200);
-    echo json_encode(['clientSecret' => 'test_' . bin2hex(random_bytes(16))]);
+try {
+    require_once 'includes/config.php';
+    require_once 'includes/functions.php';
+    
+    // Check if Stripe handler exists
+    if (file_exists('includes/stripe-handler.php')) {
+        require_once 'includes/stripe-handler.php';
+    } else {
+        // For testing without Stripe SDK
+        http_response_code(200);
+        echo json_encode(['clientSecret' => 'test_' . bin2hex(random_bytes(16)), 'id' => 'test_' . bin2hex(random_bytes(8))]);
+        exit;
+    }
+} catch (Exception $e) {
+    // Log the error
+    error_log('Error in create-payment-intent.php: ' . $e->getMessage());
+    
+    // Return a valid JSON response with error information
+    http_response_code(500);
+    echo json_encode(['error' => 'Server error: ' . $e->getMessage()]);
     exit;
 }
 
@@ -89,8 +99,21 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Get JSON input
-$jsonInput = file_get_contents('php://input');
-$data = json_decode($jsonInput, true);
+try {
+    $jsonInput = file_get_contents('php://input');
+    if (empty($jsonInput)) {
+        throw new Exception('No input data provided');
+    }
+    
+    $data = json_decode($jsonInput, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception('Invalid JSON: ' . json_last_error_msg());
+    }
+} catch (Exception $e) {
+    http_response_code(400);
+    echo json_encode(['error' => $e->getMessage()]);
+    exit;
+}
 
 // Validate input
 if (!$data || !isset($data['amount']) || !is_numeric($data['amount'])) {
@@ -129,20 +152,28 @@ if (isset($data['metadata']) && is_array($data['metadata'])) {
 }
 
 // Create payment intent
-$result = createStripePaymentIntent($amount, $currency, $description, $metadata);
-
-// Check for errors
-if (isset($result['error'])) {
+try {
+    $result = createStripePaymentIntent($amount, $currency, $description, $metadata);
+    
+    // Check for errors
+    if (!$result || isset($result['error'])) {
+        throw new Exception(isset($result['error']) ? $result['error'] : 'Unknown payment processing error');
+    }
+    
+    // Return payment intent details
+    echo json_encode([
+        'id' => $result['id'],
+        'client_secret' => $result['client_secret'],
+        'amount' => $result['amount'],
+        'currency' => $result['currency']
+    ]);
+} catch (Exception $e) {
+    // Log the error
+    error_log('Stripe payment intent error: ' . $e->getMessage());
+    
+    // Return a valid JSON response with error information
     http_response_code(400);
-    echo json_encode(['error' => $result['error']]);
+    echo json_encode(['error' => $e->getMessage()]);
     exit;
 }
-
-// Return payment intent details
-echo json_encode([
-    'id' => $result['id'],
-    'client_secret' => $result['client_secret'],
-    'amount' => $result['amount'],
-    'currency' => $result['currency']
-]);
 ?>

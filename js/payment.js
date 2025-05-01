@@ -447,6 +447,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (paymentMethod === 'credit_card') {
             // Create payment intent with Stripe
             try {
+                // Show loading indicator
+                const payBtn = document.getElementById('payment-button');
+                if (payBtn) {
+                    payBtn.disabled = true;
+                    payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                }
+                
+                const errorElement = document.getElementById('card-errors');
+                errorElement.textContent = '';
+                
                 const response = await fetch('create-payment-intent.php', {
                     method: 'POST',
                     headers: {
@@ -460,10 +470,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     }),
                 });
                 
-                const data = await response.json();
+                // Check if response is ok
+                if (!response.ok) {
+                    let errorMsg = 'Server error: ' + response.status;
+                    try {
+                        const errorData = await response.json();
+                        if (errorData && errorData.error) {
+                            errorMsg = errorData.error;
+                        }
+                    } catch (jsonError) {
+                        // If JSON parsing fails, use the status text
+                        errorMsg = 'Server error: ' + response.statusText;
+                    }
+                    throw new Error(errorMsg);
+                }
+                
+                // Parse JSON response
+                let data;
+                try {
+                    data = await response.json();
+                } catch (jsonError) {
+                    throw new Error('Invalid response from server. Please try again.');
+                }
                 
                 if (data.error) {
-                    throw new Error(data.error.message);
+                    throw new Error(typeof data.error === 'string' ? data.error : 'Payment processing error');
                 }
                 
                 // Store the payment intent ID
@@ -475,7 +506,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             } catch (error) {
                 const errorElement = document.getElementById('card-errors');
-                errorElement.textContent = error.message;
+                errorElement.textContent = error.message || 'An error occurred during payment processing';
+                console.error('Payment error:', error);
+            } finally {
+                // Reset button state
+                const payBtn = document.getElementById('payment-button');
+                if (payBtn) {
+                    payBtn.disabled = false;
+                    payBtn.innerHTML = 'Continue to Confirmation';
+                }
             }
         } else {
             // For other payment methods, just go to confirmation step

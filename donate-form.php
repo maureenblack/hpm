@@ -443,24 +443,34 @@ unset($_SESSION['success_message']);
                             <!-- Donor Information -->
                             <div class="form-section">
                                 <h3 class="form-section-title">Your Information</h3>
-                                <div class="row g-3">
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="donateAnonymously" name="donate_anonymously" value="1">
+                                    <label class="form-check-label" for="donateAnonymously">
+                                        <strong>I would like to donate anonymously</strong>
+                                    </label>
+                                    <div class="form-text">Your personal information will not be stored with your donation.</div>
+                                </div>
+                                
+                                <div id="personalInfoFields" class="row g-3">
                                     <div class="col-md-6">
                                         <label for="firstName" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" id="firstName" name="firstName" required data-name="First Name">
+                                        <input type="text" class="form-control" id="firstName" name="firstName" data-name="First Name">
                                         <div class="invalid-feedback">
                                             Please provide your first name.
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="lastName" class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" id="lastName" name="lastName" required data-name="Last Name">
+                                        <input type="text" class="form-control" id="lastName" name="lastName" data-name="Last Name">
                                         <div class="invalid-feedback">
                                             Please provide your last name.
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="email" class="form-label">Email Address</label>
-                                        <input type="email" class="form-control" id="email" name="email" required data-name="Email Address">
+                                        <input type="email" class="form-control" id="email" name="email" data-name="Email Address">
+                                        <div class="form-text">We'll send a receipt to this email if provided.</div>
                                         <div class="invalid-feedback">
                                             Please provide a valid email address.
                                         </div>

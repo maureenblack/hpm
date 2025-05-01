@@ -66,12 +66,12 @@
                         <a class="nav-link" href="get-involved.html">Get Involved</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="donate.html" id="donateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle active" href="donate-form.php" id="donateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Donate
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="donateDropdown">
+                            <li><a class="dropdown-item" href="donate-form.php">Give Now</a></li>
                             <li><a class="dropdown-item" href="donate.html#giving-options">Ways to Give</a></li>
-                            <li><a class="dropdown-item" href="donate.html#donation-form">Give Now</a></li>
                             <li><a class="dropdown-item" href="donate.html#transparent-impact">Transparent Impact</a></li>
                             <li><a class="dropdown-item" href="donate.html#planned-giving">Planned Giving</a></li>
                         </ul>
@@ -91,7 +91,7 @@
                     <p class="lead mb-4">Your generosity transforms lives through biblical prosperity principles and community impact.</p>
                     <div class="hero-buttons">
                         <a href="#giving-options" class="btn btn-primary btn-lg me-2 mb-2">Ways to Give</a>
-                        <a href="#donation-form" class="btn btn-gold btn-lg mb-2">Give Now</a>
+                        <a href="donate-form.php" class="btn btn-gold btn-lg mb-2">Give Now</a>
                     </div>
                 </div>
             </div>
@@ -213,7 +213,7 @@
                             <li>Tax-deductible</li>
                             <li>Impact updates</li>
                         </ul>
-                        <a href="#donation-form" class="btn btn-primary">Give Now</a>
+                        <a href="donate-form.php" class="btn btn-">Give Now</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -279,7 +279,10 @@
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <div class="donation-form-container">
-                        <form id="donationForm" class="needs-validation" novalidate>
+                        <div class="text-center mb-4">
+                            <p>Please use our <a href="donate-form.php" class="btn btn-primary">Donation Form</a> to make your contribution.</p>
+                        </div>
+                        <!-- This form is deprecated. Please use donate-form.php instead -->
                             <!-- Amount Selection -->
                             <div class="form-section">
                                 <h3 class="form-section-title">Select Amount</h3>

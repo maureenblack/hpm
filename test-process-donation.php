@@ -27,12 +27,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Debug: Log POST data
         error_log("POST data: " . print_r($_POST, true));
         
+        // Check if this is an anonymous donation
+        $isAnonymous = isset($_POST['donate_anonymously']) && $_POST['donate_anonymously'] == '1';
+        
         // Get and sanitize form data
-        $donorName = isset($_POST['firstName']) && isset($_POST['lastName']) 
-            ? sanitizeInput($_POST['firstName'] . ' ' . $_POST['lastName']) 
-            : sanitizeInput($_POST['donor_name'] ?? '');
-            
-        $donorEmail = sanitizeInput($_POST['email'] ?? $_POST['donor_email'] ?? '');
+        if ($isAnonymous) {
+            // For anonymous donations, use 'Anonymous Donor' as the name
+            $donorName = 'Anonymous Donor';
+            $donorEmail = ''; // No email for anonymous donations
+        } else {
+            // Regular donation with personal information
+            $donorName = isset($_POST['firstName']) && isset($_POST['lastName']) 
+                ? sanitizeInput($_POST['firstName'] . ' ' . $_POST['lastName']) 
+                : sanitizeInput($_POST['donor_name'] ?? '');
+                
+            $donorEmail = sanitizeInput($_POST['email'] ?? $_POST['donor_email'] ?? '');
+        }
+        
         $amount = floatval($_POST['amount'] ?? $_POST['custom_amount'] ?? 0);
         $paymentMethod = sanitizeInput($_POST['payment_method'] ?? '');
         $frequency = sanitizeInput($_POST['frequency'] ?? 'one-time');
@@ -41,15 +52,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $donationPurpose = sanitizeInput($_POST['designation'] ?? $_POST['donation_purpose'] ?? '');
         
         // Debug: Log processed data
-        error_log("Processed data: Name=$donorName, Email=$donorEmail, Amount=$amount, Method=$paymentMethod, Frequency=$frequency");
+        error_log("Processed data: Anonymous=$isAnonymous, Name=$donorName, Email=$donorEmail, Amount=$amount, Method=$paymentMethod, Frequency=$frequency");
         
         // Special handling for test data
         $isTestMode = (strpos(strtolower($_POST['comments'] ?? ''), 'test donation') !== false);
         
         // Validate required fields with better error messages
         $errors = [];
-        if (empty($donorName)) $errors[] = "Donor name is required";
-        if (empty($donorEmail)) $errors[] = "Email address is required";
+        if (!$isAnonymous && empty($donorName)) $errors[] = "Donor name is required unless donating anonymously";
+        if (!$isAnonymous && empty($donorEmail)) $errors[] = "Email address is required unless donating anonymously";
         if ($amount <= 0 && !$isTestMode) $errors[] = "Valid donation amount is required";
         if (empty($paymentMethod)) $errors[] = "Payment method is required";
         

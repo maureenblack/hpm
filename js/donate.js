@@ -28,6 +28,9 @@ function initDonationForm() {
     const amountOptions = document.querySelectorAll('.amount-option');
     const customAmountInput = document.getElementById('customAmount');
     
+    // Initialize anonymous donation checkbox
+    initAnonymousDonation();
+    
     // Add click event to amount options
     amountOptions.forEach(option => {
         option.addEventListener('click', function() {
@@ -687,12 +690,46 @@ document.querySelectorAll('form input[required], form select[required]').forEach
 });
 
 /**
+ * Initialize the anonymous donation functionality
+ */
+function initAnonymousDonation() {
+    const anonymousCheckbox = document.getElementById('donateAnonymously');
+    const personalInfoFields = document.getElementById('personalInfoFields');
+        
+    if (anonymousCheckbox && personalInfoFields) {
+        // Handle initial state
+        togglePersonalFields();
+            
+        // Add change event listener
+        anonymousCheckbox.addEventListener('change', togglePersonalFields);
+            
+        function togglePersonalFields() {
+            if (anonymousCheckbox.checked) {
+                // If anonymous, hide personal info fields and remove required attribute
+                personalInfoFields.classList.add('d-none');
+                document.querySelectorAll('#personalInfoFields input').forEach(input => {
+                    input.removeAttribute('required');
+                    // Clear any validation errors
+                    input.classList.remove('is-invalid');
+                });
+            } else {
+                // If not anonymous, show personal info fields
+                personalInfoFields.classList.remove('d-none');
+            }
+        }
+    }
+}
+
+/**
  * Initialize the test data button functionality
  */
 function initTestDataButton() {
-    const testDataBtn = document.getElementById('fillTestDataBtn');
-    if (testDataBtn) {
-        testDataBtn.addEventListener('click', fillTestData);
+    const testDataButton = document.getElementById('fillTestDataBtn');
+    if (testDataButton) {
+        testDataButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            fillTestData();
+        });
     }
 }
 
@@ -701,24 +738,26 @@ function initTestDataButton() {
  */
 function fillTestData() {
     console.log('Filling form with test data...');
-    
-    // Mark the button as clicked for test mode detection
-    const testButton = document.getElementById('fillTestDataBtn');
-    if (testButton) {
-        testButton.classList.add('clicked');
+        
+    // Ensure anonymous donation is unchecked
+    const anonymousCheckbox = document.getElementById('donateAnonymously');
+    if (anonymousCheckbox && anonymousCheckbox.checked) {
+        anonymousCheckbox.checked = false;
+        // Trigger the change event to show personal fields
+        anonymousCheckbox.dispatchEvent(new Event('change'));
     }
-    
+        
     // Set donation amount ($50)
     const amountOptions = document.querySelectorAll('.amount-option');
     let $50Option = null;
-    
+        
     // Find the $50 option
     amountOptions.forEach(option => {
         if (option.getAttribute('data-amount') === '50') {
             $50Option = option;
         }
     });
-    
+        
     // Click the $50 option if found, otherwise use custom amount
     if ($50Option) {
         $50Option.click();
@@ -730,7 +769,7 @@ function fillTestData() {
             customAmountInput.dispatchEvent(new Event('input', { bubbles: true }));
         }
     }
-    
+        
     // Create a hidden amount field to ensure the amount is submitted
     const donationForm = document.getElementById('donationForm');
     if (donationForm) {
@@ -744,7 +783,7 @@ function fillTestData() {
         }
         hiddenAmount.value = '50';
     }
-    
+        
     // Set frequency to one-time
     const oneTimeOption = document.querySelector('.frequency-option[data-frequency="one-time"]');
     if (oneTimeOption) {
@@ -757,7 +796,7 @@ function fillTestData() {
             console.log('Frequency set to one-time (fallback)');
         }
     }
-    
+        
     // Set designation to "General Ministry Support"
     const designationSelect = document.getElementById('designation');
     if (designationSelect) {
@@ -771,16 +810,16 @@ function fillTestData() {
             }
         }
     }
-    
+        
     // Fill personal information
     fillField('firstName', 'John');
-    fillField('lastName', 'Testuser');
-    fillField('email', 'test@example.com');
-    fillField('phone', '+1234567890');
-    
+    fillField('lastName', 'Doe');
+    fillField('email', 'john.doe@example.com');
+    fillField('phone', '555-123-4567');
+        
     // Add "Test Donation" to comments field
     fillField('comments', 'Test Donation');
-    
+        
     // Select mobile money payment method
     const mobileMoneyRadio = document.getElementById('mobile_money');
     if (mobileMoneyRadio) {
