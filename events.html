@@ -13,6 +13,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Events CSS -->
+    <link rel="stylesheet" href="css/events.css">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -111,6 +113,41 @@
                 <p class="lead">Join us for these transformative gatherings</p>
             </div>
             
+            <!-- Filter Options -->
+            <div class="event-filters mb-4">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search events..." id="eventSearch">
+                            <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select" id="eventCategory">
+                            <option value="all">All Categories</option>
+                            <option value="conference">Conferences & Summits</option>
+                            <option value="workshop">Workshops & Training</option>
+                            <option value="community">Community Outreach</option>
+                            <option value="worship">Worship & Prayer</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-text">Date Range</span>
+                            <input type="date" class="form-control" id="dateRangeStart">
+                            <input type="date" class="form-control" id="dateRangeEnd">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="btn-group w-100" role="group" aria-label="View options">
+                            <button type="button" class="btn btn-outline-primary active" id="calendarViewBtn"><i class="fas fa-calendar-alt"></i></button>
+                            <button type="button" class="btn btn-outline-primary" id="listViewBtn"><i class="fas fa-list"></i></button>
+                            <button type="button" class="btn btn-outline-primary" id="cardViewBtn"><i class="fas fa-th-large"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Calendar Navigation -->
             <div class="calendar-nav mb-4">
                 <div class="row align-items-center">
@@ -126,25 +163,21 @@
                 </div>
             </div>
             
-            <!-- Filter Options -->
-            <div class="event-filters mb-4">
-                <div class="row">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search events..." id="eventSearch">
-                            <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <select class="form-select" id="eventCategory">
-                            <option value="all">All Categories</option>
-                            <option value="conference">Conferences & Summits</option>
-                            <option value="workshop">Workshops & Training</option>
-                            <option value="community">Community Outreach</option>
-                            <option value="worship">Worship & Prayer</option>
-                        </select>
-                    </div>
+            <!-- Calendar View -->
+            <div id="calendarView" class="view-container active">
+                <div id="eventsCalendar" class="calendar-container">
+                    <div id="calendarDays" class="calendar-grid"></div>
                 </div>
+            </div>
+            
+            <!-- List View -->
+            <div id="listView" class="view-container">
+                <div id="eventsList" class="events-list"></div>
+            </div>
+            
+            <!-- Card View -->
+            <div id="cardView" class="view-container">
+                <div id="eventsCards" class="events-cards"></div>
             </div>
         </div>
     </section>
@@ -158,123 +191,96 @@
                 <p class="lead">Don't miss these transformative gatherings</p>
             </div>
             
-            <!-- Annual Prosperity Summit -->
-            <div class="event-feature mb-5" id="prosperity-summit">
+            <!-- Event Template - Use this structure to add your events -->
+            <div class="event-feature mb-5 template-event">
                 <div class="row g-0">
                     <div class="col-lg-6">
-                        <div class="event-image h-100">
-                            <img src="images/prosperity-summit.jpg" alt="Annual Prosperity Summit" class="img-fluid h-100 object-fit-cover">
+                        <div class="event-image h-100 bg-light d-flex align-items-center justify-content-center">
+                            <!-- Replace with your event image -->
+                            <div class="text-center p-5">
+                                <i class="fas fa-calendar-alt fa-5x text-primary mb-3"></i>
+                                <h4>Event Image Area</h4>
+                                <p class="small">Add your event image here (1200x800px recommended)</p>
+                            </div>
                             <div class="event-date-badge">
-                                <div class="month">JUN</div>
-                                <div class="day">15-17</div>
-                                <div class="year">2025</div>
+                                <div class="month">MMM</div>
+                                <div class="day">DD</div>
+                                <div class="year">YYYY</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="event-details h-100">
-                            <h3>Annual Prosperity Summit</h3>
+                            <h3>Event Title</h3>
                             <div class="event-meta">
-                                <span><i class="fas fa-map-marker-alt"></i> Main Campus Auditorium</span>
-                                <span><i class="fas fa-clock"></i> 9:00 AM - 5:00 PM</span>
-                                <span><i class="fas fa-tag"></i> Conference</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Location</span>
+                                <span><i class="fas fa-clock"></i> Time</span>
+                                <span><i class="fas fa-tag"></i> Category</span>
                             </div>
-                            <p class="lead">A three-day conference featuring renowned speakers on faith-based financial principles and practical wealth-building strategies.</p>
-                            <p>Join us for our flagship event of the year! The Annual Prosperity Summit brings together thought leaders, financial experts, and spiritual mentors for an immersive experience that will transform your approach to prosperity.</p>
-                            <h4>Featured Speakers:</h4>
+                            <p class="lead">Brief event description that captures attention and explains the purpose.</p>
+                            <p>More detailed information about the event, including what attendees can expect, the benefits of attending, and any special features.</p>
+                            <h4>Event Highlights:</h4>
                             <ul>
-                                <li>Pastor Jonathan Williams - "The Biblical Foundation of Prosperity"</li>
-                                <li>Dr. Sarah Chen - "Integrating Faith and Finance in Today's Economy"</li>
-                                <li>Michael Rodriguez - "Cryptocurrency and the Future of Wealth"</li>
-                                <li>Rev. David Thompson - "Stewardship as a Spiritual Discipline"</li>
+                                <li>Key highlight or feature #1</li>
+                                <li>Key highlight or feature #2</li>
+                                <li>Key highlight or feature #3</li>
+                                <li>Key highlight or feature #4</li>
                             </ul>
                             <div class="event-actions">
-                                <a href="#" class="btn btn-primary">Register Now</a>
-                                <a href="#" class="btn btn-outline-primary">View Schedule</a>
+                                <a href="#" class="btn btn-primary">Primary Action</a>
+                                <a href="#" class="btn btn-outline-primary">Secondary Action</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Faith & Finance Bootcamp -->
-            <div class="event-feature mb-5" id="finance-bootcamp">
+            <!-- Alternate Layout Template (Image Right) -->
+            <div class="event-feature mb-5 template-event">
                 <div class="row g-0">
                     <div class="col-lg-6 order-lg-2">
-                        <div class="event-image h-100">
-                            <img src="images/finance-bootcamp.jpg" alt="Faith & Finance Bootcamp" class="img-fluid h-100 object-fit-cover">
+                        <div class="event-image h-100 bg-light d-flex align-items-center justify-content-center">
+                            <!-- Replace with your event image -->
+                            <div class="text-center p-5">
+                                <i class="fas fa-calendar-alt fa-5x text-primary mb-3"></i>
+                                <h4>Event Image Area</h4>
+                                <p class="small">Add your event image here (1200x800px recommended)</p>
+                            </div>
                             <div class="event-date-badge">
-                                <div class="month">JUL</div>
-                                <div class="day">08-09</div>
-                                <div class="year">2025</div>
+                                <div class="month">MMM</div>
+                                <div class="day">DD</div>
+                                <div class="year">YYYY</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="event-details h-100">
-                            <h3>Faith & Finance Bootcamp</h3>
+                            <h3>Event Title (Alternate Layout)</h3>
                             <div class="event-meta">
-                                <span><i class="fas fa-map-marker-alt"></i> Financial Education Center</span>
-                                <span><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM</span>
-                                <span><i class="fas fa-tag"></i> Workshop</span>
+                                <span><i class="fas fa-map-marker-alt"></i> Location</span>
+                                <span><i class="fas fa-clock"></i> Time</span>
+                                <span><i class="fas fa-tag"></i> Category</span>
                             </div>
-                            <p class="lead">An intensive weekend workshop teaching practical financial skills grounded in biblical principles.</p>
-                            <p>The Faith & Finance Bootcamp is designed for those who want to take immediate action to improve their financial situation while honoring God with their resources. This hands-on workshop will equip you with practical tools and biblical wisdom.</p>
-                            <h4>What You'll Learn:</h4>
+                            <p class="lead">Brief event description that captures attention and explains the purpose.</p>
+                            <p>More detailed information about the event, including what attendees can expect, the benefits of attending, and any special features.</p>
+                            <h4>Event Highlights:</h4>
                             <ul>
-                                <li>Creating a faith-based budget that works</li>
-                                <li>Biblical strategies for debt elimination</li>
-                                <li>Saving and investing with purpose</li>
-                                <li>Giving generously while building wealth</li>
+                                <li>Key highlight or feature #1</li>
+                                <li>Key highlight or feature #2</li>
+                                <li>Key highlight or feature #3</li>
+                                <li>Key highlight or feature #4</li>
                             </ul>
                             <div class="event-actions">
-                                <a href="#" class="btn btn-primary">Register Now</a>
-                                <a href="#" class="btn btn-outline-primary">Learn More</a>
+                                <a href="#" class="btn btn-primary">Primary Action</a>
+                                <a href="#" class="btn btn-outline-primary">Secondary Action</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Community Giveback Day -->
-            <div class="event-feature" id="community-giveback">
-                <div class="row g-0">
-                    <div class="col-lg-6">
-                        <div class="event-image h-100">
-                            <img src="images/community-giveback.jpg" alt="Community Giveback Day" class="img-fluid h-100 object-fit-cover">
-                            <div class="event-date-badge">
-                                <div class="month">AUG</div>
-                                <div class="day">22</div>
-                                <div class="year">2025</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="event-details h-100">
-                            <h3>Community Giveback Day</h3>
-                            <div class="event-meta">
-                                <span><i class="fas fa-map-marker-alt"></i> Multiple Locations</span>
-                                <span><i class="fas fa-clock"></i> 8:00 AM - 2:00 PM</span>
-                                <span><i class="fas fa-tag"></i> Community Outreach</span>
-                            </div>
-                            <p class="lead">Join us as we serve our local community through various outreach initiatives and volunteer opportunities.</p>
-                            <p>Community Giveback Day is our quarterly opportunity to put our faith into action by serving those in need. Volunteers can choose from multiple service projects across the city, including:</p>
-                            <h4>Service Opportunities:</h4>
-                            <ul>
-                                <li>Food Pantry Distribution</li>
-                                <li>School Supply Drive</li>
-                                <li>Home Repairs for Seniors</li>
-                                <li>Community Garden Planting</li>
-                                <li>Free Financial Counseling Clinic</li>
-                            </ul>
-                            <div class="event-actions">
-                                <a href="#" class="btn btn-primary">Sign Up to Volunteer</a>
-                                <a href="#" class="btn btn-outline-primary">View Locations</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Add your actual events by copying and modifying the templates above -->
+            <!-- Remove the template-event class when adding real events -->
         </div>
     </section>
 
@@ -393,15 +399,177 @@
         </div>
     </section>
 
-    <!-- Event Registration CTA -->
-    <section class="event-registration-cta py-5 bg-light">
+    <!-- Event Registration Section -->
+    <section class="event-registration py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Event Registration</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Register for our upcoming events quickly and easily</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-7 mb-4 mb-lg-0">
+                    <div class="registration-form-container">
+                        <form id="eventRegistrationForm" class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Phone (optional)</label>
+                                    <input type="tel" class="form-control" id="phone">
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-md-8">
+                                    <label for="eventSelect" class="form-label">Select Event</label>
+                                    <select class="form-select" id="eventSelect" required>
+                                        <option value="" selected disabled>Choose an event...</option>
+                                        <option value="1">Annual Prosperity Summit (Jun 15-17, 2025)</option>
+                                        <option value="2">Faith & Finance Bootcamp (Jul 8-9, 2025)</option>
+                                        <option value="3">Community Giveback Day (Aug 22, 2025)</option>
+                                        <option value="4">Revival Night (May 25, 2025)</option>
+                                        <option value="5">Financial Literacy Workshop (Jun 5, 2025)</option>
+                                    </select>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="ticketQuantity" class="form-label">Number of Tickets</label>
+                                    <input type="number" class="form-control" id="ticketQuantity" min="1" value="1" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="specialRequests" class="form-label">Special Accommodations or Requests (optional)</label>
+                                    <textarea class="form-control" id="specialRequests" rows="3"></textarea>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button class="btn btn-primary w-100" type="submit">Complete Registration</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col-lg-5">
+                    <div class="registration-info">
+                        <h3>Registration Information</h3>
+                        <p>Please complete the form to register for any of our upcoming events. Upon submission, you will receive a confirmation email with event details and your registration number.</p>
+                        
+                        <div class="registration-features">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-ticket-alt"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>Easy Registration</h4>
+                                    <p>Simple one-step registration process for all our events</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>Instant Confirmation</h4>
+                                    <p>Receive immediate confirmation with all event details</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>Group Registration</h4>
+                                    <p>Register multiple attendees in a single transaction</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                </div>
+                                <div class="feature-content">
+                                    <h4>Special Accommodations</h4>
+                                    <p>Request any special needs or accommodations</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="registration-contact mt-4">
+                            <p>Need assistance with registration? Contact our events team:</p>
+                            <p><i class="fas fa-envelope"></i> hello@holisticprosperityministry.org</p>
+                            <p><i class="fas fa-phone"></i> +1 (469) 703-1453</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Registration Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="confirmationModalLabel">Registration Confirmed!</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="confirmation-details" id="printableArea">
+                        <div class="text-center mb-4">
+                            <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="60">
+                            <h3 class="mt-3">Event Registration Confirmation</h3>
+                            <p class="confirmation-number-display">Confirmation #: <span id="confirmationNumber" class="fw-bold"></span></p>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Attendee Information</h4>
+                                <p><strong>Name:</strong> <span id="confirmName"></span></p>
+                                <p><strong>Email:</strong> <span id="confirmEmail"></span></p>
+                                <p><strong>Phone:</strong> <span id="confirmPhone"></span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Event Information</h4>
+                                <p><strong>Event:</strong> <span id="confirmEvent"></span></p>
+                                <p><strong>Number of Tickets:</strong> <span id="confirmTickets"></span></p>
+                                <p><strong>Special Requests:</strong> <span id="confirmRequests"></span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info mt-4">
+                            <p class="mb-0">Please bring this confirmation (printed or digital) to the event for check-in.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="printConfirmation"><i class="fas fa-print"></i> Print Confirmation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Newsletter Subscription -->
+    <section class="newsletter-section py-5">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-8 mb-4 mb-lg-0">
+                <div class="col-lg-7 mb-4 mb-lg-0">
                     <h2>Want to Stay Updated on All Events?</h2>
                     <p class="lead mb-0">Subscribe to our events newsletter and never miss an opportunity to grow and connect.</p>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                     <form class="event-subscribe-form">
                         <div class="input-group">
                             <input type="email" class="form-control" placeholder="Your Email" required>
@@ -482,5 +650,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="js/main.js"></script>
+    <!-- Events JavaScript -->
+    <script src="js/events.js"></script>
 </body>
 </html>

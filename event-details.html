@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Prosperity Summit - Holistic Prosperity Ministry</title>
+    <link rel="icon" href="images/hpm-favicon.svg" type="image/svg+xml">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Events CSS -->
+    <link rel="stylesheet" href="css/events.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            About
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                            <li><a class="dropdown-item" href="about.html#our-story">Our Story</a></li>
+                            <li><a class="dropdown-item" href="about.html#leadership-team">Leadership Team</a></li>
+                            <li><a class="dropdown-item" href="about.html#core-values">Core Values</a></li>
+                            <li><a class="dropdown-item" href="about.html#faq">FAQ</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="ministries.html" id="ministryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ministries
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="ministryDropdown">
+                            <li><a class="dropdown-item" href="ministries/cryptstock.html">CrypStock Prosperity Academy</a></li>
+                            <li><a class="dropdown-item" href="ministries/faith-worship.html">Faith & Worship Ministry</a></li>
+                            <li><a class="dropdown-item" href="ministries/community.html">Community Impact Projects</a></li>
+                            <li><a class="dropdown-item" href="ministries/love-in-action.html">Love in Action Fellowship</a></li>
+                            <li><a class="dropdown-item" href="ministries/prosperity-counseling.html">Prosperity Counseling</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="events.html">Events</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="resources.html" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Resources
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                            <li><a class="dropdown-item" href="resources/sermons.html">Sermons Archive</a></li>
+                            <li><a class="dropdown-item" href="resources/financial-literacy.html">Financial Literacy PDFs</a></li>
+                            <li><a class="dropdown-item" href="resources/devotionals.html">Devotionals</a></li>
+                            <li><a class="dropdown-item" href="resources/recommended-reading.html">Recommended Reading</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle donate-btn" href="donate.html" id="donateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Donate
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="donateDropdown">
+                            <li><a class="dropdown-item" href="donate/one-time.html">One-Time Giving</a></li>
+                            <li><a class="dropdown-item" href="donate/monthly.html">Monthly Partnership</a></li>
+                            <li><a class="dropdown-item" href="donate/sponsor.html">Sponsor a Student</a></li>
+                            <li><a class="dropdown-item" href="donate/corporate.html">Corporate Donations</a></li>
+                            <li><a class="dropdown-item" href="donate/impact-reports.html">Transparent Impact Reports</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Event Hero Section -->
+    <header class="event-hero">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="event-hero-content text-center">
+                        <h1>[Event Title]</h1>
+                        <div class="event-meta">
+                            <span class="event-meta-badge"><i class="fas fa-calendar-alt"></i> [Event Date]</span>
+                            <span class="event-meta-badge"><i class="fas fa-map-marker-alt"></i> [Event Location]</span>
+                            <span class="event-meta-badge"><i class="fas fa-clock"></i> [Event Time]</span>
+                        </div>
+                        <p class="lead mt-3">[Brief event description that captures attention]</p>
+                        <div class="mt-4">
+                            <a href="#registration" class="btn btn-primary btn-lg me-2">Register Now</a>
+                            <a href="#schedule" class="btn btn-outline-light btn-lg">View Schedule</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Event Details Section -->
+    <section class="event-details-section" id="details">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2 class="section-title">About the Event</h2>
+                    <div class="title-underline"></div>
+                    <p class="lead">[Compelling introduction to the event]</p>
+                    <p>[Detailed description paragraph 1 - Explain the purpose, goals, and overall experience of the event]</p>
+                    <p>[Detailed description paragraph 2 - Describe what attendees will gain from participating]</p>
+                    
+                    <div class="row mt-5">
+                        <!-- Event Feature 1 -->
+                        <div class="col-md-6">
+                            <div class="event-feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-microphone-alt"></i>
+                                </div>
+                                <h3>[Feature 1 Title]</h3>
+                                <p>[Brief description of this feature or benefit]</p>
+                            </div>
+                        </div>
+                        <!-- Event Feature 2 -->
+                        <div class="col-md-6">
+                            <div class="event-feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3>[Feature 2 Title]</h3>
+                                <p>[Brief description of this feature or benefit]</p>
+                            </div>
+                        </div>
+                        <!-- Event Feature 3 -->
+                        <div class="col-md-6">
+                            <div class="event-feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-hands-helping"></i>
+                                </div>
+                                <h3>[Feature 3 Title]</h3>
+                                <p>[Brief description of this feature or benefit]</p>
+                            </div>
+                        </div>
+                        <!-- Event Feature 4 -->
+                        <div class="col-md-6">
+                            <div class="event-feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h3>[Feature 4 Title]</h3>
+                                <p>[Brief description of this feature or benefit]</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="event-info-card">
+                        <h3>Event Information</h3>
+                        <ul class="event-info-list">
+                            <li>
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>
+                                    <strong>Dates:</strong>
+                                    <p>[Event dates]</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Time:</strong>
+                                    <p>[Event times]</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>Location:</strong>
+                                    <p>[Venue name]<br>[Street address]<br>[City, State ZIP]</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-parking"></i>
+                                <div>
+                                    <strong>Parking:</strong>
+                                    <p>[Parking information]</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-utensils"></i>
+                                <div>
+                                    <strong>Meals:</strong>
+                                    <p>[Meal information]</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-question-circle"></i>
+                                <div>
+                                    <strong>Questions?</strong>
+                                    <p>[Contact email]<br>[Contact phone]</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <a href="#registration" class="btn btn-primary w-100 mt-4">Register Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Schedule Section -->
+    <section class="event-schedule-section py-5 bg-light" id="schedule">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Event Schedule</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">[Brief description of the schedule]</p>
+            </div>
+            
+            <!-- Schedule Tabs - For multi-day events -->
+            <ul class="nav nav-pills mb-4 justify-content-center" id="scheduleTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="day1-tab" data-bs-toggle="pill" data-bs-target="#day1" type="button" role="tab" aria-controls="day1" aria-selected="true">[Day 1 Label]</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="day2-tab" data-bs-toggle="pill" data-bs-target="#day2" type="button" role="tab" aria-controls="day2" aria-selected="false">[Day 2 Label]</button>
+                </li>
+                <!-- Add more days as needed -->
+            </ul>
+            
+            <!-- Schedule Content -->
+            <div class="tab-content" id="scheduleTabContent">
+                <!-- Day 1 Schedule -->
+                <div class="tab-pane fade show active" id="day1" role="tabpanel" aria-labelledby="day1-tab">
+                    <div class="accordion" id="day1Accordion">
+                        <!-- Session Template - Copy this for each session -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="session1Heading">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#session1Collapse" aria-expanded="true" aria-controls="session1Collapse">
+                                    <div class="session-time">[Time]</div>
+                                    <div class="session-info">
+                                        <div class="session-title">[Session Title]</div>
+                                        <div class="session-speaker">[Speaker/Presenter]</div>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="session1Collapse" class="accordion-collapse collapse show" aria-labelledby="session1Heading" data-bs-parent="#day1Accordion">
+                                <div class="accordion-body">
+                                    <p>[Session description - what attendees will learn or experience]</p>
+                                    <div class="session-details">
+                                        <div class="detail-item">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>[Location]</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>[Additional detail 1]</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <i class="fas fa-user-friends"></i>
+                                            <span>[Additional detail 2]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Session Template (Collapsed by default) -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="session2Heading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#session2Collapse" aria-expanded="false" aria-controls="session2Collapse">
+                                    <div class="session-time">[Time]</div>
+                                    <div class="session-info">
+                                        <div class="session-title">[Session Title]</div>
+                                        <div class="session-speaker">[Speaker/Presenter]</div>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="session2Collapse" class="accordion-collapse collapse" aria-labelledby="session2Heading" data-bs-parent="#day1Accordion">
+                                <div class="accordion-body">
+                                    <p>[Session description - what attendees will learn or experience]</p>
+                                    <div class="session-details">
+                                        <div class="detail-item">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>[Location]</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>[Additional detail 1]</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <i class="fas fa-user-friends"></i>
+                                            <span>[Additional detail 2]</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Add more sessions as needed -->
+                    </div>
+                </div>
+                
+                <!-- Day 2 Schedule -->
+                <div class="tab-pane fade" id="day2" role="tabpanel" aria-labelledby="day2-tab">
+                    <div class="accordion" id="day2Accordion">
+                        <!-- Copy the session template above for Day 2 sessions -->
+                        <div class="alert alert-info">
+                            <p class="mb-0">[Brief description of Day 2 focus or activities]</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Add more days as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section py-5" id="registration">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Registration Options</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Choose the registration option that best fits your needs</p>
+            </div>
+            
+            <div class="row pricing-container">
+                <!-- Basic Tier -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card h-100">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">[Basic Tier Name]</h3>
+                            <div class="pricing-price">$[Price]</div>
+                            <div class="pricing-period">[per person/group/etc.]</div>
+                        </div>
+                        <div class="pricing-features">
+                            <ul class="pricing-features-list">
+                                <li><i class="fas fa-check"></i> [Feature 1]</li>
+                                <li><i class="fas fa-check"></i> [Feature 2]</li>
+                                <li><i class="fas fa-check"></i> [Feature 3]</li>
+                                <li class="text-muted"><i class="fas fa-times"></i> [Not included feature]</li>
+                                <li class="text-muted"><i class="fas fa-times"></i> [Not included feature]</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100 pricing-btn">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Standard Tier (Recommended) -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card h-100 recommended">
+                        <div class="recommended-badge">Best Value</div>
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">[Standard Tier Name]</h3>
+                            <div class="pricing-price">$[Price]</div>
+                            <div class="pricing-period">[per person/group/etc.]</div>
+                        </div>
+                        <div class="pricing-features">
+                            <ul class="pricing-features-list">
+                                <li><i class="fas fa-check"></i> [Feature 1]</li>
+                                <li><i class="fas fa-check"></i> [Feature 2]</li>
+                                <li><i class="fas fa-check"></i> [Feature 3]</li>
+                                <li><i class="fas fa-check"></i> [Feature 4]</li>
+                                <li><i class="fas fa-check"></i> [Feature 5]</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary w-100 pricing-btn">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Premium Tier -->
+                <div class="col-lg-4 col-md-6 mb-4 mx-auto">
+                    <div class="pricing-card h-100">
+                        <div class="pricing-header">
+                            <h3 class="pricing-title">[Premium Tier Name]</h3>
+                            <div class="pricing-price">$[Price]</div>
+                            <div class="pricing-period">[per person/group/etc.]</div>
+                        </div>
+                        <div class="pricing-features">
+                            <ul class="pricing-features-list">
+                                <li><i class="fas fa-check"></i> [Feature 1]</li>
+                                <li><i class="fas fa-check"></i> [Feature 2]</li>
+                                <li><i class="fas fa-check"></i> [Feature 3]</li>
+                                <li><i class="fas fa-check"></i> [Feature 4]</li>
+                                <li><i class="fas fa-check"></i> [Premium exclusive feature]</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100 pricing-btn">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <p class="small">Need to register a large group? <a href="#">Contact us</a> for special group rates.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq-section py-5 bg-light" id="faq">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="title-underline mx-auto"></div>
+                <p class="lead">Find answers to common questions about the event</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <div class="accordion faq-accordion" id="faqAccordion">
+                        <!-- FAQ Item 1 -->
+                        <div class="accordion-item faq-item">
+                            <h2 class="accordion-header" id="faqHeading1">
+                                <button class="accordion-button faq-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">
+                                    [FAQ Question 1]?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse1" class="accordion-collapse collapse show" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body faq-body">
+                                    <p>[Answer to FAQ Question 1]</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 2 -->
+                        <div class="accordion-item faq-item">
+                            <h2 class="accordion-header" id="faqHeading2">
+                                <button class="accordion-button faq-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                                    [FAQ Question 2]?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body faq-body">
+                                    <p>[Answer to FAQ Question 2]</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 3 -->
+                        <div class="accordion-item faq-item">
+                            <h2 class="accordion-header" id="faqHeading3">
+                                <button class="accordion-button faq-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+                                    [FAQ Question 3]?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body faq-body">
+                                    <p>[Answer to FAQ Question 3]</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 4 -->
+                        <div class="accordion-item faq-item">
+                            <h2 class="accordion-header" id="faqHeading4">
+                                <button class="accordion-button faq-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
+                                    [FAQ Question 4]?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body faq-body">
+                                    <p>[Answer to FAQ Question 4]</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 5 -->
+                        <div class="accordion-item faq-item">
+                            <h2 class="accordion-header" id="faqHeading5">
+                                <button class="accordion-button faq-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
+                                    [FAQ Question 5]?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body faq-body">
+                                    <p>[Answer to FAQ Question 5]</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <p>Still have questions? <a href="contact.html">Contact us</a> and we'll be happy to help!</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" class="footer-logo mb-3" height="60">
+                    <p class="text-white-50">Empowering lives through biblical teachings, practical financial education, and community transformation.</p>
+                    <div class="social-icons">
+                        <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h4 class="text-white">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+                    <h4 class="text-white">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Heartland, Texas</li>
+                        <li><i class="fas fa-phone"></i> +1 (469) 703-1453</li>
+                        <li><i class="fas fa-envelope"></i> [Email]</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white">Newsletter</h4>
+                    <p class="text-white-50">Subscribe to receive updates on events, resources, and ministry news.</p>
+                    <form class="newsletter-form">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email" aria-label="Your Email" required>
+                            <button class="btn btn-gold" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 text-white-50">&copy; 2025 Holistic Prosperity Ministry. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <ul class="footer-bottom-links">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="js/main.js"></script>
+    <!-- Events JavaScript -->
+    <script src="js/events.js"></script>
+</body>
+</html>
