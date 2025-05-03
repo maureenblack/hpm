@@ -16,8 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initStripeElements();
     }
     
-    // Initialize test data button
-    initTestDataButton();
+    // Test data functionality removed
 });
 
 /**
@@ -728,151 +727,11 @@ function initTestDataButton() {
     if (testDataButton) {
         testDataButton.addEventListener('click', function(e) {
             e.preventDefault();
-            fillTestData();
+            // Removed fillTestData() call
         });
     }
 }
 
-/**
- * Fill the form with test data for quick testing
- */
-function fillTestData() {
-    console.log('Filling form with test data...');
-        
-    // Ensure anonymous donation is unchecked
-    const anonymousCheckbox = document.getElementById('donateAnonymously');
-    if (anonymousCheckbox && anonymousCheckbox.checked) {
-        anonymousCheckbox.checked = false;
-        // Trigger the change event to show personal fields
-        anonymousCheckbox.dispatchEvent(new Event('change'));
-    }
-        
-    // Set donation amount ($50)
-    const amountOptions = document.querySelectorAll('.amount-option');
-    let $50Option = null;
-        
-    // Find the $50 option
-    amountOptions.forEach(option => {
-        if (option.getAttribute('data-amount') === '50') {
-            $50Option = option;
-        }
-    });
-        
-    // Click the $50 option if found, otherwise use custom amount
-    if ($50Option) {
-        $50Option.click();
-    } else {
-        const customAmountInput = document.getElementById('customAmount');
-        if (customAmountInput) {
-            customAmountInput.value = '50';
-            // Trigger input event to update any dependent elements
-            customAmountInput.dispatchEvent(new Event('input', { bubbles: true }));
-        }
-    }
-        
-    // Create a hidden amount field to ensure the amount is submitted
-    const donationForm = document.getElementById('donationForm');
-    if (donationForm) {
-        let hiddenAmount = document.getElementById('hidden_amount');
-        if (!hiddenAmount) {
-            hiddenAmount = document.createElement('input');
-            hiddenAmount.type = 'hidden';
-            hiddenAmount.id = 'hidden_amount';
-            hiddenAmount.name = 'amount';
-            donationForm.appendChild(hiddenAmount);
-        }
-        hiddenAmount.value = '50';
-    }
-        
-    // Set frequency to one-time
-    const oneTimeOption = document.querySelector('.frequency-option[data-frequency="one-time"]');
-    if (oneTimeOption) {
-        oneTimeOption.click();
-    } else {
-        // Fallback if the option element isn't found
-        const frequencyInput = document.getElementById('frequency');
-        if (frequencyInput) {
-            frequencyInput.value = 'one-time';
-            console.log('Frequency set to one-time (fallback)');
-        }
-    }
-        
-    // Set designation to "General Ministry Support"
-    const designationSelect = document.getElementById('designation');
-    if (designationSelect) {
-        // Find the general/where needed most option
-        for (let i = 0; i < designationSelect.options.length; i++) {
-            const option = designationSelect.options[i];
-            if (option.value === 'general' || option.text.toLowerCase().includes('needed most')) {
-                designationSelect.selectedIndex = i;
-                designationSelect.dispatchEvent(new Event('change', { bubbles: true }));
-                break;
-            }
-        }
-    }
-        
-    // Fill personal information
-    fillField('firstName', 'John');
-    fillField('lastName', 'Doe');
-    fillField('email', 'john.doe@example.com');
-    fillField('phone', '555-123-4567');
-        
-    // Add "Test Donation" to comments field
-    fillField('comments', 'Test Donation');
-        
-    // Select mobile money payment method
-    const mobileMoneyRadio = document.getElementById('mobile_money');
-    if (mobileMoneyRadio) {
-        mobileMoneyRadio.checked = true;
-        mobileMoneyRadio.dispatchEvent(new Event('change', { bubbles: true }));
-        
-        // Find and click the parent payment-method-option div to apply styling
-        const paymentOption = mobileMoneyRadio.closest('.payment-method-option');
-        if (paymentOption) {
-            paymentOption.click();
-        }
-        
-        // Add mobile money number to comments field
-        const commentsField = document.getElementById('comments');
-        if (commentsField) {
-            commentsField.value = 'Test Donation - Mobile Money Number: 670199687';
-            commentsField.dispatchEvent(new Event('input', { bubbles: true }));
-        }
-        
-        // Show a helpful message about the mobile money number
-        const paymentSection = document.querySelector('.payment-methods');
-        if (paymentSection) {
-            const mobileInfo = document.createElement('div');
-            mobileInfo.className = 'alert alert-info mt-3';
-            mobileInfo.innerHTML = '<strong>Mobile Money Test:</strong> Using number 670199687';
-            paymentSection.parentNode.insertBefore(mobileInfo, paymentSection.nextSibling);
-        }
-        
-        console.log('Mobile Money selected with number: 670199687');
-    }
-    
-    // Validate all fields to update UI state
-    const form = document.getElementById('donationForm');
-    if (form) {
-        const requiredFields = form.querySelectorAll('input[required], select[required]');
-        requiredFields.forEach(field => validateField(field));
-    }
-    
-    console.log('Test data filled successfully');
-}
+// Removed fillTestData() function
 
-/**
- * Helper function to fill a form field and trigger appropriate events
- */
-function fillField(id, value) {
-    const field = document.getElementById(id);
-    if (field) {
-        field.value = value;
-        // Trigger both input and change events to ensure all handlers are called
-        field.dispatchEvent(new Event('input', { bubbles: true }));
-        field.dispatchEvent(new Event('change', { bubbles: true }));
-        field.dispatchEvent(new Event('blur', { bubbles: true }));
-    } else {
-        console.log(`Field not found: ${id}`);
-    }
-}
+// Removed fillField() function

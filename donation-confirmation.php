@@ -208,7 +208,7 @@ try {
                             <a href="index.html" class="btn btn-primary mb-2">
                                 <i class="fas fa-home"></i> Return to Homepage
                             </a>
-                            <a href="donate.html" class="btn btn-outline-secondary mb-2">
+                            <a href="donate-form.php" class="btn btn-outline-secondary mb-2">
                                 <i class="fas fa-heart"></i> Make Another Donation
                             </a>
                         </div>
@@ -234,5 +234,37 @@ try {
     
     <!-- Custom JS -->
     <script src="js/main.js"></script>
+
+    <script>
+    // Mobile dropdown fix
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdownToggles = document.querySelectorAll('.navbar-nav .dropdown-toggle');
+        
+        // For mobile view
+        if (window.innerWidth < 992) {
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    if (window.innerWidth < 992) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const dropdownMenu = this.nextElementSibling;
+                        if (dropdownMenu) {
+                            dropdownMenu.classList.toggle('show');
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Handle resize events
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 992) {
+                document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+    });
+    </script>
 </body>
 </html>

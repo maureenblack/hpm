@@ -109,13 +109,34 @@ unset($_SESSION['success_message']);
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Stripe.js for secure payments -->
     <script src="https://js.stripe.com/v3/"></script>
+<style>
+    .payment-method-card {
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+    .payment-method-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .payment-method-card.selected {
+        border-color: #4B0082;
+        background-color: rgba(75, 0, 130, 0.05);
+    }
+    .mobile-money-instructions {
+        background-color: #f8f9fa;
+        border-left: 4px solid #4B0082;
+        padding: 15px;
+        margin: 20px 0;
+    }
+</style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="50">
+                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="60">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -151,19 +172,25 @@ unset($_SESSION['success_message']);
                     <li class="nav-item">
                         <a class="nav-link" href="events.html">Events</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="resources.html">Resources</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="get-involved.html">Get Involved</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="resources.html" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Resources
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                            <li><a class="dropdown-item" href="resources/events.html">Events</a></li>
+                            <li><a class="dropdown-item" href="resources/sermons.html">Sermons Archive</a></li>
+                            <li><a class="dropdown-item" href="resources/financial-literacy.html">Financial Literacy PDFs</a></li>
+                            <li><a class="dropdown-item" href="resources/devotionals.html">Devotionals</a></li>
+                            <li><a class="dropdown-item" href="resources/recommended-reading.html">Recommended Reading</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="donate.html" id="donateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="donate-form.php" id="donateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Donate
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="donateDropdown">
+                            <li><a class="dropdown-item" href="donate-form.php">Give Now</a></li>
                             <li><a class="dropdown-item" href="donate.html#giving-options">Ways to Give</a></li>
-                            <li><a class="dropdown-item" href="donate.html#donation-form">Give Now</a></li>
                             <li><a class="dropdown-item" href="donate.html#transparent-impact">Transparent Impact</a></li>
                             <li><a class="dropdown-item" href="donate.html#planned-giving">Planned Giving</a></li>
                         </ul>
@@ -183,12 +210,63 @@ unset($_SESSION['success_message']);
                     <p class="lead mb-4">Your generosity transforms lives through biblical prosperity principles and community impact.</p>
                     <div class="hero-buttons">
                         <a href="#giving-options" class="btn btn-primary btn-lg me-2 mb-2">Ways to Give</a>
-                        <a href="#donation-form" class="btn btn-gold btn-lg mb-2">Give Now</a>
+                        <a href="donate-form.php" class="btn btn-gold btn-lg mb-2">Give Now</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
+
+<!-- Payment Methods Section -->
+<section class="payment-methods-section py-4 bg-light rounded mb-4">
+    <div class="container">
+        <h3 class="text-center mb-4">Payment Methods</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <!-- Credit/Debit Card -->
+                    <div class="col">
+                        <div class="card h-100 payment-method-card" data-payment-method="credit_card">
+                            <div class="card-body text-center">
+                                <i class="fas fa-credit-card fa-3x mb-3 text-primary"></i>
+                                <h5 class="card-title">Credit/Debit Card</h5>
+                                <p class="card-text">Secure payment via Stripe. All major cards accepted.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Money -->
+                    <div class="col">
+                        <div class="card h-100 payment-method-card" data-payment-method="mobile_money">
+                            <div class="card-body text-center">
+                                <i class="fas fa-mobile-alt fa-3x mb-3 text-success"></i>
+                                <h5 class="card-title">Mobile Money</h5>
+                                <p class="card-text">Send to Kort Godlove Fai (652444097) with WhatsApp confirmation.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bank Transfer -->
+                    <div class="col">
+                        <div class="card h-100 payment-method-card" data-payment-method="bank_transfer">
+                            <div class="card-body text-center">
+                                <i class="fas fa-university fa-3x mb-3 text-warning"></i>
+                                <h5 class="card-title">Bank Transfer</h5>
+                                <p class="card-text">Direct bank transfer to our ministry account.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <p class="mb-0"><strong>Note:</strong> Select your preferred payment method in the form below.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
 
     <!-- Impact Statistics Section -->
     <section class="impact-stats py-5">
@@ -305,7 +383,7 @@ unset($_SESSION['success_message']);
                             <li>Tax-deductible</li>
                             <li>Impact updates</li>
                         </ul>
-                        <a href="#donation-form" class="btn btn-primary">Give Now</a>
+                        <a href="donate-form.php" class="btn btn-primary">Give Now</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -382,14 +460,8 @@ unset($_SESSION['success_message']);
                             </div>
                         <?php endif; ?>
                         
-                        <!-- Test Data Button -->
-                        <div class="test-data-container mb-4">
-                            <button type="button" id="fillTestDataBtn" class="btn btn-warning w-100 py-2">
-                                <i class="fas fa-vial me-2"></i> FILL TEST DATA (For Testing Only)
-                            </button>
-                        </div>
                         
-                        <form id="donationForm" class="needs-validation" action="test-process-donation.php" method="post" novalidate data-stripe-key="<?php echo getenv('STRIPE_PUBLISHABLE_KEY'); ?>">
+                        <form id="donationForm" class="needs-validation" action="process.php" method="post" novalidate data-stripe-key="<?php echo getenv('STRIPE_PUBLISHABLE_KEY'); ?>">
                             <!-- CSRF Token for security -->
                             <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                             <!-- Amount Selection -->
@@ -757,7 +829,7 @@ unset($_SESSION['success_message']);
             </div>
             <div class="text-center mt-5">
                 <p>For more information about planned giving options, please contact our Stewardship Team:</p>
-                <p><strong>Email:</strong> <a href="mailto:stewardship@holisticprosperityministry.org">stewardship@holisticprosperityministry.org</a> | <strong>Phone:</strong> <a href="tel:+14697031453">+1 (469) 703-1453</a></p>
+                <p><strong>Email:</strong> <a href="mailto:hello@holisticprosperityministry.org">hello@holisticprosperityministry.org</a> | <strong>Phone:</strong> <a href="tel:+14697031453">+1 (469) 703-1453</a></p>
             </div>
         </div>
     </section>
@@ -836,5 +908,84 @@ unset($_SESSION['success_message']);
     <p>Please wait while we process your generous contribution...</p>
 </div>
 
+
+    <script>
+    // Mobile dropdown fix
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdownToggles = document.querySelectorAll('.navbar-nav .dropdown-toggle');
+        
+        // For mobile view
+        if (window.innerWidth < 992) {
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    if (window.innerWidth < 992) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const dropdownMenu = this.nextElementSibling;
+                        if (dropdownMenu) {
+                            dropdownMenu.classList.toggle('show');
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Handle resize events
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 992) {
+                document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+    });
+    </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Payment method card selection
+    const paymentMethodCards = document.querySelectorAll('.payment-method-card');
+    const paymentMethodRadios = document.querySelectorAll('input[name="payment_method"]');
+    
+    // Initialize cards based on selected payment method
+    function updateSelectedCard() {
+        const selectedMethod = document.querySelector('input[name="payment_method"]:checked').value;
+        
+        paymentMethodCards.forEach(card => {
+            if (card.dataset.paymentMethod === selectedMethod) {
+                card.classList.add('selected');
+            } else {
+                card.classList.remove('selected');
+            }
+        });
+    }
+    
+    // Set initial state
+    updateSelectedCard();
+    
+    // Add click event to cards
+    paymentMethodCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const method = this.dataset.paymentMethod;
+            
+            // Find and select the corresponding radio button
+            paymentMethodRadios.forEach(radio => {
+                if (radio.value === method) {
+                    radio.checked = true;
+                    // Trigger change event to update form
+                    radio.dispatchEvent(new Event('change'));
+                }
+            });
+            
+            // Update card selection
+            updateSelectedCard();
+        });
+    });
+    
+    // Listen for changes on radio buttons
+    paymentMethodRadios.forEach(radio => {
+        radio.addEventListener('change', updateSelectedCard);
+    });
+});
+</script>
 </body>
 </html>

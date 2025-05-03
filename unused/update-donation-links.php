@@ -23,7 +23,7 @@ $patterns = [
     
     // Dropdown menu links
     '~<li><a class="dropdown-item" href="donate\.html#donation-form">Give Now</a></li>\s+<li><a class="dropdown-item" href="donate\.html#giving-options">~' => 
-    '<li><a class="dropdown-item" href="donate-form.php">Give Now</a></li>' . PHP_EOL . '                            <li><a class="dropdown-item" href="donate.html#giving-options">',
+    '<li><a class="dropdown-item" href="donate-form.php">Give Now</a></li>' . PHP_EOL . '                            <li><a class="dropdown-item" href="donate-form.php">',
     
     // Direct "Give Now" buttons
     '~<a href="donate\.html#donation-form" class="btn btn-(?:gold|primary)(?:\s+\w+)*">Give Now</a>~' => 

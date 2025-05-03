@@ -1,9 +1,9 @@
 <?php
 /**
- * Test Process Donation
+ * Process Donation
  * Holistic Prosperity Ministry Payment System
  * 
- * This is a simplified version for testing the payment form with improved payment flows
+ * This script processes donation form submissions
  */
 
 // Initialize session
@@ -23,8 +23,8 @@ if (!isset($_POST['csrf_token']) || !verifyCSRFToken($_POST['csrf_token'])) {
 // Check if form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Debug: Log POST data
-        error_log("POST data: " . print_r($_POST, true));
+        // Log POST data
+        error_log("Donation form submitted: " . print_r($_POST, true));
         
         // Check if this is an anonymous donation
         $isAnonymous = isset($_POST['donate_anonymously']) && $_POST['donate_anonymously'] == '1';
@@ -50,17 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $donationType = sanitizeInput($_POST['donation_type'] ?? 'ministry');
         $donationPurpose = sanitizeInput($_POST['designation'] ?? $_POST['donation_purpose'] ?? '');
         
-        // Debug: Log processed data
-        error_log("Processed data: Anonymous=$isAnonymous, Name=$donorName, Email=$donorEmail, Amount=$amount, Method=$paymentMethod, Frequency=$frequency");
-        
-        // Special handling for test data
-        $isTestMode = (strpos(strtolower($_POST['comments'] ?? ''), 'test donation') !== false);
-        
         // Validate required fields with better error messages
         $errors = [];
         if (!$isAnonymous && empty($donorName)) $errors[] = "Donor name is required unless donating anonymously";
         if (!$isAnonymous && empty($donorEmail)) $errors[] = "Email address is required unless donating anonymously";
-        if ($amount <= 0 && !$isTestMode) $errors[] = "Valid donation amount is required";
+        if ($amount <= 0) $errors[] = "Valid donation amount is required";
         if (empty($paymentMethod)) $errors[] = "Payment method is required";
         
         // If validation errors, redirect back with error message

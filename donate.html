@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="50">
+                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="70">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -33,48 +33,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            About
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                            <li><a class="dropdown-item" href="about.html#our-story">Our Story</a></li>
-                            <li><a class="dropdown-item" href="about.html#leadership-team">Leadership Team</a></li>
-                            <li><a class="dropdown-item" href="about.html#core-values">Core Values</a></li>
-                            <li><a class="dropdown-item" href="about.html#faq">FAQ</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="ministries.html" id="ministryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ministries
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="ministryDropdown">
-                            <li><a class="dropdown-item" href="ministries/cryptstock.html">CrypStock Prosperity Academy</a></li>
-                            <li><a class="dropdown-item" href="ministries/faith-worship.html">Faith & Worship Ministry</a></li>
-                            <li><a class="dropdown-item" href="ministries/community.html">Community Impact Projects</a></li>
-                            <li><a class="dropdown-item" href="ministries/love-in-action.html">Love in Action Fellowship</a></li>
-                            <li><a class="dropdown-item" href="ministries/prosperity-counseling.html">Prosperity Counseling</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="events.html">Events</a>
+                        <a class="nav-link" href="ministries.html">Ministries</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="resources.html">Resources</a>
+                        <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="get-involved.html">Get Involved</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="donate-form.php" id="donateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Donate
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="donateDropdown">
-                            <li><a class="dropdown-item" href="donate-form.php">Give Now</a></li>
-                            <li><a class="dropdown-item" href="donate.html#giving-options">Ways to Give</a></li>
-                            <li><a class="dropdown-item" href="donate.html#transparent-impact">Transparent Impact</a></li>
-                            <li><a class="dropdown-item" href="donate.html#planned-giving">Planned Giving</a></li>
-                        </ul>
+                        <a class="nav-link" href="donate-form.php">Donate</a>
                     </li>
                 </ul>
             </div>
@@ -229,7 +198,7 @@
                             <li>Community impact</li>
                             <li>Spiritual growth</li>
                         </ul>
-                        <a href="#donation-form" class="btn btn-primary">Give Tithe</a>
+                        <a href="donate-form.php" class="btn btn-primary">Give Tithe</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -537,7 +506,7 @@
             </div>
             <div class="text-center mt-5">
                 <p>For more information about planned giving options, please contact our Stewardship Team:</p>
-                <p><strong>Email:</strong> <a href="mailto:stewardship@holisticprosperityministry.org">stewardship@holisticprosperityministry.org</a> | <strong>Phone:</strong> <a href="tel:+14697031453">+1 (469) 703-1453</a></p>
+                <p><strong>Email:</strong> <a href="mailto:hello@holisticprosperityministry.org">hello@holisticprosperityministry.org</a> | <strong>Phone:</strong> <a href="tel:+14697031453">+1 (469) 703-1453</a></p>
             </div>
         </div>
     </section>
@@ -610,5 +579,114 @@
     <script src="js/main.js"></script>
     <script src="js/responsive.js"></script>
     <script src="js/donate.js"></script>
+
+    <script>
+    // Mobile dropdown fix
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdownToggles = document.querySelectorAll('.navbar-nav .dropdown-toggle');
+        
+        // For mobile view
+        if (window.innerWidth < 992) {
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    if (window.innerWidth < 992) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const dropdownMenu = this.nextElementSibling;
+                        if (dropdownMenu) {
+                            dropdownMenu.classList.toggle('show');
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Handle resize events
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 992) {
+                document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+    });
+    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fix mobile dropdown functionality
+        const dropdownToggles = document.querySelectorAll('.navbar-nav .dropdown-toggle');
+        
+        dropdownToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                if (window.innerWidth < 992) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const parent = this.parentElement;
+                    const dropdown = parent.querySelector('.dropdown-menu');
+                    
+                    // Toggle the dropdown
+                    if (dropdown.classList.contains('show')) {
+                        dropdown.classList.remove('show');
+                    } else {
+                        // Close other open dropdowns
+                        document.querySelectorAll('.navbar-nav .dropdown-menu.show').forEach(menu => {
+                            if (menu !== dropdown) menu.classList.remove('show');
+                        });
+                        dropdown.classList.add('show');
+                    }
+                }
+            });
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.navbar-nav')) {
+                document.querySelectorAll('.navbar-nav .dropdown-menu.show').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+    });
+</script>
+<script>
+// Mobile menu dropdown fix
+document.addEventListener('DOMContentLoaded', function() {
+    // Fix mobile dropdown functionality
+    const dropdownToggles = document.querySelectorAll('.navbar-nav .dropdown-toggle');
+    
+    dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            if (window.innerWidth < 992) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const parent = this.parentElement;
+                const dropdown = parent.querySelector('.dropdown-menu');
+                
+                // Toggle the dropdown
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                } else {
+                    // Close other open dropdowns
+                    document.querySelectorAll('.navbar-nav .dropdown-menu.show').forEach(menu => {
+                        if (menu !== dropdown) menu.classList.remove('show');
+                    });
+                    dropdown.classList.add('show');
+                }
+            }
+        });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.navbar-nav')) {
+            document.querySelectorAll('.navbar-nav .dropdown-menu.show').forEach(menu => {
+                menu.classList.remove('show');
+            });
+        }
+    });
+});
+</script>
 </body>
 </html>
