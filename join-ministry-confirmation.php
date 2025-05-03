@@ -130,41 +130,12 @@ $ministryName = isset($ministryNames[$ministry]) ? $ministryNames[$ministry] : '
     </section>
 
     <!-- Footer -->
-    <footer class="footer bg-dark text-white py-5">
+    <footer class="footer py-4">
         <div class="container">
+            <div class="footer-border-top"></div>
             <div class="row">
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <h5>Holistic Prosperity Ministry</h5>
-                    <p>Bridging Faith and Financial Empowerment</p>
-                    <div class="social-icons mt-3">
-                        <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="me-2"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <h5>Contact Us</h5>
-                    <address>
-                        <p><i class="fas fa-map-marker-alt me-2"></i> 123 Prosperity Lane, Yaoundé</p>
-                        <p><i class="fas fa-phone me-2"></i> +237 123 456 789</p>
-                        <p><i class="fas fa-envelope me-2"></i> hello@holisticprosperityministry.org</p>
-                    </address>
-                </div>
-                <div class="col-md-4">
-                    <h5>Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html" class="text-white">Home</a></li>
-                        <li><a href="about.html" class="text-white">About</a></li>
-                        <li><a href="ministries.html" class="text-white">Ministries</a></li>
-                        <li><a href="contact.html" class="text-white">Contact</a></li>
-                        <li><a href="donate-form.php" class="text-white">Donate</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row mt-4">
-                <div class="col-12 text-center">
-                    <p class="mb-0">&copy; <?php echo date('Y'); ?> Holistic Prosperity Ministry. All rights reserved.</p>
+                <div class="col-12 text-center py-3">
+                    <p class="mb-0 text-white-50">&copy; 2025 Holistic Prosperity Ministry | Faith in Action, Prosperity in Motion</p>
                 </div>
             </div>
         </div>

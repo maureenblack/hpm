@@ -444,81 +444,139 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        if (paymentMethod === 'credit_card') {
-            // Create payment intent with Stripe
-            try {
-                // Show loading indicator
-                const payBtn = document.getElementById('payment-button');
-                if (payBtn) {
-                    payBtn.disabled = true;
-                    payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-                }
-                
-                const errorElement = document.getElementById('card-errors');
-                errorElement.textContent = '';
-                
-                const response = await fetch('create-payment-intent.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        amount: totalAmount,
-                        currency: 'usd',
-                        payment_method_types: ['card'],
-                        description: 'Donation to Holistic Prosperity Ministry',
-                    }),
-                });
-                
-                // Check if response is ok
-                if (!response.ok) {
-                    let errorMsg = 'Server error: ' + response.status;
-                    try {
-                        const errorData = await response.json();
-                        if (errorData && errorData.error) {
-                            errorMsg = errorData.error;
-                        }
-                    } catch (jsonError) {
-                        // If JSON parsing fails, use the status text
-                        errorMsg = 'Server error: ' + response.statusText;
-                    }
-                    throw new Error(errorMsg);
-                }
-                
-                // Parse JSON response
-                let data;
-                try {
-                    data = await response.json();
-                } catch (jsonError) {
-                    throw new Error('Invalid response from server. Please try again.');
-                }
-                
-                if (data.error) {
-                    throw new Error(typeof data.error === 'string' ? data.error : 'Payment processing error');
-                }
-                
-                // Store the payment intent ID
-                document.getElementById('payment_intent_id').value = data.id;
-                stripePaymentIntent = data;
-                
-                // Move to confirmation step
-                goToNextStep();
-                
-            } catch (error) {
-                const errorElement = document.getElementById('card-errors');
-                errorElement.textContent = error.message || 'An error occurred during payment processing';
-                console.error('Payment error:', error);
-            } finally {
-                // Reset button state
-                const payBtn = document.getElementById('payment-button');
-                if (payBtn) {
-                    payBtn.disabled = false;
-                    payBtn.innerHTML = 'Continue to Confirmation';
-                }
+        // Show processing overlay
+        const overlay = document.getElementById('paymentProcessingOverlay');
+        if (overlay) {
+            overlay.style.display = 'flex';
+        }
+        
+        // Handle different payment methods
+        try {
+            switch(paymentMethod) {
+                case 'credit_card':
+                    await processCreditCardPayment();
+                    break;
+                    
+                case 'mobile_money':
+                    // Keep mobile money flow untouched
+                    goToNextStep();
+                    break;
+                    
+                case 'paypal':
+                    await processPayPalPayment();
+                    break;
+                    
+                case 'zelle':
+                    await processZellePayment();
+                    break;
+                    
+                case 'cashapp':
+                    await processCashAppPayment();
+                    break;
+                    
+                case 'bank_transfer':
+                    await processBankTransferPayment();
+                    break;
+                    
+                default:
+                    // For other payment methods, go to confirmation step
+                    goToNextStep();
             }
-        } else {
-            // For other payment methods, just go to confirmation step
+        } catch (error) {
+            console.error('Payment processing error:', error);
+            
+            // Display error message
+            const errorElement = document.getElementById('payment-errors') || document.getElementById('card-errors');
+            if (errorElement) {
+                errorElement.textContent = error.message || 'An error occurred during payment processing';
+                errorElement.style.display = 'block';
+            }
+            
+            // Hide processing overlay
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+        }
+    }
+    
+    // Process credit card payment with Stripe
+    async function processCreditCardPayment() {
+        // Show loading indicator
+        const payBtn = document.getElementById('payment-button');
+        if (payBtn) {
+            payBtn.disabled = true;
+            payBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        }
+        
+        const errorElement = document.getElementById('card-errors');
+        if (errorElement) {
+            errorElement.textContent = '';
+        }
+        
+        try {
+            // Create payment intent with Stripe
+            const response = await fetch('create-payment-intent.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    amount: totalAmount,
+                    currency: 'usd',
+                    payment_method_types: ['card'],
+                    description: 'Donation to Holistic Prosperity Ministry',
+                }),
+            });
+            
+            // Check if response is ok
+            if (!response.ok) {
+                let errorMsg = 'Server error: ' + response.status;
+                try {
+                    const errorData = await response.json();
+                    if (errorData && errorData.error) {
+                        errorMsg = errorData.error;
+                    }
+                } catch (jsonError) {
+                    // If JSON parsing fails, use the status text
+                    errorMsg = 'Server error: ' + response.statusText;
+                }
+                throw new Error(errorMsg);
+            }
+            
+            // Parse JSON response
+            let data;
+            try {
+                data = await response.json();
+            } catch (jsonError) {
+                throw new Error('Invalid response from server. Please try again.');
+            }
+            
+            if (data.error) {
+                throw new Error(typeof data.error === 'string' ? data.error : 'Payment processing error');
+            }
+            
+            // Store the payment intent ID
+            const paymentIntentInput = document.getElementById('payment_intent_id');
+            if (paymentIntentInput) {
+                paymentIntentInput.value = data.id;
+            }
+            stripePaymentIntent = data;
+            
+            // Move to confirmation step
             goToNextStep();
+            
+        } catch (error) {
+            if (errorElement) {
+                errorElement.textContent = error.message || 'An error occurred during payment processing';
+            }
+            console.error('Stripe payment error:', error);
+            throw error; // Re-throw to be caught by the main processPayment function
+        } finally {
+            // Reset button state
+            if (payBtn) {
+                payBtn.disabled = false;
+                payBtn.innerHTML = 'Continue to Confirmation';
+            }
         }
     }
     

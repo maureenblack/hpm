@@ -214,7 +214,7 @@ $donation = $_SESSION['donation'];
                             <li><a href="ministries.html">Ministries</a></li>
                             <li><a href="events.html">Events</a></li>
                             <li><a href="resources.html">Resources</a></li>
-                            <li><a href="get-involved.html">Get Involved</a></li>
+                            <li><a href="ministries.html">Get Involved</a></li>
                         </ul>
                     </div>
                 </div>

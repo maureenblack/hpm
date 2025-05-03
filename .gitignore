@@ -1,0 +1,70 @@
+# Holistic Prosperity Ministry Website .gitignore
+
+# Environment files
+.env
+config.php
+
+# System files
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Dependency directories
+node_modules/
+vendor/
+bower_components/
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.min.js
+*.min.css
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Cache files
+.sass-cache/
+.phpunit.result.cache
+
+# Sensitive or private information
+/stripe-keys.php
+/credentials.php
+/secrets.php
+
+# Temporary files
+/tmp/
+/temp/
+
+# Uploaded files (if not tracked)
+/uploads/
+
+# Compiled assets
+/dist/
+/build/

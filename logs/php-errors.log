@@ -1,79 +1,7 @@
-[03-May-2025 05:47:12 America/Chicago] PHP Warning:  require_once(/Users/maureen/Desktop/hpm/vendor/autoload.php): failed to open stream: No such file or directory in /Users/maureen/Desktop/hpm/includes/stripe-handler.php on line 48
-[03-May-2025 05:47:12 America/Chicago] PHP Fatal error:  require_once(): Failed opening required '/Users/maureen/Desktop/hpm/vendor/autoload.php' (include_path='.:') in /Users/maureen/Desktop/hpm/includes/stripe-handler.php on line 48
-[03-May-2025 05:49:25 America/Chicago] Donation Processing Error: Invalid donation amount. Minimum donation is $5.00
-[03-May-2025 05:50:40 America/Chicago] Donation Processing Error: Invalid donation amount. Minimum donation is $5.00
-[03-May-2025 05:51:24 America/Chicago] Donation Processing Error: Invalid donation amount. Minimum donation is $5.00
-[03-May-2025 06:15:33 America/Chicago] Donation Processing Error: Invalid donation amount. Minimum donation is $5.00
-[03-May-2025 06:16:05 America/Chicago] Mobile money processing error: Please enter a valid donation amount.
-[03-May-2025 06:16:20 America/Chicago] Mobile money processing error: Please enter a valid donation amount.
-[03-May-2025 06:53:15 America/Chicago] Mobile money processing error: SQLSTATE[HY000]: General error: 1 no such table: transactions
-[03-May-2025 06:55:41 America/Chicago] Mobile money processing error: SQLSTATE[HY000]: General error: 1 no such table: transactions
-[03-May-2025 06:56:17 America/Chicago] PHP Warning:  require_once(/Users/maureen/Desktop/hpm/vendor/autoload.php): failed to open stream: No such file or directory in /Users/maureen/Desktop/hpm/includes/stripe-handler.php on line 48
-[03-May-2025 06:56:17 America/Chicago] PHP Fatal error:  require_once(): Failed opening required '/Users/maureen/Desktop/hpm/vendor/autoload.php' (include_path='.:') in /Users/maureen/Desktop/hpm/includes/stripe-handler.php on line 48
-[03-May-2025 06:56:23 America/Chicago] Mobile money processing error: SQLSTATE[HY000]: General error: 1 no such table: transactions
-[03-May-2025 07:03:29 America/Chicago] Donation Processing Error: Invalid donation amount. Minimum donation is $5.00
-[03-May-2025 07:32:10 America/Chicago] POST data: Array
+[03-May-2025 15:46:53 America/Chicago] Donation form submitted: Array
 (
     [csrf_token] => 6b6528e3e623e67370f8c4a349b8c93d26b087b0c571639fd75b63977717c828
-    [amount] => 50
-    [custom_amount] => 
-    [frequency] => one-time
-    [designation] => general
-    [firstName] => John
-    [lastName] => Doe
-    [email] => john.doe@example.com
-    [phone] => 555-123-4567
-    [tribute_type] => memory
-    [tribute_name] => 
-    [notification_address] => 
-    [comments] => Test Donation - Mobile Money Number: 670199687
-    [payment_method] => mobile_money
-)
-
-[03-May-2025 07:32:10 America/Chicago] Processed data: Anonymous=, Name=John Doe, Email=john.doe@example.com, Amount=50, Method=mobile_money, Frequency=one-time
-[03-May-2025 07:32:10 America/Chicago] Mobile Money Payment Error: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: donations.donation_type
-[03-May-2025 07:36:09 America/Chicago] Donation form submitted: Array
-(
-    [csrf_token] => 6b6528e3e623e67370f8c4a349b8c93d26b087b0c571639fd75b63977717c828
-    [amount] => 100
-    [custom_amount] => 
-    [frequency] => one-time
-    [designation] => cryptstock
-    [donate_anonymously] => 1
-    [firstName] => 
-    [lastName] => 
-    [email] => 
-    [phone] => 
-    [tribute_type] => memory
-    [tribute_name] => 
-    [notification_address] => 
-    [comments] => 
-    [payment_method] => mobile_money
-)
-
-[03-May-2025 07:36:10 America/Chicago] Mobile Money Payment Error: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: donations.donation_type
-[03-May-2025 07:37:35 America/Chicago] Donation form submitted: Array
-(
-    [csrf_token] => 6b6528e3e623e67370f8c4a349b8c93d26b087b0c571639fd75b63977717c828
-    [amount] => 250
-    [custom_amount] => 
-    [frequency] => one-time
-    [designation] => community
-    [firstName] => 
-    [lastName] => 
-    [email] => 
-    [phone] => 
-    [tribute_type] => memory
-    [tribute_name] => 
-    [notification_address] => 
-    [comments] => 
-    [payment_method] => mobile_money
-)
-
-[03-May-2025 07:38:04 America/Chicago] Donation form submitted: Array
-(
-    [csrf_token] => 6b6528e3e623e67370f8c4a349b8c93d26b087b0c571639fd75b63977717c828
-    [amount] => 100
+    [amount] => 500
     [custom_amount] => 
     [frequency] => monthly
     [designation] => community
@@ -89,4 +17,4 @@
     [payment_method] => mobile_money
 )
 
-[03-May-2025 07:38:04 America/Chicago] Mobile Money Payment Error: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: donations.donation_type
+[03-May-2025 15:46:53 America/Chicago] Mobile Money Payment Error: SQLSTATE[23000]: Integrity constraint violation: 19 NOT NULL constraint failed: donations.donation_type

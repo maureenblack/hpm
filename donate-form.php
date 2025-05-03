@@ -136,7 +136,7 @@ unset($_SESSION['success_message']);
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="60">
+                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="70">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -146,54 +146,17 @@ unset($_SESSION['success_message']);
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            About
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                            <li><a class="dropdown-item" href="about.html#our-story">Our Story</a></li>
-                            <li><a class="dropdown-item" href="about.html#leadership-team">Leadership Team</a></li>
-                            <li><a class="dropdown-item" href="about.html#core-values">Core Values</a></li>
-                            <li><a class="dropdown-item" href="about.html#faq">FAQ</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="ministries.html" id="ministryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ministries
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="ministryDropdown">
-                            <li><a class="dropdown-item" href="ministries/cryptstock.html">CrypStock Prosperity Academy</a></li>
-                            <li><a class="dropdown-item" href="ministries/faith-worship.html">Faith & Worship Ministry</a></li>
-                            <li><a class="dropdown-item" href="ministries/community.html">Community Impact Projects</a></li>
-                            <li><a class="dropdown-item" href="ministries/love-in-action.html">Love in Action Fellowship</a></li>
-                            <li><a class="dropdown-item" href="ministries/prosperity-counseling.html">Prosperity Counseling</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="events.html">Events</a>
+                        <a class="nav-link" href="ministries.html">Ministries</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="resources.html" id="resourcesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Resources
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
-                            <li><a class="dropdown-item" href="resources/events.html">Events</a></li>
-                            <li><a class="dropdown-item" href="resources/sermons.html">Sermons Archive</a></li>
-                            <li><a class="dropdown-item" href="resources/financial-literacy.html">Financial Literacy PDFs</a></li>
-                            <li><a class="dropdown-item" href="resources/devotionals.html">Devotionals</a></li>
-                            <li><a class="dropdown-item" href="resources/recommended-reading.html">Recommended Reading</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="donate-form.php" id="donateDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Donate
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="donateDropdown">
-                            <li><a class="dropdown-item" href="donate-form.php">Give Now</a></li>
-                            <li><a class="dropdown-item" href="donate.html#giving-options">Ways to Give</a></li>
-                            <li><a class="dropdown-item" href="donate.html#transparent-impact">Transparent Impact</a></li>
-                            <li><a class="dropdown-item" href="donate.html#planned-giving">Planned Giving</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="donate-form.php">Donate</a>
                     </li>
                 </ul>
             </div>
@@ -209,62 +172,15 @@ unset($_SESSION['success_message']);
                     <h1 class="display-4 fw-bold mb-3">Empower change. Plant a seed.</h1>
                     <p class="lead mb-4">Your generosity transforms lives through biblical prosperity principles and community impact.</p>
                     <div class="hero-buttons">
-                        <a href="#giving-options" class="btn btn-primary btn-lg me-2 mb-2">Ways to Give</a>
-                        <a href="donate-form.php" class="btn btn-gold btn-lg mb-2">Give Now</a>
+                        <a href="#giving-options" class="btn btn-primary btn-lg me-2 mb-2" aria-label="View donation options">Ways to Give</a>
+                        <a href="#donation-form" class="btn btn-gold btn-lg mb-2" aria-label="Donate to Holistic Prosperity Ministry">Give Now</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-<!-- Payment Methods Section -->
-<section class="payment-methods-section py-4 bg-light rounded mb-4">
-    <div class="container">
-        <h3 class="text-center mb-4">Payment Methods</h3>
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <!-- Credit/Debit Card -->
-                    <div class="col">
-                        <div class="card h-100 payment-method-card" data-payment-method="credit_card">
-                            <div class="card-body text-center">
-                                <i class="fas fa-credit-card fa-3x mb-3 text-primary"></i>
-                                <h5 class="card-title">Credit/Debit Card</h5>
-                                <p class="card-text">Secure payment via Stripe. All major cards accepted.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Mobile Money -->
-                    <div class="col">
-                        <div class="card h-100 payment-method-card" data-payment-method="mobile_money">
-                            <div class="card-body text-center">
-                                <i class="fas fa-mobile-alt fa-3x mb-3 text-success"></i>
-                                <h5 class="card-title">Mobile Money</h5>
-                                <p class="card-text">Send to Kort Godlove Fai (652444097) with WhatsApp confirmation.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Bank Transfer -->
-                    <div class="col">
-                        <div class="card h-100 payment-method-card" data-payment-method="bank_transfer">
-                            <div class="card-body text-center">
-                                <i class="fas fa-university fa-3x mb-3 text-warning"></i>
-                                <h5 class="card-title">Bank Transfer</h5>
-                                <p class="card-text">Direct bank transfer to our ministry account.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mt-4 text-center">
-                    <p class="mb-0"><strong>Note:</strong> Select your preferred payment method in the form below.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- Payment Methods Section Removed -->
 
 
 
@@ -383,7 +299,7 @@ unset($_SESSION['success_message']);
                             <li>Tax-deductible</li>
                             <li>Impact updates</li>
                         </ul>
-                        <a href="donate-form.php" class="btn btn-primary">Give Now</a>
+                        <a href="#donation-form" class="btn btn-primary" aria-label="Donate to Holistic Prosperity Ministry">Give Now</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -835,56 +751,12 @@ unset($_SESSION['success_message']);
     </section>
 
     <!-- Footer -->
-    <footer class="footer py-5">
+    <footer class="footer py-4">
         <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="footer-about">
-                        <p>Empowering individuals and communities through biblical prosperity principles, financial literacy, and faith-based community development.</p>
-                        <div class="social-links mt-3">
-                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <h5 class="footer-heading">Quick Links</h5>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="ministries.html">Ministries</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="resources.html">Resources</a></li>
-                        <li><a href="get-involved.html">Get Involved</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <h5 class="footer-heading">Our Ministries</h5>
-                    <ul class="footer-links">
-                        <li><a href="ministries/cryptstock.html">CrypStock Academy</a></li>
-                        <li><a href="ministries/faith-worship.html">Faith & Worship</a></li>
-                        <li><a href="ministries/community.html">Community Impact</a></li>
-                        <li><a href="ministries/love-in-action.html">Love in Action</a></li>
-                        <li><a href="ministries/prosperity-counseling.html">Prosperity Counseling</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <h5 class="footer-heading">Contact Us</h5>
-                    <ul class="footer-contact">
-                        <li><i class="fas fa-map-marker-alt"></i> Heartland, Texas</li>
-                        <li><i class="fas fa-phone"></i> <a href="tel:+14697031453">+1 (469) 703-1453</a></li>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:hello@holisticprosperityministry.org">hello@holisticprosperityministry.org</a></li>
-                    </ul>
-                </div>
-            </div>
-            <hr class="footer-divider">
-            <div class="footer-bottom">
-                <p class="copyright">© 2025 Holistic Prosperity Ministry. All rights reserved.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+            <div class="footer-border-top"></div>
+            <div class="row">
+                <div class="col-12 text-center py-3">
+                    <p class="mb-0 text-white-50">&copy; 2025 Holistic Prosperity Ministry | Faith in Action, Prosperity in Motion</p>
                 </div>
             </div>
         </div>
@@ -901,6 +773,8 @@ unset($_SESSION['success_message']);
     <script src="js/main.js"></script>
     <script src="js/responsive.js"></script>
     <script src="js/donate.js"></script>
+    <script src="js/payment-fix.js"></script>
+    <script src="js/payment-methods.js"></script>
 <!-- Payment Processing Overlay -->
 <div class="payment-processing-overlay" id="paymentProcessingOverlay">
     <div class="spinner"></div>
@@ -908,59 +782,30 @@ unset($_SESSION['success_message']);
     <p>Please wait while we process your generous contribution...</p>
 </div>
 
-
     <script>
-    // Mobile dropdown fix
-    document.addEventListener('DOMContentLoaded', function() {
-        const dropdownToggles = document.querySelectorAll('.navbar-nav .dropdown-toggle');
         
-        // For mobile view
-        if (window.innerWidth < 992) {
-            dropdownToggles.forEach(toggle => {
-                toggle.addEventListener('click', function(e) {
-                    if (window.innerWidth < 992) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const dropdownMenu = this.nextElementSibling;
-                        if (dropdownMenu) {
-                            dropdownMenu.classList.toggle('show');
-                        }
+        // Payment method card selection
+        const paymentMethodCards = document.querySelectorAll('.payment-method-card');
+        const paymentMethodRadios = document.querySelectorAll('input[name="payment_method"]');
+        
+        // Initialize cards based on selected payment method
+        function updateSelectedCard() {
+            const selectedMethod = document.querySelector('input[name="payment_method"]:checked');
+            if (selectedMethod) {
+                const value = selectedMethod.value;
+                
+                paymentMethodCards.forEach(card => {
+                    if (card.dataset.paymentMethod === value) {
+                        card.classList.add('selected');
+                    } else {
+                        card.classList.remove('selected');
                     }
                 });
-            });
+            }
         }
         
-        // Handle resize events
-        window.addEventListener('resize', function() {
-            if (window.innerWidth >= 992) {
-                document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
-                    menu.classList.remove('show');
-                });
-            }
-        });
-    });
-    </script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Payment method card selection
-    const paymentMethodCards = document.querySelectorAll('.payment-method-card');
-    const paymentMethodRadios = document.querySelectorAll('input[name="payment_method"]');
-    
-    // Initialize cards based on selected payment method
-    function updateSelectedCard() {
-        const selectedMethod = document.querySelector('input[name="payment_method"]:checked').value;
-        
-        paymentMethodCards.forEach(card => {
-            if (card.dataset.paymentMethod === selectedMethod) {
-                card.classList.add('selected');
-            } else {
-                card.classList.remove('selected');
-            }
-        });
-    }
-    
-    // Set initial state
-    updateSelectedCard();
+        // Set initial state
+        updateSelectedCard();
     
     // Add click event to cards
     paymentMethodCards.forEach(card => {

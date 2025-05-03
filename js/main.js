@@ -4,6 +4,66 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Fix for mobile dropdown menus
+    const fixMobileDropdowns = function() {
+        // Get all dropdown toggles in the navigation
+        const dropdownToggles = document.querySelectorAll('.navbar-nav .dropdown-toggle');
+        
+        // Fix for Bootstrap 5 mobile navigation dropdowns
+        dropdownToggles.forEach(toggle => {
+            // Remove any existing click handlers by cloning and replacing
+            const newToggle = toggle.cloneNode(true);
+            toggle.parentNode.replaceChild(newToggle, toggle);
+            
+            // Add our custom click handler
+            newToggle.addEventListener('click', function(e) {
+                // Only apply custom behavior on mobile
+                if (window.innerWidth < 992) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Get the dropdown menu
+                    const dropdownMenu = this.nextElementSibling;
+                    
+                    // Toggle the dropdown menu
+                    if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                        const isOpen = dropdownMenu.classList.contains('show');
+                        
+                        // Close all other dropdowns first
+                        document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                            menu.classList.remove('show');
+                        });
+                        
+                        // Toggle the current dropdown
+                        if (!isOpen) {
+                            dropdownMenu.classList.add('show');
+                            this.setAttribute('aria-expanded', 'true');
+                        } else {
+                            dropdownMenu.classList.remove('show');
+                            this.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                }
+            });
+        });
+        
+        // Handle clicks outside dropdowns
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown') && window.innerWidth < 992) {
+                document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+                
+                dropdownToggles.forEach(toggle => {
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+            }
+        });
+    };
+    
+    // Run the fix
+    fixMobileDropdowns();
+    
     // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     const backToTopButton = document.getElementById('backToTop');

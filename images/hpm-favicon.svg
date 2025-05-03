@@ -15,9 +15,34 @@
   <rect x="30" y="15" width="4" height="34" rx="1" fill="#FFFFFF"/>
   <rect x="15" y="30" width="34" height="4" rx="1" fill="#FFFFFF"/>
   
-  <!-- Ascending Growth Chart/Plant (Crypto Lines) -->
-  <path d="M20,48 Q28,40 32,44 Q38,38 42,42 Q46,36 50,38" 
-        stroke="url(#goldGradient)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Cryptocurrency Candlestick Chart -->
+  <g id="candlestickChart">
+    <!-- Gold up bars -->
+    <rect x="20" y="42" width="2" height="6" fill="#FFD700" />
+    <line x1="21" y1="40" x2="21" y2="42" stroke="#FFD700" stroke-width="1" />
+    <line x1="21" y1="48" x2="21" y2="50" stroke="#FFD700" stroke-width="1" />
+    
+    <rect x="32" y="38" width="2" height="6" fill="#FFD700" />
+    <line x1="33" y1="36" x2="33" y2="38" stroke="#FFD700" stroke-width="1" />
+    <line x1="33" y1="44" x2="33" y2="46" stroke="#FFD700" stroke-width="1" />
+    
+    <rect x="44" y="34" width="2" height="8" fill="#FFD700" />
+    <line x1="45" y1="32" x2="45" y2="34" stroke="#FFD700" stroke-width="1" />
+    <line x1="45" y1="42" x2="45" y2="44" stroke="#FFD700" stroke-width="1" />
+    
+    <!-- Purple down bars -->
+    <rect x="26" y="44" width="2" height="6" fill="#4B0082" />
+    <line x1="27" y1="42" x2="27" y2="44" stroke="#4B0082" stroke-width="1" />
+    <line x1="27" y1="50" x2="27" y2="52" stroke="#4B0082" stroke-width="1" />
+    
+    <rect x="38" y="40" width="2" height="6" fill="#4B0082" />
+    <line x1="39" y1="38" x2="39" y2="40" stroke="#4B0082" stroke-width="1" />
+    <line x1="39" y1="46" x2="39" y2="48" stroke="#4B0082" stroke-width="1" />
+    
+    <!-- Trend line connecting the candles -->
+    <polyline points="21,45 27,47 33,41 39,43 45,38" 
+             stroke="#FFD700" stroke-width="1" fill="none" stroke-opacity="0.8" />
+  </g>
   
   <!-- Seed/Circle at the base of growth -->
   <circle cx="20" cy="48" r="3" fill="#FFD700"/>

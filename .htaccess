@@ -1,0 +1,19 @@
+# Proper MIME type for SVG files
+AddType image/svg+xml .svg .svgz
+AddEncoding gzip .svgz
+
+# Cache control for favicon files
+<FilesMatch "\.(ico|png|svg|webp)$">
+  Header set Cache-Control "max-age=86400, public"
+</FilesMatch>
+
+# Prevent directory listing
+Options -Indexes
+
+# Security headers
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
