@@ -2,6 +2,10 @@
  * Payment System JavaScript
  * Holistic Prosperity Ministry
  * Simplified for Mobile Money and Stripe payment links
+ * 
+ * IMPORTANT: This file has been simplified to remove all Stripe API integration.
+ * The payment system now uses direct payment links for Stripe and a simple
+ * redirect for Mobile Money payments.
  */
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -19,9 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const feeAmountSpan = document.getElementById('fee-amount');
     const tributeCheckbox = document.getElementById('is_tribute');
     const tributeFields = document.getElementById('tribute-fields');
-    const mobileMoneyBtn = document.getElementById('mobile-money-btn');
-    const paymentMethodInput = document.getElementById('payment_method');
-    const paymentMethodCards = document.querySelectorAll('.payment-method-card');
     const paymentProcessingOverlay = document.getElementById('paymentProcessingOverlay');
     
     // Initialize
@@ -241,41 +242,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return re.test(String(email).toLowerCase());
     }
     
-    /**
-     * IMPORTANT: Mobile Money button handling is now done directly in the donate-form.php file
-     * This function is kept for backward compatibility but does a direct redirect
-     */
-    function processMobileMoneyPayment() {
-        console.log('Mobile Money payment processing - direct redirect');
-        // Direct redirect to mobile money instructions
-        window.location.href = 'mobile-money-instructions.php';
-    }
+    // Mobile Money button handling is now done directly with HTML links
     
-    /**
-     * Generate a unique reference code for Mobile Money transactions
-     */
-    function generateReferenceCode() {
-        const prefix = 'HPM';
-        const timestamp = new Date().getTime().toString().slice(-6);
-        const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-        return `${prefix}-${timestamp}-${random}`;
-    }
-    
-    /**
-     * Show payment processing overlay
-     */
-    function showProcessingOverlay() {
-        if (paymentProcessingOverlay) {
-            paymentProcessingOverlay.style.display = 'flex';
-        }
-    }
-    
-    /**
-     * Hide payment processing overlay
-     */
-    function hideProcessingOverlay() {
-        if (paymentProcessingOverlay) {
-            paymentProcessingOverlay.style.display = 'none';
-        }
-    }
+    // All payment processing is now handled directly through HTML links
+    // No JavaScript processing is required for Mobile Money or Stripe payments
 });

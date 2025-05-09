@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Confirmation - Holistic Prosperity Ministry</title>
+    <link rel="icon" href="images/hpm-favicon.svg" type="image/svg+xml">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        .confirmation-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .confirmation-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            color: #4B0082;
+        }
+        
+        .confirmation-icon.success {
+            color: #28a745;
+        }
+        
+        .confirmation-message {
+            margin-bottom: 2rem;
+        }
+        
+        .donation-details {
+            background-color: #f8f9fa;
+            border-left: 4px solid #4B0082;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .btn-primary {
+            background-color: #4B0082;
+            border-color: #4B0082;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a006b;
+            border-color: #3a006b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="70">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ministries.html">Ministries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="donate.html">Donate</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Confirmation Section -->
+    <section class="confirmation-section py-5 mt-5">
+        <div class="container">
+            <div class="confirmation-wrapper text-center">
+                <div class="confirmation-icon success">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                
+                <div class="confirmation-message">
+                    <h1 class="mb-3">Thank You for Your Donation!</h1>
+                    <p class="lead">Your generous support helps us spread the message of holistic prosperity and transforms lives in our community.</p>
+                </div>
+                
+                <div class="donation-details mb-4">
+                    <h4 class="mb-3">Donation Details</h4>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <p><strong>Payment Method:</strong> Mobile Money</p>
+                            <p><strong>Reference Code:</strong> <span id="referenceCode"></span></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <p><strong>Amount:</strong> $<span id="amountUsd">50.00</span> USD</p>
+                            <p><strong>Amount (FCFA):</strong> <span id="amountFcfa">32,500</span> FCFA</p>
+                        </div>
+                    </div>
+                    <p class="mb-0"><strong>Status:</strong> <span class="badge bg-warning text-dark">Pending Verification</span></p>
+                    <p class="text-muted mt-2"><small>Your donation will be verified within 24 hours after we receive your WhatsApp confirmation.</small></p>
+                </div>
+                
+                <div class="next-steps mb-4">
+                    <h4 class="mb-3">What's Next?</h4>
+                    <p>We've received your confirmation and will verify your payment shortly. You'll receive an email confirmation once your donation has been processed.</p>
+                    <p>If you have any questions or need assistance, please contact us at <a href="mailto:info@holisticprosperity.org">info@holisticprosperity.org</a> or WhatsApp <a href="https://wa.me/14697031453">+1 (469) 703-1453</a>.</p>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="index.html" class="btn btn-primary me-2">Return to Homepage</a>
+                    <a href="donate.html" class="btn btn-outline-primary">Make Another Donation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>Holistic Prosperity Ministry</h5>
+                    <p>Empowering lives through biblical prosperity principles and community impact.</p>
+                    <div class="social-icons">
+                        <a href="#" class="me-2 text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-2 text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-2 text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-2 text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="about.html" class="text-white">About Us</a></li>
+                        <li><a href="ministries.html" class="text-white">Ministries</a></li>
+                        <li><a href="contact.html" class="text-white">Contact</a></li>
+                        <li><a href="donate.html" class="text-white">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact Us</h5>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> 123 Prosperity Lane, Yaoundé, Cameroon</p>
+                        <p><i class="fas fa-phone me-2"></i> +237 652444097</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@holisticprosperity.org</p>
+                    </address>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="mb-0">&copy; 2025 Holistic Prosperity Ministry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Get URL parameters and display them -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to get URL parameters
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+            
+            // Get parameters from URL
+            const ref = getUrlParameter('ref');
+            const method = getUrlParameter('method');
+            const amount = getUrlParameter('amount') || '50.00';
+            
+            // Display parameters
+            document.getElementById('referenceCode').textContent = ref || 'HPM-20250509-ABC123';
+            document.getElementById('amountUsd').textContent = amount;
+            document.getElementById('amountFcfa').textContent = (parseFloat(amount) * 650).toLocaleString();
+        });
+    </script>
+</body>
+</html>

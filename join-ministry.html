@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Our Ministry - Holistic Prosperity Ministry</title>
+    <link rel="icon" href="images/hpm-favicon.svg" type="image/svg+xml">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        .join-form-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .form-section-title {
+            color: #4B0082;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        
+        .form-control:focus {
+            border-color: #4B0082;
+            box-shadow: 0 0 0 0.25rem rgba(75, 0, 130, 0.25);
+        }
+        
+        .btn-primary {
+            background-color: #4B0082;
+            border-color: #4B0082;
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a006b;
+            border-color: #3a006b;
+        }
+        
+        .ministry-header {
+            background-color: #f8f9fa;
+            border-left: 4px solid #4B0082;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/hpm-logo.svg" alt="Holistic Prosperity Ministry Logo" height="70">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ministries.html">Ministries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="donate.html">Donate</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Join Ministry Section -->
+    <section class="py-5 mt-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card join-form-card">
+                        <div class="ministry-header" id="ministryHeader">
+                            <h2 id="ministryTitle">Join Our Ministry</h2>
+                            <p class="lead" id="ministryDescription">Thank you for your interest in joining our ministry. Please fill out the form below and we'll get back to you soon.</p>
+                        </div>
+                        
+                        <form id="joinMinistryForm" class="needs-validation" novalidate>
+                            <div class="form-section">
+                                <h3 class="form-section-title">Personal Information</h3>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="name" class="form-label">Full Name*</label>
+                                        <input type="text" class="form-control" id="name" name="name" required>
+                                        <div class="invalid-feedback">Please enter your name</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email Address*</label>
+                                        <input type="email" class="form-control" id="email" name="email" required>
+                                        <div class="invalid-feedback">Please enter a valid email address</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="phone" class="form-label">Phone Number*</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                                        <div class="invalid-feedback">Please enter your phone number</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="location" class="form-label">Location</label>
+                                        <input type="text" class="form-control" id="location" name="location">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h3 class="form-section-title">Ministry Interest</h3>
+                                <div class="mb-3">
+                                    <label for="experience" class="form-label">Previous Experience</label>
+                                    <textarea class="form-control" id="experience" name="experience" rows="3" placeholder="Please share any relevant experience you have in this area"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="skills" class="form-label">Skills & Talents</label>
+                                    <textarea class="form-control" id="skills" name="skills" rows="3" placeholder="What skills or talents would you bring to this ministry?"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="availability" class="form-label">Availability</label>
+                                    <select class="form-select" id="availability" name="availability">
+                                        <option value="" selected disabled>Select your availability</option>
+                                        <option value="weekdays">Weekdays</option>
+                                        <option value="weekends">Weekends</option>
+                                        <option value="evenings">Evenings</option>
+                                        <option value="flexible">Flexible</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h3 class="form-section-title">Additional Information</h3>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Why do you want to join this ministry?</label>
+                                    <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter" checked>
+                                    <label class="form-check-label" for="newsletter">
+                                        I would like to receive updates and newsletters from Holistic Prosperity Ministry
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Submit Application</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-5 bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>Holistic Prosperity Ministry</h5>
+                    <p>Empowering lives through biblical prosperity principles and community impact.</p>
+                    <div class="social-icons">
+                        <a href="#" class="me-2 text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-2 text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-2 text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-2 text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="about.html" class="text-white">About Us</a></li>
+                        <li><a href="ministries.html" class="text-white">Ministries</a></li>
+                        <li><a href="contact.html" class="text-white">Contact</a></li>
+                        <li><a href="donate.html" class="text-white">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5>Contact Us</h5>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> 123 Prosperity Lane, Yaoundé, Cameroon</p>
+                        <p><i class="fas fa-phone me-2"></i> +237 652444097</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@holisticprosperity.org</p>
+                    </address>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="mb-0">&copy; 2025 Holistic Prosperity Ministry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript for form handling -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to get URL parameters
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+            
+            // Ministry information
+            const ministryNames = {
+                'love-in-action': 'Love in Action Fellowship',
+                'prosperity-counseling': 'Prosperity Counseling',
+                'faith-worship': 'Faith & Worship Ministry',
+                'community': 'Community Impact Projects',
+                'cryptstock': 'CrypStock Prosperity Academy'
+            };
+            
+            const ministryDescriptions = {
+                'love-in-action': 'Join our Love in Action Fellowship and help spread compassion and support to those in need.',
+                'prosperity-counseling': 'Use your counseling skills to help others achieve holistic prosperity in all areas of life.',
+                'faith-worship': 'Share your musical talents and spiritual gifts in our Faith & Worship Ministry.',
+                'community': 'Be part of our Community Impact Projects and make a difference in local communities.',
+                'cryptstock': 'Join the CrypStock Prosperity Academy and help others learn about financial literacy and investment.'
+            };
+            
+            // Get ministry from URL
+            const ministry = getUrlParameter('ministry');
+            
+            // Update page content based on ministry
+            if (ministry && ministryNames[ministry]) {
+                document.getElementById('ministryTitle').textContent = 'Join ' + ministryNames[ministry];
+                document.getElementById('ministryDescription').textContent = ministryDescriptions[ministry] || 'Thank you for your interest in joining our ministry. Please fill out the form below and we\'ll get back to you soon.';
+            }
+            
+            // Form validation
+            const form = document.getElementById('joinMinistryForm');
+            
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                } else {
+                    event.preventDefault();
+                    // Redirect to thank you page with parameters
+                    window.location.href = 'join-ministry-confirmation.html?ministry=' + encodeURIComponent(ministry || '') + '&name=' + encodeURIComponent(document.getElementById('name').value);
+                }
+                
+                form.classList.add('was-validated');
+            });
+        });
+    </script>
+</body>
+</html>

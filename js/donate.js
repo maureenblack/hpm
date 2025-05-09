@@ -346,9 +346,12 @@ function initCounterAnimation() {
 
 /**
  * Initialize payment method selection
+ * 
+ * IMPORTANT: Mobile Money button now uses direct onclick attribute in HTML
+ * No JavaScript event listeners needed for the button
  */
 function initPaymentMethods() {
-    // Payment method cards
+    // Payment method cards - only add hover effects
     const paymentCards = document.querySelectorAll('.payment-method-card');
     
     paymentCards.forEach(card => {
@@ -362,14 +365,7 @@ function initPaymentMethods() {
         });
     });
     
-    // Mobile Money button - direct redirect
-    const mobileMoneyBtn = document.getElementById('mobile-money-btn');
-    if (mobileMoneyBtn) {
-        mobileMoneyBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.location.href = 'mobile-money-instructions.php';
-        });
-    }
+    // No event listeners for Mobile Money button - using direct onclick in HTML
 }
 
 /**
