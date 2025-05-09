@@ -107,8 +107,7 @@ unset($_SESSION['success_message']);
     </style>
     <!-- Chart.js for donation charts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Stripe.js for secure payments -->
-    <script src="https://js.stripe.com/v3/"></script>
+    <!-- Payment system simplified to use direct Stripe payment links -->
 <style>
     .payment-method-card {
         transition: all 0.3s ease;
@@ -523,9 +522,9 @@ unset($_SESSION['success_message']);
                                                 </div>
                                                 <div class="payment-method-body">
                                                     <p>Send your donation via Mobile Money to our secure account. You'll receive a reference code and instructions for completing your transaction.</p>
-                                                    <button type="button" class="btn btn-primary payment-method-btn" id="mobile-money-btn" data-payment="mobile_money">
+                                                    <a href="mobile-money-instructions.php" class="btn btn-primary payment-method-btn" id="mobile-money-btn">
                                                         <i class="fas fa-mobile-alt me-2"></i> Pay with Mobile Money
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -581,28 +580,6 @@ unset($_SESSION['success_message']);
                             
                             <!-- Hidden input for payment method -->
                             <input type="hidden" name="payment_method" id="payment_method" value="">
-                            
-                            <!-- Mobile Money Instructions (Hidden by default) -->
-                            <div id="mobile-money-instructions" class="form-section payment-details" style="display: none;">
-                                <h3 class="form-section-title">Mobile Money Payment Instructions</h3>
-                                <div class="alert alert-info">
-                                    <p><strong>Please follow these steps to complete your Mobile Money donation:</strong></p>
-                                    <ol>
-                                        <li>Open your Mobile Money app on your phone</li>
-                                        <li>Select "Send Money" or "Pay" option</li>
-                                        <li>Enter the following phone number: <strong>+233 55 123 4567</strong></li>
-                                        <li>Enter the amount you wish to donate: <strong>$<span id="momo-amount">0.00</span></strong></li>
-                                        <li>Use this reference code in the notes/description: <strong><span id="momo-reference">HPM-000000-0000</span></strong></li>
-                                        <li>Complete the transaction in your Mobile Money app</li>
-                                        <li>You will receive a confirmation email once your donation is processed</li>
-                                    </ol>
-                                </div>
-                                <div class="text-center mt-4">
-                                    <p class="mb-3">Having trouble? Contact our support team:</p>
-                                    <p><strong>Email:</strong> support@holisticprosperityministry.org</p>
-                                    <p><strong>Phone:</strong> +233 55 123 4567</p>
-                                </div>
-                            </div>
 
                             <div class="form-section text-center">
                                 <button type="submit" id="donateButton" class="btn btn-primary btn-lg px-5">Complete Donation</button>
@@ -795,11 +772,8 @@ unset($_SESSION['success_message']);
     <!-- Bootstrap 5 JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom Scripts -->
-    <script src="js/payment.js"></script>
     <script src="js/responsive.js"></script>
     <script src="js/donate.js"></script>
-    <script src="js/payment-fix.js"></script>
-    <script src="js/payment-methods.js"></script>
 <!-- Payment Processing Overlay -->
 <div class="payment-processing-overlay" id="paymentProcessingOverlay">
     <div class="spinner"></div>
@@ -808,24 +782,9 @@ unset($_SESSION['success_message']);
 </div>
 
     <script>
-        // Payment method card selection
+        // Add hover effect to payment method cards
         document.addEventListener('DOMContentLoaded', function() {
             const paymentMethodCards = document.querySelectorAll('.payment-method-card');
-            const paymentMethodInput = document.getElementById('payment_method');
-            
-            // Mobile Money button click handler
-            const mobileMoneyBtn = document.getElementById('mobile-money-btn');
-            if (mobileMoneyBtn) {
-                mobileMoneyBtn.addEventListener('click', function() {
-                    paymentMethodInput.value = 'mobile_money';
-                    // Highlight this card
-                    const cards = document.querySelectorAll('.payment-method-card');
-                    cards.forEach(card => card.classList.remove('selected'));
-                    document.getElementById('mobile-money-option').classList.add('selected');
-                });
-            }
-            
-            // Add hover effect to payment method cards
             paymentMethodCards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
                     this.classList.add('hover');
@@ -836,8 +795,6 @@ unset($_SESSION['success_message']);
                 });
             });
         });
-
     </script>
-</script>
 </body>
 </html>

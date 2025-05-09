@@ -11,10 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCounterAnimation();
     initPaymentMethods();
     
-    // Initialize Stripe if available
-    if (typeof Stripe !== 'undefined') {
-        initStripeElements();
-    }
+    // Stripe initialization removed - now using direct payment links
     
     // Test data functionality removed
 });
@@ -49,20 +46,15 @@ function initDonationForm() {
     
     // Handle custom amount input
     customAmountInput.addEventListener('input', function() {
-        // Remove active class from all preset options
+        // Remove active class from all amount options
         amountOptions.forEach(opt => opt.classList.remove('active'));
-        
-        // Format input to allow only numbers and decimals
-        this.value = this.value.replace(/[^0-9.]/g, '');
         
         // Update donation summary
         updateDonationSummary();
     });
     
-    // Frequency selection
+    // Handle donation frequency selection
     const frequencyOptions = document.querySelectorAll('.frequency-option');
-    const frequencyInput = document.getElementById('frequency');
-    
     frequencyOptions.forEach(option => {
         option.addEventListener('click', function() {
             // Remove active class from all options
@@ -71,188 +63,88 @@ function initDonationForm() {
             // Add active class to clicked option
             this.classList.add('active');
             
-            // Update hidden frequency input
-            const selectedFrequency = this.getAttribute('data-frequency');
-            if (frequencyInput) {
-                frequencyInput.value = selectedFrequency;
-                console.log('Frequency updated:', selectedFrequency);
-            }
-            
             // Update donation summary
             updateDonationSummary();
         });
     });
     
-    // Designation selection
+    // Handle designation selection
     const designationSelect = document.getElementById('designation');
+    if (designationSelect) {
+        designationSelect.addEventListener('change', updateDonationSummary);
+    }
     
-    designationSelect.addEventListener('change', function() {
-        // Update donation summary
-        updateDonationSummary();
-    });
+    // Handle tribute checkbox
+    const tributeCheckbox = document.getElementById('is_tribute');
+    const tributeFields = document.getElementById('tribute-fields');
     
-    // Form validation
-    const form = document.getElementById('donationForm');
-    
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        // Debug information
-        console.log('Form submission started');
-        console.log('Form validity state:', form.checkValidity());
-        
-        // Clear previous error messages
-        const previousErrors = form.querySelectorAll('.alert-danger');
-        previousErrors.forEach(error => error.remove());
-        
-        // Validate all fields
-        let isValid = true;
-        const requiredFields = form.querySelectorAll('input[required], select[required]');
-        
-        console.log('Required fields count:', requiredFields.length);
-        
-        // Debug each required field
-        requiredFields.forEach(field => {
-            console.log(`Field: ${field.id || field.name}`, {
-                'Value': field.value,
-                'Valid': field.checkValidity(),
-                'ValidityState': {
-                    'valueMissing': field.validity.valueMissing,
-                    'typeMismatch': field.validity.typeMismatch,
-                    'patternMismatch': field.validity.patternMismatch
-                }
-            });
+    if (tributeCheckbox && tributeFields) {
+        tributeCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                tributeFields.style.display = 'block';
+            } else {
+                tributeFields.style.display = 'none';
+            }
             
-            if (!validateField(field)) {
-                isValid = false;
-                console.log(`Field validation failed: ${field.id || field.name}`);
-            }
+            // Update donation summary
+            updateDonationSummary();
         });
-        
-        // Check amount
-        const activeAmountOption = document.querySelector('.amount-option.active');
-        const customAmountInput = document.getElementById('customAmount');
-        let amount = 0;
-        
-        console.log('Checking amount selection:');
-        console.log('- Active amount option:', activeAmountOption ? 'Found' : 'Not found');
-        console.log('- Custom amount input:', customAmountInput ? (customAmountInput.value || 'Empty') : 'Not found');
-        
-        // Always consider the test data amount as valid during testing
-        const isTestMode = document.getElementById('fillTestDataBtn') && 
-                         document.getElementById('fillTestDataBtn').classList.contains('clicked');
-        
-        if (activeAmountOption) {
-            amount = parseFloat(activeAmountOption.getAttribute('data-amount'));
-            console.log('Selected amount option:', amount);
-        } else if (customAmountInput && customAmountInput.value) {
-            amount = parseFloat(customAmountInput.value);
-            console.log('Custom amount entered:', amount);
-        }
-        
-        // Create a hidden input to ensure amount is submitted with the form
-        let amountInput = document.getElementById('hidden_amount');
-        if (!amountInput) {
-            amountInput = document.createElement('input');
-            amountInput.type = 'hidden';
-            amountInput.id = 'hidden_amount';
-            amountInput.name = 'amount';
-            form.appendChild(amountInput);
-        }
-        amountInput.value = amount;
-        
-        if (amount <= 0 && !isTestMode) {
-            isValid = false;
-            console.log('Amount validation failed: No amount selected or entered');
-            const amountError = document.createElement('div');
-            amountError.className = 'alert alert-danger';
-            amountError.textContent = 'Please select or enter a valid donation amount';
-            const amountSection = document.querySelector('.amount-options-container') || document.querySelector('.amount-options');
-            if (amountSection) {
-                amountSection.before(amountError);
-            } else {
-                form.prepend(amountError);
-                console.log('Warning: Could not find amount section container');
-            }
-        } else {
-            console.log('Amount validation passed:', amount);
-        }
-        
-        // Check payment method
-        const paymentMethod = document.querySelector('input[name="payment_method"]:checked')?.value;
-        console.log('Selected payment method:', paymentMethod);
-        
-        if (!paymentMethod) {
-            isValid = false;
-            console.log('Payment method validation failed: No method selected');
-            const errorDiv = document.createElement('div');
-            errorDiv.className = 'alert alert-danger';
-            errorDiv.textContent = 'Please select a payment method';
-            const paymentSection = document.querySelector('.payment-methods-container') || document.querySelector('.payment-methods');
-            if (paymentSection) {
-                paymentSection.before(errorDiv);
-            } else {
-                form.prepend(errorDiv);
-                console.log('Warning: Could not find payment methods container');
-            }
-        }
-        
-        if (!isValid) {
-            console.log('Form validation failed. Submission stopped.');
-            // Scroll to first error
-            const firstError = form.querySelector('.alert-danger, .is-invalid');
-            if (firstError) {
-                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-            return;
-        }
-        
-        console.log('Form validation passed. Proceeding with submission.');
-        
-        // Show processing overlay
-        const overlay = document.getElementById('paymentProcessingOverlay');
-        overlay.style.display = 'flex';
-        
-        // Handle payment based on selected method
-        if (paymentMethod === 'credit_card') {
-            // Process with Stripe
-            processStripePayment();
-        } else {
-            // Submit form for other payment methods
-            setTimeout(() => {
-                form.submit();
-            }, 1000); // Small delay to show the processing overlay
-        }
+    }
+    
+    // Handle tribute type selection
+    const tributeTypeRadios = document.querySelectorAll('input[name="tribute_type"]');
+    tributeTypeRadios.forEach(radio => {
+        radio.addEventListener('change', updateDonationSummary);
     });
+    
+    // Handle tribute name input
+    const tributeNameInput = document.getElementById('tribute_name');
+    if (tributeNameInput) {
+        tributeNameInput.addEventListener('input', updateDonationSummary);
+    }
+    
+    // Form submission
+    const donationForm = document.getElementById('donationForm');
+    if (donationForm) {
+        donationForm.addEventListener('submit', function(event) {
+            // Validate form
+            if (!validateForm(this)) {
+                event.preventDefault();
+                return false;
+            }
+            
+            // Form is valid, continue with submission
+            return true;
+        });
+    }
 }
 
 /**
  * Initialize the memorial/honor fields functionality
  */
 function initMemorialFields() {
-    const memorialCheckbox = document.getElementById('memorialGift');
-    const memorialFields = document.getElementById('memorialFields');
-    const notificationCheckbox = document.getElementById('sendNotification');
-    const notificationFields = document.getElementById('notificationFields');
+    const tributeCheckbox = document.getElementById('is_tribute');
+    const tributeFields = document.getElementById('tribute-fields');
+    const tributeTypeRadios = document.querySelectorAll('input[name="tribute_type"]');
+    const honorLabel = document.getElementById('honor-label');
+    const memoryLabel = document.getElementById('memory-label');
     
-    // Toggle memorial fields visibility
-    memorialCheckbox.addEventListener('change', function() {
-        if (this.checked) {
-            memorialFields.classList.remove('d-none');
-        } else {
-            memorialFields.classList.add('d-none');
-            notificationFields.classList.add('d-none');
-            notificationCheckbox.checked = false;
-        }
-    });
+    // Hide tribute fields initially
+    if (tributeFields) {
+        tributeFields.style.display = 'none';
+    }
     
-    // Toggle notification fields visibility
-    notificationCheckbox.addEventListener('change', function() {
-        if (this.checked) {
-            notificationFields.classList.remove('d-none');
-        } else {
-            notificationFields.classList.add('d-none');
-        }
+    // Handle tribute type changes
+    tributeTypeRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.value === 'honor') {
+                honorLabel.style.display = 'inline';
+                memoryLabel.style.display = 'none';
+            } else {
+                honorLabel.style.display = 'none';
+                memoryLabel.style.display = 'inline';
+            }
+        });
     });
 }
 
@@ -260,60 +152,97 @@ function initMemorialFields() {
  * Update the donation summary based on user selections
  */
 function updateDonationSummary() {
-    // In a real implementation, this would update a summary section
-    // showing the selected amount, frequency, and designation
+    // Get summary elements
+    const summaryAmount = document.getElementById('summary-amount');
+    const summaryFrequency = document.getElementById('summary-frequency');
+    const summaryDesignation = document.getElementById('summary-designation');
+    const summaryTributeRow = document.getElementById('summary-tribute-row');
+    const summaryTributeType = document.getElementById('summary-tribute-type');
+    const summaryTributeName = document.getElementById('summary-tribute-name');
     
-    // Get selected amount
+    // Get selected values
     let amount = 0;
     const activeAmountOption = document.querySelector('.amount-option.active');
     const customAmountInput = document.getElementById('customAmount');
     
     if (activeAmountOption) {
-        amount = activeAmountOption.getAttribute('data-amount');
-    } else if (customAmountInput.value) {
+        amount = parseFloat(activeAmountOption.getAttribute('data-amount'));
+    } else if (customAmountInput && customAmountInput.value) {
         amount = parseFloat(customAmountInput.value);
     }
     
-    // Get selected frequency
-    const activeFrequencyOption = document.querySelector('.frequency-option.active');
-    const frequency = activeFrequencyOption ? activeFrequencyOption.getAttribute('data-frequency') : 'one-time';
+    // Update amount in summary
+    if (summaryAmount) {
+        summaryAmount.textContent = amount > 0 ? '$' + amount.toFixed(2) : 'Not selected';
+    }
     
-    // Get selected designation
+    // Update frequency in summary
+    const activeFrequency = document.querySelector('.frequency-option.active');
+    if (summaryFrequency && activeFrequency) {
+        const frequencyText = activeFrequency.getAttribute('data-frequency') === 'one-time' ? 'One-time' : 'Monthly';
+        summaryFrequency.textContent = frequencyText;
+    }
+    
+    // Update designation in summary
     const designationSelect = document.getElementById('designation');
-    const designation = designationSelect.options[designationSelect.selectedIndex] ? 
-                       designationSelect.options[designationSelect.selectedIndex].text : '';
+    if (summaryDesignation && designationSelect) {
+        const selectedOption = designationSelect.options[designationSelect.selectedIndex];
+        summaryDesignation.textContent = selectedOption.text;
+    }
     
-    console.log(`Donation Summary: $${amount} ${frequency} to ${designation}`);
-    
-    // This would update a visible summary section in a real implementation
+    // Update tribute information in summary
+    const isTributeCheckbox = document.getElementById('is_tribute');
+    if (summaryTributeRow && isTributeCheckbox) {
+        if (isTributeCheckbox.checked) {
+            const tributeType = document.querySelector('input[name="tribute_type"]:checked');
+            const tributeName = document.getElementById('tribute_name');
+            
+            if (tributeType && tributeName) {
+                summaryTributeRow.style.display = 'table-row';
+                summaryTributeType.textContent = tributeType.value === 'honor' ? 'In Honor Of:' : 'In Memory Of:';
+                summaryTributeName.textContent = tributeName.value || 'Not specified';
+            }
+        } else {
+            summaryTributeRow.style.display = 'none';
+        }
+    }
 }
 
 /**
  * Show donation success message
  */
-function showDonationSuccess() {
-    // Create success message
-    const formContainer = document.querySelector('.donation-form-container');
-    const successMessage = document.createElement('div');
+function showDonationSuccess(data) {
+    // Hide donation form
+    const donationForm = document.getElementById('donation-form-container');
+    if (donationForm) {
+        donationForm.style.display = 'none';
+    }
     
-    successMessage.className = 'alert alert-success text-center p-4';
-    successMessage.innerHTML = `
-        <i class="fas fa-check-circle fa-3x mb-3"></i>
-        <h3>Thank You for Your Generosity!</h3>
-        <p class="mb-4">Your donation will help transform lives through biblical prosperity principles and community impact.</p>
-        <p>A confirmation email has been sent to your inbox with the details of your donation.</p>
-        <div class="mt-4">
-            <a href="index.html" class="btn btn-outline-primary me-2">Return to Homepage</a>
-            <a href="#" class="btn btn-primary" onclick="location.reload()">Make Another Donation</a>
-        </div>
-    `;
-    
-    // Replace form with success message
-    formContainer.innerHTML = '';
-    formContainer.appendChild(successMessage);
-    
-    // Scroll to success message
-    successMessage.scrollIntoView({ behavior: 'smooth' });
+    // Show success message
+    const successMessage = document.getElementById('donation-success');
+    if (successMessage) {
+        successMessage.style.display = 'block';
+        
+        // Update success message with donation details
+        const donorName = document.getElementById('success-donor-name');
+        const donationAmount = document.getElementById('success-amount');
+        const donationId = document.getElementById('success-donation-id');
+        
+        if (donorName && data.donor_name) {
+            donorName.textContent = data.donor_name;
+        }
+        
+        if (donationAmount && data.amount) {
+            donationAmount.textContent = '$' + parseFloat(data.amount).toFixed(2);
+        }
+        
+        if (donationId && data.donation_id) {
+            donationId.textContent = data.donation_id;
+        }
+        
+        // Scroll to success message
+        successMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 /**
@@ -322,42 +251,55 @@ function showDonationSuccess() {
 function initAllocationChart() {
     const ctx = document.getElementById('allocationChart');
     
-    if (!ctx) return;
+    if (!ctx) {
+        return;
+    }
     
-    new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['CrypStock Academy', 'Community Outreach', 'Worship & Ministry', 'Operations', 'Future Growth'],
-            datasets: [{
-                data: [40, 25, 20, 10, 5],
-                backgroundColor: [
-                    '#4B0082', // Royal Purple
-                    '#FFD700', // Gold
-                    '#9370DB', // Medium Purple
-                    '#20B2AA', // Light Sea Green
-                    '#87CEEB'  // Sky Blue
-                ],
-                borderWidth: 0,
-                hoverOffset: 10
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '70%',
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return `${context.label}: ${context.raw}%`;
-                        }
+    // Chart data
+    const data = {
+        labels: [
+            'CrypStock Academy',
+            'Community Outreach',
+            'Worship & Ministry',
+            'Operations',
+            'Future Growth'
+        ],
+        datasets: [{
+            data: [40, 25, 20, 10, 5],
+            backgroundColor: [
+                '#4B0082', // Royal Purple
+                '#FFD700', // Gold
+                '#9370DB', // Medium Purple
+                '#20B2AA', // Light Sea Green
+                '#87CEEB'  // Sky Blue
+            ],
+            borderWidth: 0
+        }]
+    };
+    
+    // Chart options
+    const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return context.label + ': ' + context.raw + '%';
                     }
                 }
             }
         }
+    };
+    
+    // Create chart
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+        options: options
     });
 }
 
@@ -366,25 +308,29 @@ function initAllocationChart() {
  */
 function initCounterAnimation() {
     const counters = document.querySelectorAll('.counter');
+    const speed = 200; // Animation speed - lower is faster
     
-    // Intersection Observer to trigger counter animation when in view
+    // Intersection Observer to start animation when counters are in view
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const counter = entry.target;
-                const target = parseInt(counter.getAttribute('data-count'));
+                const target = parseInt(counter.getAttribute('data-target'));
                 let count = 0;
-                const duration = 2000; // 2 seconds
-                const interval = duration / target;
                 
-                const timer = setInterval(() => {
-                    count++;
-                    counter.innerText = count < target ? count : target + '+';
+                const updateCount = () => {
+                    const increment = target / speed;
                     
-                    if (count >= target) {
-                        clearInterval(timer);
+                    if (count < target) {
+                        count += increment;
+                        counter.innerText = Math.ceil(count).toLocaleString();
+                        setTimeout(updateCount, 1);
+                    } else {
+                        counter.innerText = target.toLocaleString();
                     }
-                }, interval);
+                };
+                
+                updateCount();
                 
                 // Unobserve after animation starts
                 observer.unobserve(counter);
@@ -392,7 +338,7 @@ function initCounterAnimation() {
         });
     }, { threshold: 0.5 });
     
-    // Observe all counter elements
+    // Observe all counters
     counters.forEach(counter => {
         observer.observe(counter);
     });
@@ -402,245 +348,114 @@ function initCounterAnimation() {
  * Initialize payment method selection
  */
 function initPaymentMethods() {
-    const paymentMethodOptions = document.querySelectorAll('input[name="payment_method"]');
-    const creditCardForm = document.getElementById('creditCardForm');
+    // Payment method cards
+    const paymentCards = document.querySelectorAll('.payment-method-card');
     
-    if (!paymentMethodOptions || !creditCardForm) return;
-    
-    paymentMethodOptions.forEach(option => {
-        option.addEventListener('change', function() {
-            // Show/hide credit card form based on selection
-            if (this.value === 'credit_card') {
-                creditCardForm.style.display = 'block';
-            } else {
-                creditCardForm.style.display = 'none';
-            }
+    paymentCards.forEach(card => {
+        // Add hover effects
+        card.addEventListener('mouseenter', function() {
+            this.classList.add('hover');
         });
-    });
-}
-
-// Stripe variables
-let stripe;
-let elements;
-let cardElement;
-let paymentIntentClientSecret;
-
-/**
- * Initialize Stripe Elements
- */
-function initStripeElements() {
-    // Get Stripe publishable key from data attribute
-    const stripePublishableKey = document.getElementById('donationForm').dataset.stripeKey;
-    
-    if (!stripePublishableKey) {
-        console.error('Stripe publishable key not found');
-        return;
-    }
-    
-    // Initialize Stripe
-    stripe = Stripe(stripePublishableKey);
-    
-    // Create Elements instance
-    elements = stripe.elements();
-    
-    // Create Card Element
-    cardElement = elements.create('card', {
-        style: {
-            base: {
-                color: '#32325d',
-                fontFamily: '"Montserrat", sans-serif',
-                fontSmoothing: 'antialiased',
-                fontSize: '16px',
-                '::placeholder': {
-                    color: '#aab7c4'
-                }
-            },
-            invalid: {
-                color: '#fa755a',
-                iconColor: '#fa755a'
-            }
-        }
-    });
-    
-    // Mount Card Element
-    cardElement.mount('#card-element');
-    
-    // Handle real-time validation errors
-    cardElement.on('change', function(event) {
-        const displayError = document.getElementById('card-errors');
-        if (event.error) {
-            displayError.textContent = event.error.message;
-        } else {
-            displayError.textContent = '';
-        }
-    });
-}
-
-/**
- * Process payment with Stripe
- */
-function processStripePayment() {
-    const form = document.getElementById('donationForm');
-    const errorElement = document.getElementById('card-errors');
-    const overlay = document.getElementById('paymentProcessingOverlay');
-    
-    // Get form data
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
-    const email = document.getElementById('email').value;
-    
-    // Get amount
-    let amount = 0;
-    const activeAmountOption = document.querySelector('.amount-option.active');
-    const customAmountInput = document.getElementById('customAmount');
-    
-    if (activeAmountOption) {
-        amount = parseFloat(activeAmountOption.getAttribute('data-amount'));
-    } else if (customAmountInput.value) {
-        amount = parseFloat(customAmountInput.value);
-    }
-    
-    // Create payment intent on server
-    fetch('create-payment-intent.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            amount: amount * 100, // Convert to cents
-            currency: 'usd',
-            payment_method_types: ['card'],
-            metadata: {
-                donor_name: `${firstName} ${lastName}`,
-                donor_email: email
-            }
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.error) {
-            // Hide overlay
-            overlay.style.display = 'none';
-            // Show error
-            errorElement.textContent = data.error.message;
-            return;
-        }
         
-        // Confirm card payment
-        return stripe.confirmCardPayment(data.clientSecret, {
-            payment_method: {
-                card: cardElement,
-                billing_details: {
-                    name: `${firstName} ${lastName}`,
-                    email: email
-                }
-            }
+        card.addEventListener('mouseleave', function() {
+            this.classList.remove('hover');
         });
-    })
-    .then(result => {
-        if (result && result.error) {
-            // Hide overlay
-            overlay.style.display = 'none';
-            // Show error
-            errorElement.textContent = result.error.message;
-            errorElement.scrollIntoView({ behavior: 'smooth' });
-        } else if (result && result.paymentIntent && result.paymentIntent.status === 'succeeded') {
-            // Payment succeeded, submit form
-            const hiddenInput = document.createElement('input');
-            hiddenInput.setAttribute('type', 'hidden');
-            hiddenInput.setAttribute('name', 'stripe_payment_id');
-            hiddenInput.setAttribute('value', result.paymentIntent.id);
-            form.appendChild(hiddenInput);
-            
-            form.submit();
-        } else {
-            // For testing purposes, simulate success
-            form.submit();
-        }
-    })
-    .catch(error => {
-        // Hide overlay
-        overlay.style.display = 'none';
-        // Show error
-        errorElement.textContent = error.message || 'An error occurred during payment processing.';
-        errorElement.scrollIntoView({ behavior: 'smooth' });
     });
+    
+    // Mobile Money button - direct redirect
+    const mobileMoneyBtn = document.getElementById('mobile-money-btn');
+    if (mobileMoneyBtn) {
+        mobileMoneyBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'mobile-money-instructions.php';
+        });
+    }
 }
+
+/**
+ * Payment system has been simplified to use direct Stripe payment links
+ * All Stripe-related code has been removed as it's no longer needed
+ * 
+ * One-Time Donation: https://buy.stripe.com/eVa6p68qadtrg4EeUU
+ * Monthly Recurring: https://buy.stripe.com/bIYeVCgWGexvbOo3cd
+ * Subscription Management: https://billing.stripe.com/p/login/fZeg2RfMacaQagU288
+ */
 
 /**
  * Validate a form field and show appropriate feedback
  */
 function validateField(field) {
-    // Ensure the field has a name for logging
-    const fieldName = field.id || field.name || 'unnamed field';
+    // Get field name for error messages
+    const fieldName = field.dataset.name || field.name || 'This field';
     
-    // Special handling for hidden fields or fields in hidden containers
-    if (field.type === 'hidden' || !isElementVisible(field)) {
-        console.log(`Field ${fieldName} is hidden or in a hidden container - skipping validation`);
-        return true;
-    }
-    
-    // Fix for radio buttons and checkboxes in a group
-    if ((field.type === 'radio' || field.type === 'checkbox') && field.name) {
-        const group = document.querySelectorAll(`input[name="${field.name}"]`);
-        if (group.length > 1) {
-            // For radio groups, check if any in the group is checked
-            const isChecked = Array.from(group).some(input => input.checked);
-            if (isChecked) {
-                // If any is checked, mark all as valid
-                group.forEach(input => {
-                    input.classList.remove('is-invalid');
-                    input.classList.add('is-valid');
-                });
-                return true;
-            }
-        }
-    }
-    
-    const isValid = field.checkValidity();
-    console.log(`Validating ${fieldName}: ${isValid ? 'Valid' : 'Invalid'}`);
-    
-    if (isValid) {
-        field.classList.remove('is-invalid');
-        field.classList.add('is-valid');
-        
-        // Clear any existing error message
-        const feedbackElement = field.nextElementSibling;
-        if (feedbackElement && feedbackElement.classList.contains('invalid-feedback')) {
-            feedbackElement.style.display = 'none';
-        }
-    } else {
-        field.classList.remove('is-valid');
+    // Check if field is required and empty
+    if (field.required && !field.value.trim()) {
         field.classList.add('is-invalid');
+        field.classList.remove('is-valid');
         
-        // Show error message
-        let message = '';
-        
-        if (field.validity.valueMissing) {
-            message = `${field.getAttribute('data-name') || fieldName} is required`;
-        } else if (field.validity.typeMismatch) {
-            message = `Please enter a valid ${field.getAttribute('data-name') || fieldName}`;
-        } else if (field.validity.patternMismatch) {
-            message = field.getAttribute('data-pattern-message') || `Please enter a valid format for ${fieldName}`;
-        } else {
-            message = `Please check this field: ${fieldName}`;
+        // Set custom validation message
+        const invalidFeedback = field.parentNode.querySelector('.invalid-feedback');
+        if (invalidFeedback) {
+            invalidFeedback.textContent = `${fieldName} is required.`;
         }
         
-        console.log(`Validation error for ${fieldName}: ${message}`);
-        
-        // Find or create feedback element
-        let feedbackElement = field.nextElementSibling;
-        if (!feedbackElement || !feedbackElement.classList.contains('invalid-feedback')) {
-            feedbackElement = document.createElement('div');
-            feedbackElement.className = 'invalid-feedback';
-            field.parentNode.insertBefore(feedbackElement, field.nextSibling);
-        }
-        
-        feedbackElement.textContent = message;
-        feedbackElement.style.display = 'block';
+        return false;
     }
     
-    return isValid;
+    // Check email format
+    if (field.type === 'email' && field.value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(field.value)) {
+            field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
+            
+            // Set custom validation message
+            const invalidFeedback = field.parentNode.querySelector('.invalid-feedback');
+            if (invalidFeedback) {
+                invalidFeedback.textContent = 'Please enter a valid email address.';
+            }
+            
+            return false;
+        }
+    }
+    
+    // Check number fields
+    if (field.type === 'number' && field.value) {
+        const value = parseFloat(field.value);
+        
+        // Check min attribute
+        if (field.min && value < parseFloat(field.min)) {
+            field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
+            
+            // Set custom validation message
+            const invalidFeedback = field.parentNode.querySelector('.invalid-feedback');
+            if (invalidFeedback) {
+                invalidFeedback.textContent = `${fieldName} must be at least ${field.min}.`;
+            }
+            
+            return false;
+        }
+        
+        // Check max attribute
+        if (field.max && value > parseFloat(field.max)) {
+            field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
+            
+            // Set custom validation message
+            const invalidFeedback = field.parentNode.querySelector('.invalid-feedback');
+            if (invalidFeedback) {
+                invalidFeedback.textContent = `${fieldName} must be at most ${field.max}.`;
+            }
+            
+            return false;
+        }
+    }
+    
+    // Field is valid
+    field.classList.add('is-valid');
+    field.classList.remove('is-invalid');
+    return true;
 }
 
 /**
@@ -649,19 +464,16 @@ function validateField(field) {
 function isElementVisible(element) {
     if (!element) return false;
     
-    // Check if the element itself is hidden
-    if (element.style.display === 'none' || element.style.visibility === 'hidden') {
-        return false;
-    }
-    
-    // Check if any parent is hidden
-    let parent = element.parentElement;
-    while (parent) {
-        const style = window.getComputedStyle(parent);
-        if (style.display === 'none' || style.visibility === 'hidden') {
+    // Check if element or any parent has display: none
+    let currentElement = element;
+    while (currentElement) {
+        const style = window.getComputedStyle(currentElement);
+        if (style.display === 'none') {
             return false;
         }
-        parent = parent.parentElement;
+        
+        // Move up to parent element
+        currentElement = currentElement.parentElement;
     }
     
     return true;
@@ -671,16 +483,15 @@ function isElementVisible(element) {
 document.querySelectorAll('form input[required], form select[required]').forEach(field => {
     // Add data-name attribute if not present
     if (!field.hasAttribute('data-name')) {
-        const label = document.querySelector(`label[for="${field.id}"]`);
-        if (label) {
-            field.setAttribute('data-name', label.textContent.replace('*', '').trim());
-        }
+        field.dataset.name = field.name.replace(/[_-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
     }
     
+    // Add validation on blur
     field.addEventListener('blur', function() {
         validateField(this);
     });
     
+    // Add validation on input (for immediate feedback)
     field.addEventListener('input', function() {
         if (this.classList.contains('is-invalid')) {
             validateField(this);
@@ -694,44 +505,82 @@ document.querySelectorAll('form input[required], form select[required]').forEach
 function initAnonymousDonation() {
     const anonymousCheckbox = document.getElementById('donateAnonymously');
     const personalInfoFields = document.getElementById('personalInfoFields');
-        
+    
     if (anonymousCheckbox && personalInfoFields) {
-        // Handle initial state
-        togglePersonalFields();
-            
-        // Add change event listener
-        anonymousCheckbox.addEventListener('change', togglePersonalFields);
-            
-        function togglePersonalFields() {
-            if (anonymousCheckbox.checked) {
-                // If anonymous, hide personal info fields and remove required attribute
-                personalInfoFields.classList.add('d-none');
-                document.querySelectorAll('#personalInfoFields input').forEach(input => {
-                    input.removeAttribute('required');
-                    // Clear any validation errors
-                    input.classList.remove('is-invalid');
+        anonymousCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                // Hide personal info fields
+                personalInfoFields.style.display = 'none';
+                
+                // Make fields not required
+                personalInfoFields.querySelectorAll('input[required]').forEach(input => {
+                    input.required = false;
+                    input.dataset.wasRequired = 'true';
                 });
             } else {
-                // If not anonymous, show personal info fields
-                personalInfoFields.classList.remove('d-none');
+                // Show personal info fields
+                personalInfoFields.style.display = 'block';
+                
+                // Restore required attribute
+                personalInfoFields.querySelectorAll('input[data-was-required="true"]').forEach(input => {
+                    input.required = true;
+                });
             }
-        }
-    }
-}
-
-/**
- * Initialize the test data button functionality
- */
-function initTestDataButton() {
-    const testDataButton = document.getElementById('fillTestDataBtn');
-    if (testDataButton) {
-        testDataButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Removed fillTestData() call
         });
     }
 }
 
-// Removed fillTestData() function
-
-// Removed fillField() function
+/**
+ * Validate the entire form
+ */
+function validateForm(form) {
+    let isValid = true;
+    
+    // Validate all visible required fields
+    form.querySelectorAll('input[required], select[required]').forEach(field => {
+        // Only validate visible fields
+        if (isElementVisible(field)) {
+            if (!validateField(field)) {
+                isValid = false;
+            }
+        }
+    });
+    
+    // Validate donation amount
+    const amountOptions = document.querySelectorAll('.amount-option');
+    const customAmountInput = document.getElementById('customAmount');
+    const activeOption = document.querySelector('.amount-option.active');
+    
+    let hasAmount = false;
+    
+    if (activeOption) {
+        hasAmount = true;
+    } else if (customAmountInput && customAmountInput.value) {
+        const amount = parseFloat(customAmountInput.value);
+        if (amount > 0) {
+            hasAmount = true;
+        }
+    }
+    
+    if (!hasAmount) {
+        isValid = false;
+        alert('Please select or enter a donation amount.');
+        
+        // Scroll to amount section
+        const amountSection = document.querySelector('.amount-options');
+        if (amountSection) {
+            amountSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+    
+    if (!isValid) {
+        // Scroll to first invalid field
+        const firstInvalidField = form.querySelector('.is-invalid');
+        if (firstInvalidField) {
+            firstInvalidField.focus();
+            firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+    
+    return isValid;
+}
