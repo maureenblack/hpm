@@ -17,15 +17,7 @@
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #f8f9fa;
-        }
-        
-        .donation-hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/donation-bg.jpg') no-repeat center center;
-            background-size: cover;
-            height: 300px;
-            position: relative;
-            margin-top: 76px;
+            background-color: #ffffff;
         }
         
         .donation-container {
@@ -37,6 +29,7 @@
         .donation-header {
             text-align: center;
             margin-bottom: 40px;
+            padding-top: 40px;
         }
         
         .donation-header h1 {
@@ -46,7 +39,7 @@
             font-family: 'Playfair Display', serif;
         }
         
-        .form-section {
+        .payment-methods-container {
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
@@ -54,110 +47,11 @@
             margin-bottom: 30px;
         }
         
-        .form-section-title {
+        .payment-section-title {
             color: #4B0082;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             font-weight: 600;
-        }
-        
-        .amount-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .amount-option {
-            background-color: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 5px;
-            padding: 12px 20px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
             text-align: center;
-            flex: 1 0 calc(33.333% - 10px);
-            min-width: 100px;
-        }
-        
-        .amount-option:hover {
-            border-color: #4B0082;
-            background-color: #f0e6ff;
-        }
-        
-        .amount-option.active {
-            background-color: #4B0082;
-            color: white;
-            border-color: #4B0082;
-        }
-        
-        .donation-type-options {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .donation-type-option {
-            background-color: #f8f9fa;
-            border: 2px solid #e9ecef;
-            border-radius: 5px;
-            padding: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            flex: 1;
-        }
-        
-        .donation-type-option:hover {
-            border-color: #4B0082;
-            background-color: #f0e6ff;
-        }
-        
-        .donation-type-option.active {
-            background-color: #4B0082;
-            color: white;
-            border-color: #4B0082;
-        }
-        
-        .payment-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .payment-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            border: none;
-            gap: 10px;
-        }
-        
-        .btn-mobile-money {
-            background-color: #4B0082;
-            color: white;
-        }
-        
-        .btn-mobile-money:hover {
-            background-color: #3a006b;
-            color: white;
-        }
-        
-        .btn-stripe {
-            background-color: #6772e5;
-            color: white;
-        }
-        
-        .btn-stripe:hover {
-            background-color: #5469d4;
-            color: white;
         }
         
         .payment-method-card {
@@ -166,11 +60,15 @@
             padding: 20px;
             transition: all 0.3s ease;
             height: 100%;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
         }
         
         .payment-method-card:hover {
             border-color: #4B0082;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
         }
         
         .payment-method-header {
@@ -190,6 +88,7 @@
             margin-right: 15px;
             color: #4B0082;
             font-size: 1.5rem;
+            flex-shrink: 0;
         }
         
         .payment-method-title {
@@ -198,21 +97,109 @@
         }
         
         .payment-method-btn {
-            margin-top: 15px;
+            margin-top: auto;
             width: 100%;
             padding: 12px;
+            background-color: #4B0082;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
         }
         
-        .payment-icons {
+        .payment-method-btn:hover {
+            background-color: #3a006b;
+            color: white;
+        }
+        
+        .payment-method-btn.stripe {
+            background-color: #6772e5;
+        }
+        
+        .payment-method-btn.stripe:hover {
+            background-color: #5469d4;
+        }
+        
+        .payment-method-btn.apple-pay {
+            background-color: #000;
+        }
+        
+        .payment-method-btn.google-pay {
+            background-color: #4285F4;
+        }
+        
+        .payment-method-btn.cash-app {
+            background-color: #00D632;
+        }
+        
+        .payment-method-btn.amazon-pay {
+            background-color: #FF9900;
+        }
+        
+        .payment-method-btn.recurring {
+            background-color: #8A2BE2;
+        }
+        
+        .cancel-subscription-section {
+            background-color: #f8f9fa;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 5px;
+        }
+        
+        .cancel-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .cancel-btn:hover {
+            background-color: #c82333;
+            color: white;
+        }
+        
+        .footer-border-top {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 15px;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: #4B0082;
+            color: white;
+            border-radius: 50%;
             display: flex;
-            gap: 15px;
-            margin-top: 10px;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: all 0.3s ease;
         }
         
-        .payment-icon {
-            font-size: 1.5rem;
-            color: #6c757d;
+        .back-to-top:hover {
+            opacity: 1;
+            color: white;
+        }
+        
+        @media (max-width: 767px) {
+            .payment-method-card {
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
@@ -248,59 +235,100 @@
         </div>
     </nav>
     
-    <!-- Hero Section -->
-    <header class="donation-hero d-flex align-items-center text-white">
-        <div class="container text-center">
-            <h1 class="display-4 fw-bold mb-3">Support Our Ministry</h1>
-            <p class="lead">Your generosity helps us spread the message of holistic prosperity</p>
-        </div>
-    </header>
-    
-    <!-- Main Donation Form -->
-    <div class="donation-container my-5">
-        <!-- Donation Form -->
-        <div class="form-section">
-            <h2 class="form-section-title text-center mb-4">Select Donation Amount</h2>
-            <div class="amount-options">
-                <div class="amount-option" data-amount="10">$10</div>
-                <div class="amount-option" data-amount="25">$25</div>
-                <div class="amount-option" data-amount="50">$50</div>
-                <div class="amount-option active" data-amount="100">$100</div>
-                <div class="amount-option" data-amount="250">$250</div>
-                <div class="amount-option" data-amount="500">$500</div>
-            </div>
-            <div class="mt-3">
-                <label for="customAmount" class="form-label">Other Amount</label>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">$</span>
-                    <input type="number" id="customAmount" class="form-control" placeholder="Enter custom amount">
-                    <span class="input-group-text">.00</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Donation Type -->
-        <div class="form-section">
-            <h2 class="form-section-title text-center mb-4">Donation Type</h2>
-            <div class="donation-type-options">
-                <div class="donation-type-option active" data-type="one-time">
-                    <i class="fas fa-hand-holding-usd mb-2"></i>
-                    <div>One-Time Donation</div>
-                </div>
-                <div class="donation-type-option" data-type="monthly">
-                    <i class="fas fa-sync-alt mb-2"></i>
-                    <div>Monthly Donation</div>
-                </div>
-            </div>
+    <!-- Main Donation Container -->
+    <div class="donation-container mt-5 pt-5">
+        <div class="donation-header">
+            <h1>Support Our Ministry</h1>
+            <p class="lead">Your generous donation helps us spread the message of holistic prosperity and transforms lives.</p>
         </div>
         
         <!-- Payment Methods -->
-        <div class="form-section">
-            <h2 class="form-section-title text-center mb-4">Select Payment Method</h2>
+        <div class="payment-methods-container">
+            <h2 class="payment-section-title">Select Payment Method</h2>
             
             <div class="row g-4">
+                <!-- Credit/Debit Card Option -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="payment-method-card">
+                        <div class="payment-method-header">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <h3 class="payment-method-title">Credit/Debit Card</h3>
+                        </div>
+                        <p>Make a secure donation using your credit or debit card through Stripe.</p>
+                        <a href="https://buy.stripe.com/eVa6p68qadtrg4EeUU" class="payment-method-btn stripe">
+                            <i class="fas fa-credit-card me-2"></i> Pay with Card
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Apple Pay Option -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="payment-method-card">
+                        <div class="payment-method-header">
+                            <div class="payment-method-icon">
+                                <i class="fab fa-apple"></i>
+                            </div>
+                            <h3 class="payment-method-title">Apple Pay</h3>
+                        </div>
+                        <p>Quick and secure payment using Apple Pay on your Apple device.</p>
+                        <a href="https://buy.stripe.com/eVa6p68qadtrg4EeUU" class="payment-method-btn apple-pay">
+                            <i class="fab fa-apple-pay me-2"></i> Pay with Apple Pay
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Google Pay Option -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="payment-method-card">
+                        <div class="payment-method-header">
+                            <div class="payment-method-icon">
+                                <i class="fab fa-google"></i>
+                            </div>
+                            <h3 class="payment-method-title">Google Pay</h3>
+                        </div>
+                        <p>Fast and secure payment using Google Pay on your device.</p>
+                        <a href="https://buy.stripe.com/eVa6p68qadtrg4EeUU" class="payment-method-btn google-pay">
+                            <i class="fab fa-google-pay me-2"></i> Pay with Google Pay
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Cash App Pay Option -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="payment-method-card">
+                        <div class="payment-method-header">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <h3 class="payment-method-title">Cash App Pay</h3>
+                        </div>
+                        <p>Simple and secure payment using your Cash App account.</p>
+                        <a href="https://buy.stripe.com/eVa6p68qadtrg4EeUU" class="payment-method-btn cash-app">
+                            <i class="fas fa-dollar-sign me-2"></i> Pay with Cash App
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Amazon Pay Option -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="payment-method-card">
+                        <div class="payment-method-header">
+                            <div class="payment-method-icon">
+                                <i class="fab fa-amazon"></i>
+                            </div>
+                            <h3 class="payment-method-title">Amazon Pay</h3>
+                        </div>
+                        <p>Convenient and secure payment using your Amazon account.</p>
+                        <a href="https://buy.stripe.com/eVa6p68qadtrg4EeUU" class="payment-method-btn amazon-pay">
+                            <i class="fab fa-amazon me-2"></i> Pay with Amazon Pay
+                        </a>
+                    </div>
+                </div>
+                
                 <!-- Mobile Money Option -->
-                <div class="col-md-6">
+                <div class="col-md-6 col-lg-4">
                     <div class="payment-method-card">
                         <div class="payment-method-header">
                             <div class="payment-method-icon">
@@ -308,93 +336,98 @@
                             </div>
                             <h3 class="payment-method-title">Mobile Money</h3>
                         </div>
-                        <p>Send your donation via Mobile Money to our secure account. You'll receive instructions for completing your transaction.</p>
-                        <button type="button" onclick="window.location.href='mobile-money-instructions.html';" class="btn btn-primary payment-method-btn" id="mobile-money-btn">
+                        <p>Send your donation via Mobile Money to our secure account.</p>
+                        <a href="mobile-money-instructions.html" class="payment-method-btn">
                             <i class="fas fa-mobile-alt me-2"></i> Pay with Mobile Money
-                        </button>
+                        </a>
                     </div>
                 </div>
                 
-                <!-- Stripe Option -->
-                <div class="col-md-6">
+                <!-- Monthly Recurring Option -->
+                <div class="col-md-12">
                     <div class="payment-method-card">
                         <div class="payment-method-header">
                             <div class="payment-method-icon">
-                                <i class="fab fa-stripe"></i>
+                                <i class="fas fa-sync-alt"></i>
                             </div>
-                            <h3 class="payment-method-title">Card/Stripe</h3>
+                            <h3 class="payment-method-title">Monthly Recurring Donation</h3>
                         </div>
-                        <p>Make a secure donation using your credit/debit card or other payment methods through Stripe.</p>
-                        <a href="https://buy.stripe.com/eVa6p68qadtrg4EeUU" class="btn btn-primary payment-method-btn btn-stripe">
-                            <i class="fab fa-stripe me-2"></i> Pay with Card/Stripe
+                        <p>Support our ministry with a recurring monthly donation. You can cancel anytime.</p>
+                        <a href="https://buy.stripe.com/bIYeVCgWGexvbOo3cd" class="payment-method-btn recurring">
+                            <i class="fas fa-sync-alt me-2"></i> Set Up Monthly Donation
                         </a>
-                        <div id="cancel-subscription-link" style="display: none; margin-top: 10px; text-align: center;">
-                            <a href="https://billing.stripe.com/p/login/28o28Z1Vx7Uf8ZW288" class="text-muted" target="_blank">
-                                <small>Cancel or manage your monthly donation</small>
-                            </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cancellation Section -->
+            <div class="cancel-subscription-section">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h4>Need to cancel a recurring donation?</h4>
+                        <p class="mb-md-0">You can easily cancel your monthly donation subscription at any time.</p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <a href="https://billing.stripe.com/p/login/fZeg2RfMacaQagU288" class="cancel-btn" target="_blank">
+                            Cancel Subscription
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Other Ways to Give Section -->
+        <div class="payment-methods-container">
+            <h2 class="payment-section-title">Other Ways to Give</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="payment-method-card">
+                        <div class="payment-method-header">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-hand-holding-heart"></i>
+                            </div>
+                            <h3 class="payment-method-title">Planned Giving</h3>
                         </div>
-                        <div class="payment-icons mt-3">
-                            <span class="payment-icon" title="Credit/Debit Card"><i class="fas fa-credit-card"></i></span>
-                            <span class="payment-icon" title="Apple Pay"><i class="fab fa-apple-pay"></i></span>
-                            <span class="payment-icon" title="Google Pay"><i class="fab fa-google-pay"></i></span>
-                            <span class="payment-icon" title="Cash App Pay"><i class="fas fa-dollar-sign"></i></span>
+                        <p>Include Holistic Prosperity Ministry in your will or estate planning to create a lasting legacy.</p>
+                        <a href="mailto:hello@holisticprosperityministry.org" class="payment-method-btn">
+                            <i class="fas fa-envelope me-2"></i> Contact Us
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="payment-method-card">
+                        <div class="payment-method-header">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <h3 class="payment-method-title">In-Kind Donations</h3>
                         </div>
+                        <p>Donate goods, services, or volunteer your time to support our ministry's mission.</p>
+                        <a href="contact.html" class="payment-method-btn">
+                            <i class="fas fa-info-circle me-2"></i> Learn More
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="payment-method-card">
+                        <div class="payment-method-header">
+                            <div class="payment-method-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3 class="payment-method-title">Corporate Partnerships</h3>
+                        </div>
+                        <p>Partner your business with our ministry for community impact and social responsibility.</p>
+                        <a href="contact.html" class="payment-method-btn">
+                            <i class="fas fa-handshake me-2"></i> Partner With Us
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-    <!-- Ways to Give Section -->
-    <section class="bg-light py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title">Other Ways to Give</h2>
-                <div class="title-underline mx-auto"></div>
-            </div>
-            
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="mb-3">
-                                <i class="fas fa-hand-holding-heart fa-3x text-primary"></i>
-                            </div>
-                            <h3 class="card-title h4">Planned Giving</h3>
-                            <p class="card-text">Include Holistic Prosperity Ministry in your will or estate planning to create a lasting legacy.</p>
-                            <a href="mailto:hello@holisticprosperityministry.org" class="btn btn-outline-primary">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="mb-3">
-                                <i class="fas fa-gift fa-3x text-primary"></i>
-                            </div>
-                            <h3 class="card-title h4">In-Kind Donations</h3>
-                            <p class="card-text">Donate goods, services, or volunteer your time to support our ministry's mission.</p>
-                            <a href="contact.html" class="btn btn-outline-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-4">
-                    <div class="card h-100 border-0 shadow-sm">
-                        <div class="card-body text-center p-4">
-                            <div class="mb-3">
-                                <i class="fas fa-building fa-3x text-primary"></i>
-                            </div>
-                            <h3 class="card-title h4">Corporate Partnerships</h3>
-                            <p class="card-text">Partner your business with our ministry for community impact and social responsibility.</p>
-                            <a href="contact.html" class="btn btn-outline-primary">Partner With Us</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     
     <!-- Footer -->
     <footer class="footer py-4">
@@ -415,71 +448,5 @@
 
     <!-- Bootstrap 5 JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Amount selection
-            const amountOptions = document.querySelectorAll('.amount-option');
-            const customAmountInput = document.getElementById('customAmount');
-            
-            // Add click event to amount options
-            amountOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    // Remove active class from all options
-                    amountOptions.forEach(opt => opt.classList.remove('active'));
-                    
-                    // Add active class to clicked option
-                    this.classList.add('active');
-                    
-                    // Clear custom amount input
-                    customAmountInput.value = '';
-                });
-            });
-            
-            // Custom amount input handling
-            customAmountInput.addEventListener('input', function() {
-                // Remove active class from all amount options
-                amountOptions.forEach(opt => opt.classList.remove('active'));
-            });
-            
-            // Donation type toggle
-            const donationTypeOptions = document.querySelectorAll('.donation-type-option');
-            
-            donationTypeOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    // Remove active class from all options
-                    donationTypeOptions.forEach(opt => opt.classList.remove('active'));
-                    
-                    // Add active class to clicked option
-                    this.classList.add('active');
-                    
-                    // Update payment button text based on donation type
-                    const donationType = this.getAttribute('data-type');
-                    const stripeBtn = document.querySelector('.btn-stripe');
-                    
-                    if (donationType === 'monthly') {
-                        stripeBtn.href = 'https://buy.stripe.com/bIYeVCgWGexvbOo3cd';
-                        stripeBtn.innerHTML = '<i class="fab fa-stripe me-2"></i> Set Up Monthly Donation';
-                        
-                        // Add cancellation link for monthly donations
-                        const cancelLink = document.getElementById('cancel-subscription-link');
-                        if (cancelLink) {
-                            cancelLink.style.display = 'block';
-                        }
-                    } else {
-                        stripeBtn.href = 'https://buy.stripe.com/eVa6p68qadtrg4EeUU';
-                        stripeBtn.innerHTML = '<i class="fab fa-stripe me-2"></i> Pay with Card/Stripe';
-                        
-                        // Hide cancellation link for one-time donations
-                        const cancelLink = document.getElementById('cancel-subscription-link');
-                        if (cancelLink) {
-                            cancelLink.style.display = 'none';
-                        }
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
