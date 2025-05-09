@@ -581,6 +581,28 @@ unset($_SESSION['success_message']);
                             
                             <!-- Hidden input for payment method -->
                             <input type="hidden" name="payment_method" id="payment_method" value="">
+                            
+                            <!-- Mobile Money Instructions (Hidden by default) -->
+                            <div id="mobile-money-instructions" class="form-section payment-details" style="display: none;">
+                                <h3 class="form-section-title">Mobile Money Payment Instructions</h3>
+                                <div class="alert alert-info">
+                                    <p><strong>Please follow these steps to complete your Mobile Money donation:</strong></p>
+                                    <ol>
+                                        <li>Open your Mobile Money app on your phone</li>
+                                        <li>Select "Send Money" or "Pay" option</li>
+                                        <li>Enter the following phone number: <strong>+233 55 123 4567</strong></li>
+                                        <li>Enter the amount you wish to donate: <strong>$<span id="momo-amount">0.00</span></strong></li>
+                                        <li>Use this reference code in the notes/description: <strong><span id="momo-reference">HPM-000000-0000</span></strong></li>
+                                        <li>Complete the transaction in your Mobile Money app</li>
+                                        <li>You will receive a confirmation email once your donation is processed</li>
+                                    </ol>
+                                </div>
+                                <div class="text-center mt-4">
+                                    <p class="mb-3">Having trouble? Contact our support team:</p>
+                                    <p><strong>Email:</strong> support@holisticprosperityministry.org</p>
+                                    <p><strong>Phone:</strong> +233 55 123 4567</p>
+                                </div>
+                            </div>
 
                             <div class="form-section text-center">
                                 <button type="submit" id="donateButton" class="btn btn-primary btn-lg px-5">Complete Donation</button>

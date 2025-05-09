@@ -257,10 +257,32 @@ document.addEventListener('DOMContentLoaded', function() {
             momoReference.textContent = referenceCode;
         }
         
+        // Update the donation amount in the instructions
+        const momoAmount = document.getElementById('momo-amount');
+        if (momoAmount) {
+            momoAmount.textContent = donationAmount.toFixed(2);
+        }
+        
+        // Hide other form elements
+        const formSections = document.querySelectorAll('.form-section:not(#mobile-money-instructions)');
+        formSections.forEach(section => {
+            if (section.id !== 'mobile-money-instructions') {
+                section.style.display = 'none';
+            }
+        });
+        
         // Show the Mobile Money instructions
         const mobileMoneyInstructions = document.getElementById('mobile-money-instructions');
         if (mobileMoneyInstructions) {
             mobileMoneyInstructions.style.display = 'block';
+            // Scroll to the instructions
+            mobileMoneyInstructions.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Hide the donation button
+        const donateButton = document.getElementById('donateButton');
+        if (donateButton) {
+            donateButton.style.display = 'none';
         }
         
         // Hide processing overlay after a short delay
