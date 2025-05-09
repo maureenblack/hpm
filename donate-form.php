@@ -514,70 +514,73 @@ unset($_SESSION['success_message']);
                             <div class="form-section">
                                 <h3 class="form-section-title">Payment Method</h3>
                                 <div class="payment-methods">
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <div class="payment-method-option">
-                                                <input type="radio" class="form-check-input" name="payment_method" id="credit_card" value="credit_card" required>
-                                                <label class="form-check-label" for="credit_card">
-                                                    <i class="fas fa-credit-card"></i> Credit/Debit Card
-                                                </label>
+                                    <div class="row g-4">
+                                        <!-- Mobile Money Option -->
+                                        <div class="col-md-12 mb-3">
+                                            <div class="payment-method-card" id="mobile-money-option">
+                                                <div class="payment-method-header">
+                                                    <h4><i class="fas fa-mobile-alt"></i> Mobile Money (MoMo)</h4>
+                                                </div>
+                                                <div class="payment-method-body">
+                                                    <p>Send your donation via Mobile Money to our secure account. You'll receive a reference code and instructions for completing your transaction.</p>
+                                                    <button type="button" class="btn btn-primary payment-method-btn" id="mobile-money-btn" data-payment="mobile_money">
+                                                        <i class="fas fa-mobile-alt me-2"></i> Pay with Mobile Money
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="payment-method-option">
-                                                <input type="radio" class="form-check-input" name="payment_method" id="mobile_money" value="mobile_money">
-                                                <label class="form-check-label" for="mobile_money">
-                                                    <i class="fas fa-mobile-alt"></i> Mobile Money (MoMo)
-                                                </label>
+                                        
+                                        <!-- Stripe One-Time Donation Option -->
+                                        <div class="col-md-6 mb-3">
+                                            <div class="payment-method-card" id="stripe-onetime-option">
+                                                <div class="payment-method-header">
+                                                    <h4><i class="fas fa-credit-card"></i> One-Time Donation</h4>
+                                                </div>
+                                                <div class="payment-method-body">
+                                                    <p>Make a single donation using credit/debit card or other payment methods.</p>
+                                                    <a href="https://buy.stripe.com/eVa6p68qadtrg4EeUU" target="_blank" class="btn btn-primary payment-method-btn">
+                                                        <i class="fas fa-credit-card me-2"></i> Make One-Time Donation
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="payment-method-option">
-                                                <input type="radio" class="form-check-input" name="payment_method" id="paypal" value="paypal">
-                                                <label class="form-check-label" for="paypal">
-                                                    <i class="fab fa-paypal"></i> PayPal
-                                                </label>
+                                        
+                                        <!-- Stripe Monthly Recurring Option -->
+                                        <div class="col-md-6 mb-3">
+                                            <div class="payment-method-card" id="stripe-recurring-option">
+                                                <div class="payment-method-header">
+                                                    <h4><i class="fas fa-sync-alt"></i> Monthly Recurring</h4>
+                                                </div>
+                                                <div class="payment-method-body">
+                                                    <p>Set up a monthly donation to provide ongoing support to our ministry.</p>
+                                                    <a href="https://buy.stripe.com/bIYeVCgWGexvbOo3cd" target="_blank" class="btn btn-primary payment-method-btn">
+                                                        <i class="fas fa-sync-alt me-2"></i> Set Up Monthly Donation
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="payment-method-option">
-                                                <input type="radio" class="form-check-input" name="payment_method" id="zelle" value="zelle">
-                                                <label class="form-check-label" for="zelle">
-                                                    <i class="fas fa-exchange-alt"></i> Zelle
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="payment-method-option">
-                                                <input type="radio" class="form-check-input" name="payment_method" id="cashapp" value="cashapp">
-                                                <label class="form-check-label" for="cashapp">
-                                                    <i class="fas fa-dollar-sign"></i> CashApp
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="payment-method-option">
-                                                <input type="radio" class="form-check-input" name="payment_method" id="bank_transfer" value="bank_transfer">
-                                                <label class="form-check-label" for="bank_transfer">
-                                                    <i class="fas fa-university"></i> Bank Transfer
-                                                </label>
+                                        
+                                        <!-- Supported Payment Methods -->
+                                        <div class="col-12 mt-3">
+                                            <div class="supported-payment-methods">
+                                                <h5>Stripe Supports These Payment Methods:</h5>
+                                                <div class="payment-icons">
+                                                    <span class="payment-icon" title="Credit/Debit Card"><i class="fas fa-credit-card"></i></span>
+                                                    <span class="payment-icon" title="Apple Pay"><i class="fab fa-apple-pay"></i></span>
+                                                    <span class="payment-icon" title="Google Pay"><i class="fab fa-google-pay"></i></span>
+                                                    <span class="payment-icon" title="Cash App Pay"><i class="fas fa-dollar-sign"></i></span>
+                                                    <span class="payment-icon" title="Amazon Pay"><i class="fab fa-amazon-pay"></i></span>
+                                                </div>
+                                                <p class="payment-note">All credit card and digital wallet payments are securely processed through Stripe's payment page.</p>
+                                                <p class="subscription-note"><i class="fas fa-info-circle"></i> To cancel a recurring donation, visit <a href="https://billing.stripe.com/p/login/fZeg2RfMacaQagU288" target="_blank">Stripe Billing Portal</a></p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Credit Card Payment Form (will be shown/hidden with JavaScript) -->
-                            <div id="creditCardForm" class="form-section payment-details" style="display: none;">
-                                <h3 class="form-section-title">Card Details</h3>
-                                <div id="card-element" class="form-control mb-3">
-                                    <!-- Stripe Elements will be inserted here -->
-                                </div>
-                                <div id="card-errors" class="text-danger mb-3" role="alert"></div>
-                                <div class="security-badge mb-3">
-                                    <i class="fas fa-lock"></i> Secure Payment Powered by Stripe
-                                </div>
-                            </div>
+                            
+                            <!-- Hidden input for payment method -->
+                            <input type="hidden" name="payment_method" id="payment_method" value="">
 
                             <div class="form-section text-center">
                                 <button type="submit" id="donateButton" class="btn btn-primary btn-lg px-5">Complete Donation</button>
@@ -769,8 +772,8 @@ unset($_SESSION['success_message']);
 
     <!-- Bootstrap 5 JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom JavaScript -->
-    <script src="js/main.js"></script>
+    <!-- Custom Scripts -->
+    <script src="js/payment.js"></script>
     <script src="js/responsive.js"></script>
     <script src="js/donate.js"></script>
     <script src="js/payment-fix.js"></script>
@@ -783,54 +786,36 @@ unset($_SESSION['success_message']);
 </div>
 
     <script>
-        
         // Payment method card selection
-        const paymentMethodCards = document.querySelectorAll('.payment-method-card');
-        const paymentMethodRadios = document.querySelectorAll('input[name="payment_method"]');
-        
-        // Initialize cards based on selected payment method
-        function updateSelectedCard() {
-            const selectedMethod = document.querySelector('input[name="payment_method"]:checked');
-            if (selectedMethod) {
-                const value = selectedMethod.value;
-                
-                paymentMethodCards.forEach(card => {
-                    if (card.dataset.paymentMethod === value) {
-                        card.classList.add('selected');
-                    } else {
-                        card.classList.remove('selected');
-                    }
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentMethodCards = document.querySelectorAll('.payment-method-card');
+            const paymentMethodInput = document.getElementById('payment_method');
+            
+            // Mobile Money button click handler
+            const mobileMoneyBtn = document.getElementById('mobile-money-btn');
+            if (mobileMoneyBtn) {
+                mobileMoneyBtn.addEventListener('click', function() {
+                    paymentMethodInput.value = 'mobile_money';
+                    // Highlight this card
+                    const cards = document.querySelectorAll('.payment-method-card');
+                    cards.forEach(card => card.classList.remove('selected'));
+                    document.getElementById('mobile-money-option').classList.add('selected');
                 });
             }
-        }
-        
-        // Set initial state
-        updateSelectedCard();
-    
-    // Add click event to cards
-    paymentMethodCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const method = this.dataset.paymentMethod;
             
-            // Find and select the corresponding radio button
-            paymentMethodRadios.forEach(radio => {
-                if (radio.value === method) {
-                    radio.checked = true;
-                    // Trigger change event to update form
-                    radio.dispatchEvent(new Event('change'));
-                }
+            // Add hover effect to payment method cards
+            paymentMethodCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.classList.add('hover');
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.classList.remove('hover');
+                });
             });
-            
-            // Update card selection
-            updateSelectedCard();
         });
-    });
-    
-    // Listen for changes on radio buttons
-    paymentMethodRadios.forEach(radio => {
-        radio.addEventListener('change', updateSelectedCard);
-    });
-});
+
+    </script>
 </script>
 </body>
 </html>

@@ -500,3 +500,126 @@
         flex: 0 0 100%;
     }
 }
+
+/* Payment Methods Styling */
+.payment-method-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.payment-method-card:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.payment-method-header {
+    background-color: #4B0082;
+    color: white;
+    padding: 15px 20px;
+}
+
+.payment-method-header h4 {
+    margin: 0;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.payment-method-header h4 i {
+    margin-right: 10px;
+}
+
+.payment-method-body {
+    padding: 20px;
+    background-color: white;
+}
+
+.payment-method-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.payment-method-btn:hover {
+    background-color: #FFD700;
+    color: #333;
+    border-color: #FFD700;
+}
+
+.supported-payment-methods {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.supported-payment-methods h5 {
+    margin-bottom: 15px;
+    color: #4B0082;
+}
+
+.payment-icons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.payment-icon {
+    font-size: 1.8rem;
+    color: #4B0082;
+    background-color: #fff;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.payment-icon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.payment-note, .subscription-note {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.subscription-note {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.subscription-note a {
+    color: #4B0082;
+    text-decoration: underline;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .payment-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+    
+    .payment-method-header h4 {
+        font-size: 1.1rem;
+    }
+    
+    .payment-method-body p {
+        font-size: 0.9rem;
+    }
+}
