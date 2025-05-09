@@ -40,80 +40,74 @@
         }
         
         .payment-methods-container {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-            padding: 30px;
-            margin-bottom: 30px;
+            padding: 2rem 0;
         }
         
         .payment-section-title {
-            color: #4B0082;
-            margin-bottom: 30px;
-            font-weight: 600;
             text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 600;
         }
         
         .payment-method-card {
-            border: 2px solid #e9ecef;
+            background-color: #fff;
             border-radius: 10px;
-            padding: 20px;
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
             height: 100%;
-            margin-bottom: 20px;
             display: flex;
             flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
         .payment-method-card:hover {
-            border-color: #4B0082;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
         
         .payment-method-header {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
         }
         
         .payment-method-icon {
             width: 50px;
             height: 50px;
-            background-color: #f0e6ff;
+            background-color: #f8f9fa;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
-            color: #4B0082;
+            margin-right: 1rem;
             font-size: 1.5rem;
-            flex-shrink: 0;
+            color: #333;
         }
         
         .payment-method-title {
+            margin: 0;
+            font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 0;
+        }
+        
+        .payment-method-card p {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
         }
         
         .payment-method-btn {
-            margin-top: auto;
-            width: 100%;
-            padding: 12px;
-            background-color: #4B0082;
-            border: none;
-            color: white;
-            border-radius: 5px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            text-align: center;
             display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #f8f9fa;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
         }
         
         .payment-method-btn:hover {
-            background-color: #3a006b;
-            color: white;
+            background-color: #e9ecef;
         }
         
         .payment-method-btn.stripe {
@@ -196,8 +190,117 @@
             color: white;
         }
         
+        /* Other Ways to Give Section Styling */
+        .other-ways-container {
+            padding: 3rem 0;
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+        
+        .section-header {
+            position: relative;
+        }
+        
+        .section-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .gold-underline {
+            height: 3px;
+            width: 80px;
+            background-color: #d4af37; /* Gold color */
+            margin-bottom: 2rem;
+        }
+        
+        .other-way-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            border-top: 4px solid #d4af37; /* Gold accent */
+        }
+        
+        .other-way-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .other-way-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(212, 175, 55, 0.1); /* Light gold background */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: #d4af37; /* Gold color */
+        }
+        
+        .other-way-title {
+            text-align: center;
+            margin: 0 0 1rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .other-way-description {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .other-way-features {
+            margin-bottom: 1.5rem;
+        }
+        
+        .other-way-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .other-way-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .other-way-features li i {
+            color: #d4af37; /* Gold color */
+            margin-right: 0.75rem;
+        }
+        
+        .other-way-btn {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            background-color: #d4af37; /* Gold color */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-top: auto;
+        }
+        
+        .other-way-btn:hover {
+            background-color: #c4a030; /* Darker gold */
+            color: #fff;
+            text-decoration: none;
+        }
+        
         @media (max-width: 767px) {
-            .payment-method-card {
+            .payment-method-card, .other-way-card {
                 margin-bottom: 20px;
             }
         }
@@ -377,50 +480,68 @@
         </div>
         
         <!-- Other Ways to Give Section -->
-        <div class="payment-methods-container">
-            <h2 class="payment-section-title">Other Ways to Give</h2>
+        <div class="other-ways-container mt-5">
+            <div class="section-header text-center mb-4">
+                <h2 class="section-title">Other Ways to Give</h2>
+                <div class="gold-underline mx-auto"></div>
+            </div>
             
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="payment-method-card">
-                        <div class="payment-method-header">
-                            <div class="payment-method-icon">
-                                <i class="fas fa-hand-holding-heart"></i>
-                            </div>
-                            <h3 class="payment-method-title">Planned Giving</h3>
+                    <div class="other-way-card">
+                        <div class="other-way-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
                         </div>
-                        <p>Include Holistic Prosperity Ministry in your will or estate planning to create a lasting legacy.</p>
-                        <a href="mailto:hello@holisticprosperityministry.org" class="payment-method-btn">
+                        <h3 class="other-way-title">Planned Giving</h3>
+                        <p class="other-way-description">Include Holistic Prosperity Ministry in your will or estate planning to create a lasting legacy.</p>
+                        <div class="other-way-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Estate planning</li>
+                                <li><i class="fas fa-check-circle"></i> Endowment gifts</li>
+                                <li><i class="fas fa-check-circle"></i> Legacy support</li>
+                            </ul>
+                        </div>
+                        <a href="mailto:hello@holisticprosperityministry.org" class="other-way-btn">
                             <i class="fas fa-envelope me-2"></i> Contact Us
                         </a>
                     </div>
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="payment-method-card">
-                        <div class="payment-method-header">
-                            <div class="payment-method-icon">
-                                <i class="fas fa-gift"></i>
-                            </div>
-                            <h3 class="payment-method-title">In-Kind Donations</h3>
+                    <div class="other-way-card">
+                        <div class="other-way-icon">
+                            <i class="fas fa-gift"></i>
                         </div>
-                        <p>Donate goods, services, or volunteer your time to support our ministry's mission.</p>
-                        <a href="contact.html" class="payment-method-btn">
+                        <h3 class="other-way-title">In-Kind Donations</h3>
+                        <p class="other-way-description">Donate goods, services, or volunteer your time to support our ministry's mission.</p>
+                        <div class="other-way-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Volunteer opportunities</li>
+                                <li><i class="fas fa-check-circle"></i> Material donations</li>
+                                <li><i class="fas fa-check-circle"></i> Professional services</li>
+                            </ul>
+                        </div>
+                        <a href="contact.html" class="other-way-btn">
                             <i class="fas fa-info-circle me-2"></i> Learn More
                         </a>
                     </div>
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="payment-method-card">
-                        <div class="payment-method-header">
-                            <div class="payment-method-icon">
-                                <i class="fas fa-building"></i>
-                            </div>
-                            <h3 class="payment-method-title">Corporate Partnerships</h3>
+                    <div class="other-way-card">
+                        <div class="other-way-icon">
+                            <i class="fas fa-building"></i>
                         </div>
-                        <p>Partner your business with our ministry for community impact and social responsibility.</p>
-                        <a href="contact.html" class="payment-method-btn">
+                        <h3 class="other-way-title">Corporate Partnerships</h3>
+                        <p class="other-way-description">Partner your business with our ministry for community impact and social responsibility.</p>
+                        <div class="other-way-features">
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Sponsorship programs</li>
+                                <li><i class="fas fa-check-circle"></i> Matching donations</li>
+                                <li><i class="fas fa-check-circle"></i> CSR initiatives</li>
+                            </ul>
+                        </div>
+                        <a href="contact.html" class="other-way-btn">
                             <i class="fas fa-handshake me-2"></i> Partner With Us
                         </a>
                     </div>
