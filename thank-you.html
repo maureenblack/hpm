@@ -45,11 +45,14 @@
         .btn-primary {
             background-color: #4B0082;
             border-color: #4B0082;
+            transition: all 0.3s ease;
         }
         
         .btn-primary:hover {
-            background-color: #3a006b;
-            border-color: #3a006b;
+            background-color: #d4af37; /* Gold color on hover */
+            border-color: #d4af37;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -107,18 +110,17 @@
                             <p><strong>Date:</strong> <span id="donationDate">May 9, 2025</span></p>
                         </div>
                     </div>
-                    <p class="mb-0"><strong>Status:</strong> <span class="badge bg-success">Completed</span></p>
+                    <p class="mb-0"><strong>Status:</strong> <span class="badge bg-warning text-dark">Pending</span></p>
                 </div>
                 
                 <div class="next-steps">
                     <h4 class="mb-3">What's Next?</h4>
                     <p>A confirmation email has been sent to your email address with the details of your donation.</p>
-                    <p>If you have any questions or need assistance, please contact us at <a href="mailto:info@holisticprosperity.org">info@holisticprosperity.org</a>.</p>
+                    <p>If you have any questions or need assistance, please contact us at <a href="mailto:hello@holisticprosperityministry.org">hello@holisticprosperityministry.org</a>.</p>
                 </div>
                 
                 <div class="action-buttons">
-                    <a href="index.html" class="btn btn-primary me-2">Return to Homepage</a>
-                    <a href="donate.html" class="btn btn-outline-primary">Make Another Donation</a>
+                    <a href="donate.html" class="btn btn-primary">Make Another Donation</a>
                 </div>
             </div>
         </div>
@@ -195,6 +197,50 @@
             document.getElementById('donationAmount').textContent = amount;
             document.getElementById('transactionId').textContent = ref;
             document.getElementById('donationDate').textContent = formattedDate;
+            
+            // Always show status as Pending
+            document.querySelector('.badge').className = 'badge bg-warning text-dark';
+            document.querySelector('.badge').textContent = 'Pending';
+            
+            // Check if payment method is Mobile Money and show countdown
+            if (method.toLowerCase().includes('mobile') || method.toLowerCase().includes('momo')) {
+                // Create and show the WhatsApp redirect section
+                const nextStepsDiv = document.querySelector('.next-steps');
+                
+                // Create WhatsApp redirect container
+                const whatsappRedirectDiv = document.createElement('div');
+                whatsappRedirectDiv.className = 'whatsapp-redirect mt-4 p-4 bg-light rounded';
+                whatsappRedirectDiv.innerHTML = `
+                    <h4 class="mb-3"><i class="fab fa-whatsapp text-success me-2"></i>Join Our Community</h4>
+                    <p>You will be redirected to our WhatsApp community group in <span id="countdown" class="fw-bold text-primary">10</span> seconds.</p>
+                    <div class="progress mb-3">
+                        <div id="countdown-progress" class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>Or click the button below to join now:</p>
+                    <a href="https://chat.whatsapp.com/JH3fYqR3UrCK1qwuSEPYwO" class="btn btn-success" target="_blank">
+                        <i class="fab fa-whatsapp me-2"></i>Join WhatsApp Group Now
+                    </a>
+                `;
+                
+                // Insert after next steps
+                nextStepsDiv.parentNode.insertBefore(whatsappRedirectDiv, nextStepsDiv.nextSibling);
+                
+                // Start countdown
+                let secondsLeft = 10;
+                const countdownElement = document.getElementById('countdown');
+                const progressBar = document.getElementById('countdown-progress');
+                
+                const countdownInterval = setInterval(function() {
+                    secondsLeft--;
+                    countdownElement.textContent = secondsLeft;
+                    progressBar.style.width = (secondsLeft * 10) + '%';
+                    
+                    if (secondsLeft <= 0) {
+                        clearInterval(countdownInterval);
+                        window.open('https://chat.whatsapp.com/JH3fYqR3UrCK1qwuSEPYwO', '_blank');
+                    }
+                }, 1000);
+            }
         });
     </script>
 </body>
